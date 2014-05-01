@@ -1,4 +1,7 @@
-package pvm.vm;
+package pvm.vm.instructions;
+
+import pvm.vm.PMachine;
+import pvm.vm.values.IntValue;
 
 public class IntInstruction implements Instruction {
 	public enum IntInstruction_t {
@@ -40,5 +43,10 @@ public class IntInstruction implements Instruction {
 	@Override
 	public void execute(PMachine pmachine) {
 		intInstruction_t.execute(numb, pmachine);
+	}
+	
+	@Override
+	public String toString() {
+		return this.intInstruction_t.name()+" "+this.numb;
 	}
 }

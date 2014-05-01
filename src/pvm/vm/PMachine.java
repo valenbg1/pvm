@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import pvm.vm.exceptions.InvalidValueTypeException;
+import pvm.vm.instructions.Instruction;
+import pvm.vm.values.Value;
+
 public class PMachine {
 	private Stack<Value> stack;
 
@@ -43,7 +47,7 @@ public class PMachine {
 		++p_prog;
 	}
 
-	public void run() throws IllegalStateException {
+	public void run() throws IllegalStateException, InvalidValueTypeException {
 		while (run && (p_prog < prog.size()))
 			prog.get(p_prog).execute(this);
 	}

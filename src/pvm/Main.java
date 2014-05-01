@@ -2,12 +2,13 @@ package pvm;
 
 import java.util.ArrayList;
 
-import pvm.vm.Instruction;
-import pvm.vm.IntInstruction;
-import pvm.vm.IntInstruction.IntInstruction_t;
 import pvm.vm.PMachine;
-import pvm.vm.VoidInstruction;
-import pvm.vm.VoidInstruction.VoidInstruction_t;
+import pvm.vm.exceptions.InvalidValueTypeException;
+import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntInstruction;
+import pvm.vm.instructions.VoidInstruction;
+import pvm.vm.instructions.IntInstruction.IntInstruction_t;
+import pvm.vm.instructions.VoidInstruction.VoidInstruction_t;
 
 public class Main {
 	public static void main(String[] args) {
@@ -32,7 +33,15 @@ public class Main {
 		prog.add(new IntInstruction(IntInstruction_t.DESAPILA_DIR, 1));
 
 		PMachine pmachine = new PMachine(prog);
-		pmachine.run();
+		try {
+			
+			pmachine.run();
+			
+		} catch (InvalidValueTypeException e) {
+			e.printStackTrace();
+			int p_prog = pmachine.getP_prog();
+			System.err.println("Error al ejecutar la instrución: "+p_prog+": "+prog.get(p_prog));
+		}
 
 		System.out.println(pmachine.getMem().get(0));
 		System.out.println(pmachine.getMem().get(1));
