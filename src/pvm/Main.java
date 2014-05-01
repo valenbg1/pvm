@@ -16,11 +16,15 @@ public class Main {
 		/*
 		 * int x, y;
 		 * 
-		 * x:= 25;
+		 * read x;
+		 * 
 		 * y:= 2*x / (x+7);
 		 * 
+		 * write x;
+		 * write y;
+		 * 
 		 */
-		prog.add(new IntInstruction(IntInstruction_t.APILA, 25));
+		prog.add(new VoidInstruction(VoidInstruction_t.LEE));
 		prog.add(new IntInstruction(IntInstruction_t.DESAPILA_DIR, 0));
 		prog.add(new IntInstruction(IntInstruction_t.APILA, 2));
 		prog.add(new IntInstruction(IntInstruction_t.APILA_DIR, 0));
@@ -30,6 +34,10 @@ public class Main {
 		prog.add(new VoidInstruction(VoidInstruction_t.SUMA));
 		prog.add(new VoidInstruction(VoidInstruction_t.DIV));
 		prog.add(new IntInstruction(IntInstruction_t.DESAPILA_DIR, 1));
+		prog.add(new IntInstruction(IntInstruction_t.APILA_DIR, 0));
+		prog.add(new VoidInstruction(VoidInstruction_t.ESCRIBE));
+		prog.add(new IntInstruction(IntInstruction_t.APILA_DIR, 1));
+		prog.add(new VoidInstruction(VoidInstruction_t.ESCRIBE));
 
 		PMachine pmachine = new PMachine(prog);
 		try {
@@ -37,12 +45,9 @@ public class Main {
 		} catch (Exception e) {
 			
 			int p_prog = pmachine.getP_prog();
-			System.err.println("Error al ejecutar la instrución: " + p_prog
+			System.err.println("Error al ejecutar la instrución " + p_prog
 					+ ": " + prog.get(p_prog));
 			e.printStackTrace();
 		}
-
-		System.out.println(pmachine.getMem().get(0));
-		System.out.println(pmachine.getMem().get(1));
 	}
 }
