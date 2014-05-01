@@ -3,7 +3,6 @@ package pvm;
 import java.util.ArrayList;
 
 import pvm.vm.PMachine;
-import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.instructions.Instruction;
 import pvm.vm.instructions.IntInstruction;
 import pvm.vm.instructions.VoidInstruction;
@@ -34,13 +33,13 @@ public class Main {
 
 		PMachine pmachine = new PMachine(prog);
 		try {
-			
 			pmachine.run();
+		} catch (Exception e) {
 			
-		} catch (InvalidValueTypeException e) {
-			e.printStackTrace();
 			int p_prog = pmachine.getP_prog();
-			System.err.println("Error al ejecutar la instrución: "+p_prog+": "+prog.get(p_prog));
+			System.err.println("Error al ejecutar la instrución: " + p_prog
+					+ ": " + prog.get(p_prog));
+			e.printStackTrace();
 		}
 
 		System.out.println(pmachine.getMem().get(0));

@@ -1,7 +1,11 @@
 package pvm.vm.instructions;
 
+import java.util.EmptyStackException;
+
 import pvm.vm.PMachine;
+import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.values.IntValue;
+import pvm.vm.values.Value;
 
 public class IntInstruction implements Instruction {
 	public enum IntInstruction_t {
@@ -15,21 +19,29 @@ public class IntInstruction implements Instruction {
 
 		APILA_DIR {
 			@Override
-			protected void execute(int numb, PMachine pmachine) {
-				pmachine.getStack().push(pmachine.getMem().get(numb));
+			protected void execute(int numb, PMachine pmachine)
+					throws InvalidMemoryPosException {
+				Value val = pmachine.getMem().get(numb);
+
+				if (val == null)
+					throw new InvalidMemoryPosException();
+
+				pmachine.getStack().push(val);
 				pmachine.incP_prog();
 			}
 		},
 
 		DESAPILA_DIR {
 			@Override
-			protected void execute(int numb, PMachine pmachine) {
+			protected void execute(int numb, PMachine pmachine)
+					throws EmptyStackException {
 				pmachine.getMem().put(numb, pmachine.getStack().pop());
 				pmachine.incP_prog();
 			}
 		};
 
-		protected abstract void execute(int numb, PMachine pmachine);
+		protected abstract void execute(int numb, PMachine pmachine)
+				throws EmptyStackException, InvalidMemoryPosException;
 	}
 
 	private final IntInstruction_t intInstruction_t;
@@ -41,12 +53,13 @@ public class IntInstruction implements Instruction {
 	}
 
 	@Override
-	public void execute(PMachine pmachine) {
+	public void execute(PMachine pmachine) throws EmptyStackException,
+			InvalidMemoryPosException {
 		intInstruction_t.execute(numb, pmachine);
 	}
-	
+
 	@Override
 	public String toString() {
-		return this.intInstruction_t.name()+" "+this.numb;
+		return this.intInstruction_t.name() + "(" + this.numb + ")";
 	}
 }

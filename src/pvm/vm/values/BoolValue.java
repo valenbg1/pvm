@@ -2,8 +2,7 @@ package pvm.vm.values;
 
 import pvm.vm.exceptions.InvalidValueTypeException;
 
-public class BoolValue implements Value {
-
+public class BoolValue implements Value {	
 	public final boolean value;
 
 	public BoolValue(boolean value) {
@@ -11,8 +10,8 @@ public class BoolValue implements Value {
 	}
 
 	@Override
-	public String toString() {
-		return Boolean.toString(value);
+	public boolean getBool() throws InvalidValueTypeException {
+		return this.value;
 	}
 
 	@Override
@@ -21,7 +20,7 @@ public class BoolValue implements Value {
 	}
 
 	@Override
-	public boolean getBool() throws InvalidValueTypeException {
-		return this.value;
+	public String toString() {
+		return Boolean.toString(value);
 	}
 }

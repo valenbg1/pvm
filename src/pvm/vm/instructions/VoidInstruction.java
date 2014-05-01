@@ -1,5 +1,6 @@
 package pvm.vm.instructions;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 import pvm.vm.PMachine;
@@ -10,57 +11,54 @@ public class VoidInstruction implements Instruction {
 	public enum VoidInstruction_t {
 		SUMA {
 			@Override
-			protected void execute(PMachine pmachine) throws IllegalStateException, InvalidValueTypeException {
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
 				Stack<Value> stack = pmachine.getStack();
-				IntValue op2 = (IntValue) stack.pop();
-				IntValue op1 = (IntValue) stack.pop();
-				
+				Value op2 = stack.pop(), op1 = stack.pop();
+
 				stack.push(new IntValue(op1.getInt() + op2.getInt()));
-				
 				pmachine.incP_prog();
 			}
 		},
 
 		RESTA {
 			@Override
-			protected void execute(PMachine pmachine) throws IllegalStateException, InvalidValueTypeException {
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
 				Stack<Value> stack = pmachine.getStack();
-				IntValue op2 = (IntValue) stack.pop();
-				IntValue op1 = (IntValue) stack.pop();
-				
+				Value op2 = stack.pop(), op1 = stack.pop();
+
 				stack.push(new IntValue(op1.getInt() - op2.getInt()));
-				
 				pmachine.incP_prog();
 			}
 		},
 
 		MULT {
 			@Override
-			protected void execute(PMachine pmachine) throws IllegalStateException, InvalidValueTypeException {
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
 				Stack<Value> stack = pmachine.getStack();
-				IntValue op2 = (IntValue) stack.pop();
-				IntValue op1= (IntValue) stack.pop();
-				
+				Value op2 = stack.pop(), op1 = stack.pop();
+
 				stack.push(new IntValue(op1.getInt() * op2.getInt()));
-				
 				pmachine.incP_prog();
 			}
 		},
 
 		DIV {
 			@Override
-			protected void execute(PMachine pmachine) throws IllegalStateException, InvalidValueTypeException {
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
 				Stack<Value> stack = pmachine.getStack();
-				IntValue op2 = (IntValue) stack.pop();
-				IntValue op1 = (IntValue) stack.pop();
-				
+				Value op2 = stack.pop(), op1 = stack.pop();
+
 				stack.push(new IntValue(op1.getInt() / op2.getInt()));
-				
 				pmachine.incP_prog();
 			}
 		};
 
-		protected abstract void execute(PMachine pmachine) throws IllegalStateException, InvalidValueTypeException;
+		protected abstract void execute(PMachine pmachine)
+				throws InvalidValueTypeException, EmptyStackException;
 	}
 
 	private final VoidInstruction_t voidInstruction_t;
@@ -70,10 +68,11 @@ public class VoidInstruction implements Instruction {
 	}
 
 	@Override
-	public void execute(PMachine pmachine) throws IllegalStateException, InvalidValueTypeException {
+	public void execute(PMachine pmachine) throws InvalidValueTypeException,
+			EmptyStackException {
 		voidInstruction_t.execute(pmachine);
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.voidInstruction_t.name();

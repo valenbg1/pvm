@@ -3,7 +3,6 @@ package pvm.vm.values;
 import pvm.vm.exceptions.InvalidValueTypeException;
 
 public class IntValue implements Value {
-
 	public final int value;
 
 	public IntValue(int value) {
@@ -11,8 +10,8 @@ public class IntValue implements Value {
 	}
 
 	@Override
-	public String toString() {
-		return Integer.toString(value);
+	public boolean getBool() throws InvalidValueTypeException {
+		throw new InvalidValueTypeException();
 	}
 
 	@Override
@@ -21,7 +20,7 @@ public class IntValue implements Value {
 	}
 
 	@Override
-	public boolean getBool() throws InvalidValueTypeException {
-		throw new InvalidValueTypeException();
+	public String toString() {
+		return Integer.toString(value);
 	}
 }
