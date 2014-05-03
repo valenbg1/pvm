@@ -1,45 +1,28 @@
 package pvm;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.List;
 
+import pvm.assembler.PAssembler;
 import pvm.vm.PMachine;
 import pvm.vm.instructions.Instruction;
-import pvm.vm.instructions.IntInstruction;
-import pvm.vm.instructions.VoidInstruction;
-import pvm.vm.instructions.IntInstruction.IntInstruction_t;
-import pvm.vm.instructions.VoidInstruction.VoidInstruction_t;
 
 public class Main {
 	public static void main(String[] args) {
-		ArrayList<Instruction> prog = new ArrayList<Instruction>();
-
-		/*
-		 * int x, y;
-		 * 
-		 * read x;
-		 * 
-		 * y:= 2*x / (x+7);
-		 * 
-		 * write x;
-		 * write y;
-		 * 
-		 */
-		prog.add(new VoidInstruction(VoidInstruction_t.LEE));
-		prog.add(new IntInstruction(IntInstruction_t.DESAPILA_DIR, 0));
-		prog.add(new IntInstruction(IntInstruction_t.APILA, 2));
-		prog.add(new IntInstruction(IntInstruction_t.APILA_DIR, 0));
-		prog.add(new VoidInstruction(VoidInstruction_t.MULT));
-		prog.add(new IntInstruction(IntInstruction_t.APILA_DIR, 0));
-		prog.add(new IntInstruction(IntInstruction_t.APILA, 7));
-		prog.add(new VoidInstruction(VoidInstruction_t.SUMA));
-		prog.add(new VoidInstruction(VoidInstruction_t.DIV));
-		prog.add(new IntInstruction(IntInstruction_t.DESAPILA_DIR, 1));
-		prog.add(new IntInstruction(IntInstruction_t.APILA_DIR, 0));
-		prog.add(new VoidInstruction(VoidInstruction_t.ESCRIBE));
-		prog.add(new IntInstruction(IntInstruction_t.APILA_DIR, 1));
-		prog.add(new VoidInstruction(VoidInstruction_t.ESCRIBE));
-
+		List<Instruction> prog ;
+		
+		try {
+			prog = new PAssembler(new BufferedReader(new FileReader("prog.p"))).assemble();
+		} catch (FileNotFoundException e1) {
+			System.err.println("No se encuentra el archivo");
+			e1.printStackTrace();
+			return;
+		}
+		
 		PMachine pmachine = new PMachine(prog);
+		
 		try {
 			pmachine.run();
 		} catch (Exception e) {
@@ -48,6 +31,7 @@ public class Main {
 			System.err.println("Error al ejecutar la instrución " + p_prog
 					+ ": " + prog.get(p_prog));
 			e.printStackTrace();
+			return;
 		}
 	}
 }
