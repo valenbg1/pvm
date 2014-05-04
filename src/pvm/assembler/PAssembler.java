@@ -20,7 +20,7 @@ public class PAssembler {
 		this.file = file;
 	}
 
-	public List<Instruction> assemble() {
+	public List<Instruction> assemble() throws IOException {
 		String line = "";
 		ArrayList<Instruction> instrs = new ArrayList<Instruction>();
 
@@ -63,9 +63,7 @@ public class PAssembler {
 					throw new IOException();
 			}
 		} catch (Exception e) {
-			System.err.println("Error al leer la línea " + row + ": " + line);
-			e.printStackTrace();
-			return new ArrayList<Instruction>();
+			throw new IOException("Error al leer la línea " + row + ": " + line);
 		}
 
 		return instrs;
