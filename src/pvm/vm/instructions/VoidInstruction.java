@@ -242,6 +242,30 @@ public class VoidInstruction implements Instruction {
 						+ pmachine.getStack().pop());
 				pmachine.incP_prog();
 			}
+		},
+		
+		APILA_IND {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op = stack.pop();
+
+				stack.push(pmachine.getMem().get(op.getInt()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		DESAPILA_IND {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				pmachine.getMem().put(op1.getInt(), op2);
+				pmachine.incP_prog();
+			}
 		};
 
 		protected abstract void execute(PMachine pmachine)

@@ -2,19 +2,28 @@ lee
 copia
 desapila_dir(0)
 desapila_dir(1)
-apila_dir(0)
+apila(0)
+apila_ind
 apila(1)
 resta
 copia
 desapila_dir(0)
-apila_dir(1)
+apila(1)
+apila_ind
 mul
 desapila_dir(1)
-apila_dir(0)
+apila(0)
+apila_ind
 apila(1)
 menoroigual
 ir_f(4)
 apila_dir(1)
+escribe
+apila(5)
+apila_dir(1)
+desapila_ind
+apila(5)
+apila_ind
 escribe
 
 // Calcular el factorial de n
