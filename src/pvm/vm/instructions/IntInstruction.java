@@ -15,7 +15,7 @@ public class IntInstruction implements Instruction {
 		APILA {
 			@Override
 			protected void execute(int numb, PMachine pmachine) {
-				pmachine.getStack().push(new IntValue(numb));
+				pmachine.stack.push(new IntValue(numb));
 				pmachine.incP_prog();
 			}
 		},
@@ -24,12 +24,12 @@ public class IntInstruction implements Instruction {
 			@Override
 			protected void execute(int numb, PMachine pmachine)
 					throws InvalidMemoryPosException {
-				Value val = pmachine.getMem().get(numb);
+				Value val = pmachine.mem.get(numb);
 
 				if (val == null)
 					throw new InvalidMemoryPosException();
 
-				pmachine.getStack().push(val);
+				pmachine.stack.push(val);
 				pmachine.incP_prog();
 			}
 		},
@@ -38,7 +38,7 @@ public class IntInstruction implements Instruction {
 			@Override
 			protected void execute(int numb, PMachine pmachine)
 					throws EmptyStackException {
-				pmachine.getMem().put(numb, pmachine.getStack().pop());
+				pmachine.mem.put(numb, pmachine.stack.pop());
 				pmachine.incP_prog();
 			}
 		},
@@ -54,7 +54,7 @@ public class IntInstruction implements Instruction {
 			@Override
 			protected void execute(int numb, PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op = stack.pop();
 
 				if (op.getBool())
@@ -68,7 +68,7 @@ public class IntInstruction implements Instruction {
 			@Override
 			protected void execute(int numb, PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op = stack.pop();
 
 				if (!op.getBool())
@@ -83,8 +83,8 @@ public class IntInstruction implements Instruction {
 			protected void execute(int numb, PMachine pmachine)
 					throws EmptyStackException, InvalidValueTypeException,
 					InvalidMemoryPosException {
-				Stack<Value> stack = pmachine.getStack();
-				Map<Integer, Value> mem = pmachine.getMem();
+				Stack<Value> stack = pmachine.stack;
+				Map<Integer, Value> mem = pmachine.mem;
 				int op2 = stack.pop().getInt(), op1 = stack.pop().getInt();
 
 				for (int i = 0; i < numb; ++i) {
@@ -105,8 +105,8 @@ public class IntInstruction implements Instruction {
 				InvalidMemoryPosException;
 	}
 
-	private final IntInstruction_t intInstruction_t;
-	private final int numb;
+	public final IntInstruction_t intInstruction_t;
+	public final int numb;
 
 	public IntInstruction(IntInstruction_t intInstruction_t, int numb) {
 		this.intInstruction_t = intInstruction_t;

@@ -8,7 +8,7 @@ public class BoolInstruction implements Instruction {
 		APILA {
 			@Override
 			protected void execute(boolean bool, PMachine pmachine) {
-				pmachine.getStack().push(new BoolValue(bool));
+				pmachine.stack.push(new BoolValue(bool));
 				pmachine.incP_prog();
 			}
 		};
@@ -16,8 +16,8 @@ public class BoolInstruction implements Instruction {
 		protected abstract void execute(boolean bool, PMachine pmachine);
 	}
 
-	private final BoolInstruction_t boolInstruction_t;
-	private final boolean bool;
+	public final BoolInstruction_t boolInstruction_t;
+	public final boolean bool;
 
 	public BoolInstruction(BoolInstruction_t intInstruction_t, boolean numb) {
 		this.boolInstruction_t = intInstruction_t;

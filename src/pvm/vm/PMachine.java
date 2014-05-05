@@ -3,6 +3,7 @@ package pvm.vm;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -13,11 +14,13 @@ import pvm.vm.instructions.Instruction;
 import pvm.vm.values.Value;
 
 public class PMachine {
-	private Stack<Value> stack;
+	public final Stack<Value> stack;
 
-	private Map<Integer, Value> mem;
+	public final Map<Integer, Value> mem;
+	public final List<Segment> heap;
+	public final Segment heap_size = new Segment(65536, 65536*2);
 
-	private List<Instruction> prog;
+	public final List<Instruction> prog;
 	private int p_prog;
 
 	private boolean run;
@@ -26,6 +29,8 @@ public class PMachine {
 		this.stack = new Stack<Value>();
 
 		this.mem = new HashMap<Integer, Value>();
+		this.heap = new LinkedList<Segment>();
+		this.heap.add(heap_size);
 
 		this.prog = new ArrayList<Instruction>(prog);
 		this.p_prog = 0;
@@ -33,16 +38,8 @@ public class PMachine {
 		this.run = true;
 	}
 
-	public Map<Integer, Value> getMem() {
-		return mem;
-	}
-
 	public int getP_prog() {
 		return p_prog;
-	}
-
-	public Stack<Value> getStack() {
-		return stack;
 	}
 
 	public void incP_prog() {

@@ -19,7 +19,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new IntValue(op1.getInt() + op2.getInt()));
@@ -31,7 +31,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new IntValue(op1.getInt() - op2.getInt()));
@@ -43,7 +43,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new IntValue(op1.getInt() * op2.getInt()));
@@ -55,7 +55,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new IntValue(op1.getInt() / op2.getInt()));
@@ -67,7 +67,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new IntValue(op1.getInt() % op2.getInt()));
@@ -79,7 +79,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op = stack.pop();
 
 				stack.push(new IntValue(-op.getInt()));
@@ -91,7 +91,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new BoolValue(op1.getBool() && op2.getBool()));
@@ -103,7 +103,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new BoolValue(op1.getBool() || op2.getBool()));
@@ -115,7 +115,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op = stack.pop();
 
 				stack.push(new BoolValue(!op.getBool()));
@@ -127,7 +127,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new BoolValue(op1.equals(op2)));
@@ -139,7 +139,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new BoolValue(!op1.equals(op2)));
@@ -151,7 +151,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new BoolValue(op1.getInt() < op2.getInt()));
@@ -163,7 +163,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new BoolValue(op1.getInt() > op2.getInt()));
@@ -175,7 +175,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new BoolValue(op1.getInt() <= op2.getInt()));
@@ -187,7 +187,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new BoolValue(op1.getInt() >= op2.getInt()));
@@ -199,7 +199,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws EmptyStackException {
-				pmachine.getStack().push(pmachine.getStack().peek());
+				pmachine.stack.push(pmachine.stack.peek());
 				pmachine.incP_prog();
 			}
 		},
@@ -208,7 +208,7 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				String in;
 
 				System.out.print(LEE.name() + ": ");
@@ -240,7 +240,7 @@ public class VoidInstruction implements Instruction {
 			protected void execute(PMachine pmachine)
 					throws EmptyStackException {
 				System.out.println(ESCRIBE.name() + ": "
-						+ pmachine.getStack().pop());
+						+ pmachine.stack.pop());
 				pmachine.incP_prog();
 			}
 		},
@@ -250,8 +250,8 @@ public class VoidInstruction implements Instruction {
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException,
 					InvalidMemoryPosException {
-				Stack<Value> stack = pmachine.getStack();
-				Value op = stack.pop(), aux = pmachine.getMem()
+				Stack<Value> stack = pmachine.stack;
+				Value op = stack.pop(), aux = pmachine.mem
 						.get(op.getInt());
 
 				if (aux != null) {
@@ -266,10 +266,10 @@ public class VoidInstruction implements Instruction {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
-				Stack<Value> stack = pmachine.getStack();
+				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
-				pmachine.getMem().put(op1.getInt(), op2);
+				pmachine.mem.put(op1.getInt(), op2);
 				pmachine.incP_prog();
 			}
 		};
@@ -279,7 +279,7 @@ public class VoidInstruction implements Instruction {
 				InvalidMemoryPosException;
 	}
 
-	private final VoidInstruction_t voidInstruction_t;
+	public final VoidInstruction_t voidInstruction_t;
 
 	public VoidInstruction(VoidInstruction_t voidInstruction_t) {
 		this.voidInstruction_t = voidInstruction_t;
