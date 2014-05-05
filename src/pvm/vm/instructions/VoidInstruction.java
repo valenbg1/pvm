@@ -7,6 +7,7 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 import pvm.vm.PMachine;
+import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.values.BoolValue;
 import pvm.vm.values.IntValue;
@@ -61,7 +62,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		MOD {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -73,7 +74,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		NEG {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -85,7 +86,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		AND {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -97,7 +98,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		OR {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -109,7 +110,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		NOT {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -121,7 +122,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		IGUAL {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -133,7 +134,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		DISTINTO {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -145,7 +146,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		MENOR {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -157,7 +158,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		MAYOR {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -169,7 +170,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		MENOROIGUAL {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -181,7 +182,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		MAYOROIGUAL {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -193,7 +194,7 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		COPIA {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -243,19 +244,24 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
-		
+
 		APILA_IND {
 			@Override
 			protected void execute(PMachine pmachine)
-					throws InvalidValueTypeException, EmptyStackException {
+					throws InvalidValueTypeException, EmptyStackException,
+					InvalidMemoryPosException {
 				Stack<Value> stack = pmachine.getStack();
-				Value op = stack.pop();
+				Value op = stack.pop(), aux = pmachine.getMem()
+						.get(op.getInt());
 
-				stack.push(pmachine.getMem().get(op.getInt()));
-				pmachine.incP_prog();
+				if (aux != null) {
+					stack.push(aux);
+					pmachine.incP_prog();
+				} else
+					throw new InvalidMemoryPosException();
 			}
 		},
-		
+
 		DESAPILA_IND {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -269,7 +275,8 @@ public class VoidInstruction implements Instruction {
 		};
 
 		protected abstract void execute(PMachine pmachine)
-				throws InvalidValueTypeException, EmptyStackException;
+				throws InvalidValueTypeException, EmptyStackException,
+				InvalidMemoryPosException;
 	}
 
 	private final VoidInstruction_t voidInstruction_t;
@@ -280,7 +287,7 @@ public class VoidInstruction implements Instruction {
 
 	@Override
 	public void execute(PMachine pmachine) throws InvalidValueTypeException,
-			EmptyStackException {
+			EmptyStackException, InvalidMemoryPosException {
 		voidInstruction_t.execute(pmachine);
 	}
 

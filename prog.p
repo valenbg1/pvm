@@ -25,5 +25,17 @@ desapila_ind
 apila(5)
 apila_ind
 escribe
+apila_dir(5)
+copia
+copia
+desapila_dir(6)
+desapila_dir(7)
+desapila_dir(8)
+apila(9)
+apila(6)
+dona(3)
+apila(11)
+apila_ind
+escribe
 
 // Calcular el factorial de n

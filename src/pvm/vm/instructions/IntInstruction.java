@@ -1,6 +1,7 @@
 package pvm.vm.instructions;
 
 import java.util.EmptyStackException;
+import java.util.Map;
 import java.util.Stack;
 
 import pvm.vm.PMachine;
@@ -74,6 +75,28 @@ public class IntInstruction implements Instruction {
 					pmachine.setP_prog(numb);
 				else
 					pmachine.incP_prog();
+			}
+		},
+
+		DONA {
+			@Override
+			protected void execute(int numb, PMachine pmachine)
+					throws EmptyStackException, InvalidValueTypeException,
+					InvalidMemoryPosException {
+				Stack<Value> stack = pmachine.getStack();
+				Map<Integer, Value> mem = pmachine.getMem();
+				int op2 = stack.pop().getInt(), op1 = stack.pop().getInt();
+
+				for (int i = 0; i < numb; ++i) {
+					Value aux = mem.get(op2 + i);
+
+					if (aux == null)
+						throw new InvalidMemoryPosException();
+
+					mem.put(op1 + i, aux);
+				}
+
+				pmachine.incP_prog();
 			}
 		};
 
