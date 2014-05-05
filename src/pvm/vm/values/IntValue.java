@@ -10,6 +10,11 @@ public class IntValue implements Value {
 	}
 
 	@Override
+	public boolean equals(Value other)  throws InvalidValueTypeException {
+		return value == other.getInt();
+	}
+
+	@Override
 	public boolean getBool() throws InvalidValueTypeException {
 		throw new InvalidValueTypeException();
 	}

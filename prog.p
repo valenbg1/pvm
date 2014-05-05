@@ -13,7 +13,7 @@ lee
 desapila_dir(0)
 apila(2)
 apila_dir(0)
-mult
+mul
 apila_dir(0)
 apila(7)
 suma

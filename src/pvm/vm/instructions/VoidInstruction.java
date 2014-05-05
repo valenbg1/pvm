@@ -38,7 +38,7 @@ public class VoidInstruction implements Instruction {
 			}
 		},
 
-		MULT {
+		MUL {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws InvalidValueTypeException, EmptyStackException {
@@ -58,6 +58,138 @@ public class VoidInstruction implements Instruction {
 				Value op2 = stack.pop(), op1 = stack.pop();
 
 				stack.push(new IntValue(op1.getInt() / op2.getInt()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		MOD {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				stack.push(new IntValue(op1.getInt() % op2.getInt()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		NEG {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op = stack.pop();
+
+				stack.push(new IntValue(-op.getInt()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		AND {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				stack.push(new BoolValue(op1.getBool() && op2.getBool()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		OR {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				stack.push(new BoolValue(op1.getBool() || op2.getBool()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		NOT {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op = stack.pop();
+
+				stack.push(new BoolValue(!op.getBool()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		IGUAL {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				stack.push(new BoolValue(op1.equals(op2)));
+				pmachine.incP_prog();
+			}
+		},
+		
+		DISTINTO {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				stack.push(new BoolValue(!op1.equals(op2)));
+				pmachine.incP_prog();
+			}
+		},
+		
+		MENOR {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				stack.push(new BoolValue(op1.getInt() < op2.getInt()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		MAYOR {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				stack.push(new BoolValue(op1.getInt() > op2.getInt()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		MENOROIGUAL {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				stack.push(new BoolValue(op1.getInt() <= op2.getInt()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		MAYOROIGUAL {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op2 = stack.pop(), op1 = stack.pop();
+
+				stack.push(new BoolValue(op1.getInt() >= op2.getInt()));
 				pmachine.incP_prog();
 			}
 		},

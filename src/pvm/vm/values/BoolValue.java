@@ -10,6 +10,11 @@ public class BoolValue implements Value {
 	}
 
 	@Override
+	public boolean equals(Value other) throws InvalidValueTypeException {
+		return value == other.getBool();
+	}
+
+	@Override
 	public boolean getBool() throws InvalidValueTypeException {
 		return this.value;
 	}
