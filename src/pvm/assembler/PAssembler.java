@@ -6,11 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pvm.vm.exceptions.InvalidValueTypeException;
-import pvm.vm.instructions.BoolInstruction;
-import pvm.vm.instructions.BoolInstruction.BoolInstruction_t;
+import pvm.vm.instructions.BoolArgInstruction;
+import pvm.vm.instructions.BoolArgInstruction.BoolInstruction_t;
+import pvm.vm.instructions.IOInstruction;
+import pvm.vm.instructions.IOInstruction.IOInstruction_t;
 import pvm.vm.instructions.Instruction;
-import pvm.vm.instructions.IntInstruction;
-import pvm.vm.instructions.IntInstruction.IntInstruction_t;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.PointerInstruction;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 import pvm.vm.instructions.VoidInstruction;
 import pvm.vm.instructions.VoidInstruction.VoidInstruction_t;
 
@@ -41,9 +45,20 @@ public class PAssembler {
 					sline[0] = line;
 				
 				try {
-					instrs.add(new IntInstruction(IntInstruction_t.valueOf(sline[0]), Integer.valueOf(sline[1])));
+					instrs.add(new IntArgInstruction(IntInstruction_t.valueOf(sline[0]), Integer.valueOf(sline[1])));
 					continue;
 				} catch (Exception e) { }
+				
+				try {
+					instrs.add(new IOInstruction(IOInstruction_t.valueOf(sline[0])));
+					continue;
+				} catch (Exception e) { }
+				
+				try {
+					instrs.add(new PointerInstruction(PointerInstruction_t.valueOf(sline[0])));
+					continue;
+				} catch (Exception e) { }
+				
 				
 				try {
 					boolean arg2;
@@ -55,7 +70,7 @@ public class PAssembler {
 					else
 						throw new InvalidValueTypeException();
 					
-					instrs.add(new BoolInstruction(BoolInstruction_t.valueOf(sline[0]), arg2));
+					instrs.add(new BoolArgInstruction(BoolInstruction_t.valueOf(sline[0]), arg2));
 					
 					continue;
 				} catch (Exception e) { }

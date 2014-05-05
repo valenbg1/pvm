@@ -10,7 +10,7 @@ import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.values.IntValue;
 import pvm.vm.values.Value;
 
-public class IntInstruction implements Instruction {
+public class IntArgInstruction implements Instruction {
 	public enum IntInstruction_t {
 		APILA {
 			@Override
@@ -78,7 +78,7 @@ public class IntInstruction implements Instruction {
 			}
 		},
 
-		DONA {
+		CLONA {
 			@Override
 			protected void execute(int numb, PMachine pmachine)
 					throws EmptyStackException, InvalidValueTypeException,
@@ -108,7 +108,7 @@ public class IntInstruction implements Instruction {
 	public final IntInstruction_t intInstruction_t;
 	public final int numb;
 
-	public IntInstruction(IntInstruction_t intInstruction_t, int numb) {
+	public IntArgInstruction(IntInstruction_t intInstruction_t, int numb) {
 		this.intInstruction_t = intInstruction_t;
 		this.numb = numb;
 	}

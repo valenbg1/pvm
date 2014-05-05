@@ -3,7 +3,7 @@ package pvm.vm.instructions;
 import pvm.vm.PMachine;
 import pvm.vm.values.BoolValue;
 
-public class BoolInstruction implements Instruction {
+public class BoolArgInstruction implements Instruction {
 	public enum BoolInstruction_t {
 		APILA {
 			@Override
@@ -19,7 +19,7 @@ public class BoolInstruction implements Instruction {
 	public final BoolInstruction_t boolInstruction_t;
 	public final boolean bool;
 
-	public BoolInstruction(BoolInstruction_t intInstruction_t, boolean numb) {
+	public BoolArgInstruction(BoolInstruction_t intInstruction_t, boolean numb) {
 		this.boolInstruction_t = intInstruction_t;
 		this.bool = numb;
 	}
