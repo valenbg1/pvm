@@ -27,40 +27,27 @@ public class PAssembler {
 		try {
 			while ((line = file.readLine()) != null) {
 				++row;
+				line = line.toUpperCase();
 
 				if (line.equals("") || line.startsWith("//"))
 					continue;
 
 				String[] sline = line.split("[(, )]");
-				boolean match = false;
 
 				if (sline.length == 0)
 					sline[0] = line;
 				
-
-				IntInstruction_t[] int_intrs = IntInstruction_t.values();
-
-				for (int i = 0; !match && (i < int_intrs.length); ++i) {
-					if (int_intrs[i].name().equalsIgnoreCase(sline[0])) {
-						match = true;
-						instrs.add(new IntInstruction(int_intrs[i], Integer
-								.valueOf(sline[1])));
-					}
-				}
+				try {
+					instrs.add(new IntInstruction(IntInstruction_t.valueOf(sline[0]), Integer.valueOf(sline[1])));
+					continue;
+				} catch (Exception e) { }
 				
+				try {
+					instrs.add(new VoidInstruction(VoidInstruction_t.valueOf(sline[0])));
+					continue;
+				} catch (Exception e) { }
 
-				VoidInstruction_t[] void_intrs = VoidInstruction_t.values();
-
-				for (int i = 0; !match && (i < void_intrs.length); ++i) {
-					if (void_intrs[i].name().equalsIgnoreCase(sline[0])) {
-						match = true;
-						instrs.add(new VoidInstruction(void_intrs[i]));
-					}
-				}
-				
-
-				if (!match)
-					throw new IOException();
+				throw new IOException();
 			}
 		} catch (Exception e) {
 			throw new IOException("Error al leer la línea " + row + ": " + line);
