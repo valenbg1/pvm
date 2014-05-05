@@ -1,9 +1,11 @@
 package pvm.vm.instructions;
 
 import java.util.EmptyStackException;
+import java.util.Stack;
 
 import pvm.vm.PMachine;
 import pvm.vm.exceptions.InvalidMemoryPosException;
+import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.values.IntValue;
 import pvm.vm.values.Value;
 
@@ -38,10 +40,46 @@ public class IntInstruction implements Instruction {
 				pmachine.getMem().put(numb, pmachine.getStack().pop());
 				pmachine.incP_prog();
 			}
+		},
+
+		IR {
+			@Override
+			protected void execute(int numb, PMachine pmachine) {
+				pmachine.setP_prog(numb);
+			}
+		},
+
+		IR_V {
+			@Override
+			protected void execute(int numb, PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op = stack.pop();
+
+				if (op.getBool())
+					pmachine.setP_prog(numb);
+				else
+					pmachine.incP_prog();
+			}
+		},
+
+		IR_F {
+			@Override
+			protected void execute(int numb, PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.getStack();
+				Value op = stack.pop();
+
+				if (!op.getBool())
+					pmachine.setP_prog(numb);
+				else
+					pmachine.incP_prog();
+			}
 		};
 
 		protected abstract void execute(int numb, PMachine pmachine)
-				throws EmptyStackException, InvalidMemoryPosException;
+				throws EmptyStackException, InvalidValueTypeException,
+				InvalidMemoryPosException;
 	}
 
 	private final IntInstruction_t intInstruction_t;
@@ -54,7 +92,7 @@ public class IntInstruction implements Instruction {
 
 	@Override
 	public void execute(PMachine pmachine) throws EmptyStackException,
-			InvalidMemoryPosException {
+			InvalidMemoryPosException, InvalidValueTypeException {
 		intInstruction_t.execute(numb, pmachine);
 	}
 

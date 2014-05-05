@@ -193,6 +193,15 @@ public class VoidInstruction implements Instruction {
 				pmachine.incP_prog();
 			}
 		},
+		
+		COPIA {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws EmptyStackException {
+				pmachine.getStack().push(pmachine.getStack().peek());
+				pmachine.incP_prog();
+			}
+		},
 
 		LEE {
 			@Override
