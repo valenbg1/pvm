@@ -1,12 +1,11 @@
 package pvm.vm.instructions;
 
 import java.util.EmptyStackException;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Stack;
 
 import pvm.vm.PMachine;
-import pvm.vm.Segment;
+import pvm.vm.exceptions.InvalidHeapStateException;
 import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.exceptions.NoHeapSpaceException;
@@ -107,28 +106,25 @@ public class IntArgInstruction implements Instruction {
 			@Override
 			protected void execute(int numb, PMachine pmachine)
 					throws NoHeapSpaceException {
-				for (ListIterator<Segment> it = pmachine.heap.listIterator(); it.hasNext();) {
-					Segment seg = it.next();
-					
-					if (seg.size >= numb) {
-						it.remove();
-						
-						if (seg.size > numb)
-							it.add(new Segment(seg.ini_dir+numb, seg.size-numb));
-						
-						pmachine.stack.push(new IntValue(seg.ini_dir));
-						pmachine.incP_prog();
-						return;
-					}
-				}
-				
-				throw new NoHeapSpaceException();
+				pmachine.stack.push(new IntValue(pmachine.heap.malloc(numb).ini_dir));
+				pmachine.incP_prog();
+			}
+		},
+
+		LIBERA {
+			@Override
+			protected void execute(int numb, PMachine pmachine)
+					throws EmptyStackException, InvalidValueTypeException,
+					InvalidHeapStateException {
+				pmachine.heap.free(pmachine.stack.pop().getInt(), numb);
+				pmachine.incP_prog();
 			}
 		};
 
 		protected abstract void execute(int numb, PMachine pmachine)
 				throws EmptyStackException, InvalidValueTypeException,
-				InvalidMemoryPosException, NoHeapSpaceException;
+				InvalidMemoryPosException, NoHeapSpaceException,
+				InvalidHeapStateException;
 	}
 
 	public final IntInstruction_t intInstruction_t;
@@ -142,7 +138,7 @@ public class IntArgInstruction implements Instruction {
 	@Override
 	public void execute(PMachine pmachine) throws EmptyStackException,
 			InvalidMemoryPosException, InvalidValueTypeException,
-			NoHeapSpaceException {
+			NoHeapSpaceException, InvalidHeapStateException {
 		intInstruction_t.execute(numb, pmachine);
 	}
 

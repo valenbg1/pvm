@@ -1,8 +1,8 @@
 package pvm.vm.exceptions;
 
 public class InvalidValueTypeException extends Exception {
-	private static final long serialVersionUID = 5003100092755254944L;
-	
+	private static final long serialVersionUID = 6594598736578438664L;
+
 	public InvalidValueTypeException() {
 		super();
 	}
