@@ -15,7 +15,6 @@ import pvm.vm.values.Value;
 
 public class IOInstruction implements Instruction {
 	public enum IOInstruction_t {
-		
 		LEE {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -78,5 +77,4 @@ public class IOInstruction implements Instruction {
 	public String toString() {
 		return this.ioInstruction_t.name();
 	}
-
 }

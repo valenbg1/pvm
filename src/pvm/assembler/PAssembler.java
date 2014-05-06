@@ -15,8 +15,8 @@ import pvm.vm.instructions.IntArgInstruction;
 import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
 import pvm.vm.instructions.PointerInstruction;
 import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
-import pvm.vm.instructions.VoidInstruction;
-import pvm.vm.instructions.VoidInstruction.VoidInstruction_t;
+import pvm.vm.instructions.VoidArgInstruction;
+import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
 public class PAssembler {
 	private int row;
@@ -76,7 +76,7 @@ public class PAssembler {
 				} catch (Exception e) { }
 				
 				try {
-					instrs.add(new VoidInstruction(VoidInstruction_t.valueOf(sline[0])));
+					instrs.add(new VoidArgInstruction(VoidInstruction_t.valueOf(sline[0])));
 					continue;
 				} catch (Exception e) { }
 

@@ -33,7 +33,7 @@ desapila_dir(7)
 desapila_dir(8)
 apila(9)
 apila(6)
-dona(3)
+clona(3)
 apila(11)
 apila_ind
 escribe

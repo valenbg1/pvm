@@ -10,7 +10,6 @@ import pvm.vm.values.Value;
 
 public class PointerInstruction implements Instruction {
 	public enum PointerInstruction_t {
-		
 		APILA_IND {
 			@Override
 			protected void execute(PMachine pmachine)
@@ -38,6 +37,14 @@ public class PointerInstruction implements Instruction {
 				pmachine.mem.put(op1.getInt(), op2);
 				pmachine.incP_prog();
 			}
+		},
+		
+		IR_IND {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				pmachine.setP_prog(pmachine.stack.pop().getInt());
+			}
 		};
 
 		protected abstract void execute(PMachine pmachine)
@@ -61,5 +68,4 @@ public class PointerInstruction implements Instruction {
 	public String toString() {
 		return this.pointerInstruction_t.name();
 	}
-
 }

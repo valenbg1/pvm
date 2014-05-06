@@ -10,7 +10,7 @@ import pvm.vm.values.BoolValue;
 import pvm.vm.values.IntValue;
 import pvm.vm.values.Value;
 
-public class VoidInstruction implements Instruction {
+public class VoidArgInstruction implements Instruction {
 	public enum VoidInstruction_t {
 		SUMA {
 			@Override
@@ -208,7 +208,7 @@ public class VoidInstruction implements Instruction {
 
 	public final VoidInstruction_t voidInstruction_t;
 
-	public VoidInstruction(VoidInstruction_t voidInstruction_t) {
+	public VoidArgInstruction(VoidInstruction_t voidInstruction_t) {
 		this.voidInstruction_t = voidInstruction_t;
 	}
 
