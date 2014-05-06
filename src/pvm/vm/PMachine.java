@@ -10,6 +10,7 @@ import java.util.Stack;
 
 import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.exceptions.InvalidValueTypeException;
+import pvm.vm.exceptions.NoHeapSpaceException;
 import pvm.vm.instructions.Instruction;
 import pvm.vm.values.Value;
 
@@ -18,7 +19,7 @@ public class PMachine {
 
 	public final Map<Integer, Value> mem;
 	public final List<Segment> heap;
-	public final Segment heap_size = new Segment(65536, 65536*2);
+	public final Segment heap_segment = new Segment(65536, 65536*2);
 
 	public final List<Instruction> prog;
 	private int p_prog;
@@ -30,7 +31,7 @@ public class PMachine {
 
 		this.mem = new HashMap<Integer, Value>();
 		this.heap = new LinkedList<Segment>();
-		this.heap.add(heap_size);
+		this.heap.add(heap_segment);
 
 		this.prog = new ArrayList<Instruction>(prog);
 		this.p_prog = 0;
@@ -50,7 +51,8 @@ public class PMachine {
 		return run;
 	}
 
-	public void run() throws EmptyStackException, InvalidValueTypeException, InvalidMemoryPosException {
+	public void run() throws EmptyStackException, InvalidValueTypeException,
+			InvalidMemoryPosException, NoHeapSpaceException {
 		while (run && (p_prog < prog.size()))
 			prog.get(p_prog).execute(this);
 	}

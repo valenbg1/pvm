@@ -1,12 +1,15 @@
 package pvm.vm.instructions;
 
 import java.util.EmptyStackException;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Stack;
 
 import pvm.vm.PMachine;
+import pvm.vm.Segment;
 import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.exceptions.InvalidValueTypeException;
+import pvm.vm.exceptions.NoHeapSpaceException;
 import pvm.vm.values.IntValue;
 import pvm.vm.values.Value;
 
@@ -98,11 +101,34 @@ public class IntArgInstruction implements Instruction {
 
 				pmachine.incP_prog();
 			}
+		},
+
+		RESERVA {
+			@Override
+			protected void execute(int numb, PMachine pmachine)
+					throws NoHeapSpaceException {
+				for (ListIterator<Segment> it = pmachine.heap.listIterator(); it.hasNext();) {
+					Segment seg = it.next();
+					
+					if (seg.size >= numb) {
+						it.remove();
+						
+						if (seg.size > numb)
+							it.add(new Segment(seg.ini_dir+numb, seg.size-numb));
+						
+						pmachine.stack.push(new IntValue(seg.ini_dir));
+						pmachine.incP_prog();
+						return;
+					}
+				}
+				
+				throw new NoHeapSpaceException();
+			}
 		};
 
 		protected abstract void execute(int numb, PMachine pmachine)
 				throws EmptyStackException, InvalidValueTypeException,
-				InvalidMemoryPosException;
+				InvalidMemoryPosException, NoHeapSpaceException;
 	}
 
 	public final IntInstruction_t intInstruction_t;
@@ -115,7 +141,8 @@ public class IntArgInstruction implements Instruction {
 
 	@Override
 	public void execute(PMachine pmachine) throws EmptyStackException,
-			InvalidMemoryPosException, InvalidValueTypeException {
+			InvalidMemoryPosException, InvalidValueTypeException,
+			NoHeapSpaceException {
 		intInstruction_t.execute(numb, pmachine);
 	}
 
