@@ -34,7 +34,7 @@ public class PAssembler {
 		try {
 			while ((line = file.readLine()) != null) {
 				++row;
-				line = line.toUpperCase();
+				line = line.trim().toUpperCase();
 
 				if (line.equals("") || line.startsWith("//"))
 					continue;
