@@ -4,8 +4,8 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 import pvm.vm.PMachine;
-import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.exceptions.InvalidValueTypeException;
+import pvm.vm.values.IntValue;
 import pvm.vm.values.Value;
 
 public class PointerInstruction implements Instruction {
@@ -13,17 +13,16 @@ public class PointerInstruction implements Instruction {
 		APILA_IND {
 			@Override
 			protected void execute(PMachine pmachine)
-					throws InvalidValueTypeException, EmptyStackException,
-					InvalidMemoryPosException {
+					throws InvalidValueTypeException, EmptyStackException {
 				Stack<Value> stack = pmachine.stack;
 				Value op = stack.pop(), aux = pmachine.mem
 						.get(op.getInt());
 
-				if (aux != null) {
-					stack.push(aux);
-					pmachine.incP_prog();
-				} else
-					throw new InvalidMemoryPosException();
+				if (aux == null)
+					aux = new IntValue(0);
+					
+				stack.push(aux);
+				pmachine.incP_prog();
 			}
 		},
 
@@ -48,8 +47,7 @@ public class PointerInstruction implements Instruction {
 		};
 
 		protected abstract void execute(PMachine pmachine)
-				throws InvalidValueTypeException, EmptyStackException,
-				InvalidMemoryPosException;
+				throws InvalidValueTypeException, EmptyStackException;
 	}
 
 	public final PointerInstruction_t pointerInstruction_t;
@@ -60,7 +58,7 @@ public class PointerInstruction implements Instruction {
 
 	@Override
 	public void execute(PMachine pmachine) throws InvalidValueTypeException,
-			EmptyStackException, InvalidMemoryPosException {
+			EmptyStackException {
 		pointerInstruction_t.execute(pmachine);
 	}
 

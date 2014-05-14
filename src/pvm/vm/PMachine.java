@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Stack;
 
 import pvm.vm.exceptions.InvalidHeapStateException;
-import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.exceptions.NoHeapSpaceException;
 import pvm.vm.heap.Heap;
@@ -53,7 +52,7 @@ public class PMachine {
 	}
 
 	public void run() throws EmptyStackException, InvalidValueTypeException,
-			InvalidMemoryPosException, NoHeapSpaceException, InvalidHeapStateException {
+			NoHeapSpaceException, InvalidHeapStateException {
 		while (run && (p_prog < prog.size()))
 			prog.get(p_prog).execute(this);
 	}

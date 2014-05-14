@@ -7,7 +7,6 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 import pvm.vm.PMachine;
-import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.values.BoolValue;
 import pvm.vm.values.IntValue;
@@ -57,8 +56,7 @@ public class IOInstruction implements Instruction {
 		};
 
 		protected abstract void execute(PMachine pmachine)
-				throws InvalidValueTypeException, EmptyStackException,
-				InvalidMemoryPosException;
+				throws InvalidValueTypeException, EmptyStackException;
 	}
 
 	public final IOInstruction_t ioInstruction_t;
@@ -69,7 +67,7 @@ public class IOInstruction implements Instruction {
 
 	@Override
 	public void execute(PMachine pmachine) throws InvalidValueTypeException,
-			EmptyStackException, InvalidMemoryPosException {
+			EmptyStackException {
 		ioInstruction_t.execute(pmachine);
 	}
 

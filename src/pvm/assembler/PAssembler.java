@@ -19,17 +19,10 @@ import pvm.vm.instructions.VoidArgInstruction;
 import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
 public class PAssembler {
-	private int row;
-	private final BufferedReader file;
-
-	public PAssembler(BufferedReader file) {
-		this.row = 0;
-		this.file = file;
-	}
-
-	public List<Instruction> assemble() throws IOException {
+	public static List<Instruction> assemble(BufferedReader file) throws IOException {
 		String line = "";
 		ArrayList<Instruction> instrs = new ArrayList<Instruction>();
+		int row = 0;
 
 		try {
 			while ((line = file.readLine()) != null) {
@@ -39,7 +32,7 @@ public class PAssembler {
 				if (line.equals("") || line.startsWith("//"))
 					continue;
 
-				String[] sline = line.split("[(, )]");
+				String[] sline = line.split("[(,), ]");
 
 				if (sline.length == 0)
 					sline[0] = line;
@@ -83,9 +76,29 @@ public class PAssembler {
 				throw new IOException();
 			}
 		} catch (Exception e) {
-			throw new IOException("Error al leer la línea " + row + ": " + line);
+			throw new IOException("Error al leer la línea " + row + ": " + line.toLowerCase());
 		}
 
 		return instrs;
+	}
+
+	public static void printInstrNumbers(BufferedReader file) throws IOException {
+		String line = "";
+		int row = 0;
+
+		try {
+			while ((line = file.readLine()) != null) {
+				line = line.trim();
+
+				if (line.equals("") || line.startsWith("//")) {
+					System.out.println(line);
+					continue;
+				}
+
+				System.out.println(row++ + " " + line);
+			}
+		} catch (Exception e) {
+			throw new IOException("Error al leer la línea " + row + ": " + line.toLowerCase());
+		}
 	}
 }

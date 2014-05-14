@@ -6,7 +6,6 @@ import java.util.Stack;
 
 import pvm.vm.PMachine;
 import pvm.vm.exceptions.InvalidHeapStateException;
-import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.exceptions.NoHeapSpaceException;
 import pvm.vm.heap.Segment;
@@ -25,12 +24,11 @@ public class IntArgInstruction implements Instruction {
 
 		APILA_DIR {
 			@Override
-			protected void execute(int numb, PMachine pmachine)
-					throws InvalidMemoryPosException {
+			protected void execute(int numb, PMachine pmachine) {
 				Value val = pmachine.mem.get(numb);
 
 				if (val == null)
-					throw new InvalidMemoryPosException();
+					val = new IntValue(0);
 
 				pmachine.stack.push(val);
 				pmachine.incP_prog();
@@ -46,7 +44,7 @@ public class IntArgInstruction implements Instruction {
 			}
 		},
 
-		IR {
+		IR_A {
 			@Override
 			protected void execute(int numb, PMachine pmachine) {
 				pmachine.setP_prog(numb);
@@ -84,8 +82,7 @@ public class IntArgInstruction implements Instruction {
 		CLONA {
 			@Override
 			protected void execute(int numb, PMachine pmachine)
-					throws EmptyStackException, InvalidValueTypeException,
-					InvalidMemoryPosException {
+					throws EmptyStackException, InvalidValueTypeException {
 				Stack<Value> stack = pmachine.stack;
 				Map<Integer, Value> mem = pmachine.mem;
 				int op2 = stack.pop().getInt(), op1 = stack.pop().getInt();
@@ -94,7 +91,7 @@ public class IntArgInstruction implements Instruction {
 					Value aux = mem.get(op2 + i);
 
 					if (aux == null)
-						throw new InvalidMemoryPosException();
+						aux = new IntValue(0);
 
 					mem.put(op1 + i, aux);
 				}
@@ -124,8 +121,7 @@ public class IntArgInstruction implements Instruction {
 
 		protected abstract void execute(int numb, PMachine pmachine)
 				throws EmptyStackException, InvalidValueTypeException,
-				InvalidMemoryPosException, NoHeapSpaceException,
-				InvalidHeapStateException;
+				NoHeapSpaceException, InvalidHeapStateException;
 	}
 
 	public final IntInstruction_t intInstruction_t;
@@ -138,8 +134,8 @@ public class IntArgInstruction implements Instruction {
 
 	@Override
 	public void execute(PMachine pmachine) throws EmptyStackException,
-			InvalidMemoryPosException, InvalidValueTypeException,
-			NoHeapSpaceException, InvalidHeapStateException {
+			InvalidValueTypeException, NoHeapSpaceException,
+			InvalidHeapStateException {
 		intInstruction_t.execute(numb, pmachine);
 	}
 

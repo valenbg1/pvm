@@ -4,7 +4,6 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 import pvm.vm.PMachine;
-import pvm.vm.exceptions.InvalidMemoryPosException;
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.values.BoolValue;
 import pvm.vm.values.IntValue;
@@ -192,7 +191,7 @@ public class VoidArgInstruction implements Instruction {
 			}
 		},
 
-		COPIA {
+		DUP {
 			@Override
 			protected void execute(PMachine pmachine)
 					throws EmptyStackException {
@@ -202,8 +201,7 @@ public class VoidArgInstruction implements Instruction {
 		};
 
 		protected abstract void execute(PMachine pmachine)
-				throws InvalidValueTypeException, EmptyStackException,
-				InvalidMemoryPosException;
+				throws InvalidValueTypeException, EmptyStackException;
 	}
 
 	public final VoidInstruction_t voidInstruction_t;
@@ -214,7 +212,7 @@ public class VoidArgInstruction implements Instruction {
 
 	@Override
 	public void execute(PMachine pmachine) throws InvalidValueTypeException,
-			EmptyStackException, InvalidMemoryPosException {
+			EmptyStackException {
 		voidInstruction_t.execute(pmachine);
 	}
 

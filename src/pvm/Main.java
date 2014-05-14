@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pvm.assembler.PAssembler;
@@ -15,7 +17,9 @@ public class Main {
 		List<Instruction> prog = null;
 		
 		try {
-			prog = new PAssembler(new BufferedReader(new FileReader("prog.p"))).assemble();
+			PAssembler.printInstrNumbers(new BufferedReader(new FileReader("prog.p")));
+			prog = PAssembler.assemble(new BufferedReader(new FileReader("prog.p")));
+			System.out.println();
 		} catch (FileNotFoundException e1) {
 			System.err.println("No se encuentra el archivo");
 			e1.printStackTrace();
@@ -37,5 +41,16 @@ public class Main {
 			e.printStackTrace();
 			return;
 		}
+		
+		System.out.println("\nMem trace:");
+
+		List<Integer> keys = new ArrayList<Integer>(pmachine.mem.keySet());
+		Collections.sort(keys);
+		for (Integer key : keys)
+		    System.out.println(key + ": " + pmachine.mem.get(key));
+
+		System.out.println("\nHeap trace:\n" + pmachine.heap);
+
+		System.out.println("\nStack trace:\n" + pmachine.stack);
 	}
 }
