@@ -189,7 +189,7 @@ desapila_ind
 apila_dir(0)
 apila(1)
 suma
-apila(167)
+apila(166)
 desapila_ind
 ir_a(104)
 ir_a(202)
