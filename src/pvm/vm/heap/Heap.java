@@ -18,48 +18,47 @@ public class Heap {
 		this.free_segments.add(heap_segment);
 	}
 
-	public void free(Segment seg)
-			throws InvalidHeapStateException {
-		int direction = seg.ini_dir, blocks = seg.size;
+	public void free(Segment seg) throws InvalidHeapStateException {
 		
 		if (free_segments.isEmpty())
-			free_segments.add(new Segment(direction, blocks));
+			free_segments.add(seg);
 		else {
 			boolean ok = false;
 			
 			for (ListIterator<Segment> it = free_segments.listIterator(); it.hasNext();) {
-				Segment r_seg = it.next(), aux = new Segment(direction, blocks);
+				Segment r_seg = it.next();
 
-				if (direction < r_seg.ini_dir) {
+				if (seg.ini_dir < r_seg.ini_dir) {
 					it.previous();
-					it.add(new Segment(direction, blocks));
+					it.add(seg);
 					it.previous();
 
 					if (it.hasPrevious()) {
 						Segment l_seg = it.previous();
 
-						if ((l_seg.ini_dir + l_seg.size) == direction) {
-							it.set(aux = new Segment(l_seg.ini_dir, l_seg.size
-									+ blocks));
+						if ((l_seg.ini_dir + l_seg.size) == seg.ini_dir) {
+							seg = seg.join(l_seg);
+							it.set(seg);
 							it.next();
 							it.next();
 							it.remove();
 							it.previous();
-						} else if ((l_seg.ini_dir + l_seg.size) > direction)
+						} else if ((l_seg.ini_dir + l_seg.size) > seg.ini_dir)
 							throw new InvalidHeapStateException();
 					}
 
-					if ((r_seg.ini_dir - blocks) == direction) {
-						it.set(new Segment(aux.ini_dir, aux.size + r_seg.size));
+					if ((seg.ini_dir + seg.size) == r_seg.ini_dir) {
+						seg = seg.join(r_seg);
+						it.set(seg);
 						it.next();
 						it.next();
 						it.remove();
-					} else if ((r_seg.ini_dir - blocks) < direction)
+					} else if ((seg.ini_dir + seg.size) > r_seg.ini_dir)
 						throw new InvalidHeapStateException();
 
 					ok = true;
 					break;
-				} else if (r_seg.ini_dir == direction)
+				} else if (r_seg.ini_dir == seg.ini_dir)
 					throw new InvalidHeapStateException();
 			}
 			
