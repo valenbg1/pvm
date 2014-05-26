@@ -11,12 +11,17 @@ public class IntValue implements Value {
 
 	@Override
 	public boolean equals(Value other) throws InvalidValueTypeException {
-		return value == other.getInt();
+		return value == other.getDouble();
 	}
 
 	@Override
 	public boolean getBool() throws InvalidValueTypeException {
 		throw new InvalidValueTypeException();
+	}
+
+	@Override
+	public double getDouble() throws InvalidValueTypeException {
+		return this.value;
 	}
 
 	@Override

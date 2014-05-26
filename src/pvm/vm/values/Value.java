@@ -6,6 +6,8 @@ public interface Value {
 	public boolean equals(Value other) throws InvalidValueTypeException;
 
 	public boolean getBool() throws InvalidValueTypeException;
+	
+	public double getDouble() throws InvalidValueTypeException;
 
 	public int getInt() throws InvalidValueTypeException;
 

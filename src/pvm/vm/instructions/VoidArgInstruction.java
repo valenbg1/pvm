@@ -5,6 +5,7 @@ import java.util.Stack;
 
 import pvm.vm.PMachine;
 import pvm.vm.exceptions.InvalidValueTypeException;
+import pvm.vm.instructions.aux.NumOps;
 import pvm.vm.values.BoolValue;
 import pvm.vm.values.IntValue;
 import pvm.vm.values.Value;
@@ -18,7 +19,7 @@ public class VoidArgInstruction implements Instruction {
 				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
-				stack.push(new IntValue(op1.getInt() + op2.getInt()));
+				stack.push(NumOps.add(op1, op2));
 				pmachine.incP_prog();
 			}
 		},
@@ -30,7 +31,7 @@ public class VoidArgInstruction implements Instruction {
 				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
-				stack.push(new IntValue(op1.getInt() - op2.getInt()));
+				stack.push(NumOps.sub(op1, op2));
 				pmachine.incP_prog();
 			}
 		},
@@ -42,7 +43,7 @@ public class VoidArgInstruction implements Instruction {
 				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
-				stack.push(new IntValue(op1.getInt() * op2.getInt()));
+				stack.push(NumOps.mul(op1, op2));
 				pmachine.incP_prog();
 			}
 		},
@@ -54,7 +55,7 @@ public class VoidArgInstruction implements Instruction {
 				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
-				stack.push(new IntValue(op1.getInt() / op2.getInt()));
+				stack.push(NumOps.div(op1, op2));
 				pmachine.incP_prog();
 			}
 		},
@@ -78,7 +79,7 @@ public class VoidArgInstruction implements Instruction {
 				Stack<Value> stack = pmachine.stack;
 				Value op = stack.pop();
 
-				stack.push(new IntValue(-op.getInt()));
+				stack.push(NumOps.neg(op));
 				pmachine.incP_prog();
 			}
 		},
@@ -150,7 +151,7 @@ public class VoidArgInstruction implements Instruction {
 				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
-				stack.push(new BoolValue(op1.getInt() < op2.getInt()));
+				stack.push(new BoolValue(op1.getDouble() < op2.getDouble()));
 				pmachine.incP_prog();
 			}
 		},
@@ -162,7 +163,7 @@ public class VoidArgInstruction implements Instruction {
 				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
-				stack.push(new BoolValue(op1.getInt() > op2.getInt()));
+				stack.push(new BoolValue(op1.getDouble() > op2.getDouble()));
 				pmachine.incP_prog();
 			}
 		},
@@ -174,7 +175,7 @@ public class VoidArgInstruction implements Instruction {
 				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
-				stack.push(new BoolValue(op1.getInt() <= op2.getInt()));
+				stack.push(new BoolValue(op1.getDouble() <= op2.getDouble()));
 				pmachine.incP_prog();
 			}
 		},
@@ -186,7 +187,7 @@ public class VoidArgInstruction implements Instruction {
 				Stack<Value> stack = pmachine.stack;
 				Value op2 = stack.pop(), op1 = stack.pop();
 
-				stack.push(new BoolValue(op1.getInt() >= op2.getInt()));
+				stack.push(new BoolValue(op1.getDouble() >= op2.getDouble()));
 				pmachine.incP_prog();
 			}
 		},

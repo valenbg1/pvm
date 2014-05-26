@@ -2,35 +2,35 @@ package pvm.vm.values;
 
 import pvm.vm.exceptions.InvalidValueTypeException;
 
-public class BoolValue implements Value {	
-	public final boolean value;
+public class DoubleValue implements Value {
+	public final double value;
 
-	public BoolValue(boolean value) {
+	public DoubleValue(double value) {
 		this.value = value;
 	}
 
 	@Override
 	public boolean equals(Value other) throws InvalidValueTypeException {
-		return value == other.getBool();
+		return value == other.getDouble();
 	}
 
 	@Override
 	public boolean getBool() throws InvalidValueTypeException {
-		return this.value;
+		throw new InvalidValueTypeException();
 	}
 
 	@Override
 	public double getDouble() throws InvalidValueTypeException {
-		throw new InvalidValueTypeException();
+		return value;
 	}
 
 	@Override
 	public int getInt() throws InvalidValueTypeException {
-		throw new InvalidValueTypeException();
+		return (int) this.value;
 	}
 
 	@Override
 	public String toString() {
-		return Boolean.toString(value);
+		return Double.toString(value);
 	}
 }

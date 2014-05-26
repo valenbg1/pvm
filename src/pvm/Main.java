@@ -17,8 +17,8 @@ public class Main {
 		List<Instruction> prog = null;
 		
 		try {
-			PAssembler.printInstrNumbers(new BufferedReader(new FileReader("bprog-valen.p")));
-			prog = PAssembler.assemble(new BufferedReader(new FileReader("bprog-valen.p")));
+			PAssembler.printInstrNumbers(new BufferedReader(new FileReader("prog4.p")));
+			prog = PAssembler.assemble(new BufferedReader(new FileReader("prog4.p")));
 			System.out.println();
 		} catch (FileNotFoundException e1) {
 			System.err.println("No se encuentra el archivo");

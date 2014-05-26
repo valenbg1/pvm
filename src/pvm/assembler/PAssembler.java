@@ -8,6 +8,8 @@ import java.util.List;
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.instructions.BoolArgInstruction;
 import pvm.vm.instructions.BoolArgInstruction.BoolInstruction_t;
+import pvm.vm.instructions.DoubleArgInstruction;
+import pvm.vm.instructions.DoubleArgInstruction.DoubleInstruction_t;
 import pvm.vm.instructions.IOInstruction;
 import pvm.vm.instructions.IOInstruction.IOInstruction_t;
 import pvm.vm.instructions.Instruction;
@@ -39,6 +41,11 @@ public class PAssembler {
 				
 				try {
 					instrs.add(new IntArgInstruction(IntInstruction_t.valueOf(sline[0]), Integer.valueOf(sline[1])));
+					continue;
+				} catch (Exception e) { }
+				
+				try {
+					instrs.add(new DoubleArgInstruction(DoubleInstruction_t.valueOf(sline[0]), Double.valueOf(sline[1])));
 					continue;
 				} catch (Exception e) { }
 				

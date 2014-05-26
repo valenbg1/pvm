@@ -9,6 +9,7 @@ import java.util.Stack;
 import pvm.vm.PMachine;
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.values.BoolValue;
+import pvm.vm.values.DoubleValue;
 import pvm.vm.values.IntValue;
 import pvm.vm.values.Value;
 
@@ -37,8 +38,13 @@ public class IOInstruction implements Instruction {
 						stack.push(new BoolValue(false));
 					else if (in.equalsIgnoreCase("true"))
 						stack.push(new BoolValue(true));
-					else
-						throw new InvalidValueTypeException();
+					else {
+						try {
+							stack.push(new DoubleValue(Double.valueOf(in)));
+						} catch (NumberFormatException e1) {
+							throw new InvalidValueTypeException();
+						}
+					}
 				}
 
 				pmachine.incP_prog();
