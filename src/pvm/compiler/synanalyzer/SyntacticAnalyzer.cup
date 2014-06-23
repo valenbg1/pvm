@@ -1,7 +1,20 @@
 package pvm.compiler.synanalyzer;
 
 import java.util.List;
+
 import pvm.compiler.ErrorsHandler;
+import pvm.compiler.abstractsyntax.Programa;
+import pvm.compiler.abstractsyntax.designador.Designador;
+import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.instr.Instruccion;
+import pvm.compiler.abstractsyntax.instr.cond.Caso;
+import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
+import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
+import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
+import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
+import pvm.compiler.abstractsyntax.subprog.param.Parametro;
+import pvm.compiler.abstractsyntax.tipo.DecTipo;
+import pvm.compiler.abstractsyntax.tipo.Tipo;
 import pvm.compiler.lexanalyzer.LexicalAnalyzer;
 import pvm.compiler.lexanalyzer.LexicalUnit;
 
@@ -30,7 +43,7 @@ non terminal Programa Programa;
 non terminal SeccionTipos SeccionTipos;
 non terminal SeccionVariables SeccionVariables;
 non terminal SeccionSubprogramas SeccionSubprogramas;
-non terminal List<DecTipos> DecTipos, DecVariables, Campos;
+non terminal List<DecTipo> DecTipos, DecVariables, Campos;
 non terminal List<DecSubprograma> DecSubprogramas;
 non terminal DecTipo DecTipo, Campo, DecVariable;
 non terminal Tipo Tipo;
