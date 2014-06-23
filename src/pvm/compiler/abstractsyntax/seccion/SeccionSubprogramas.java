@@ -2,15 +2,19 @@ package pvm.compiler.abstractsyntax.seccion;
 
 import java.util.List;
 
+import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
 
 public class SeccionSubprogramas extends Node {
+	private List<DecSubprograma> decsubprogramas;
+	
 	public SeccionSubprogramas(List<DecSubprograma> decsubprogramas) {
 		super();
 		
-		for (DecSubprograma decsubprograma : decsubprogramas)
-			this.childs.add(decsubprograma);
+		this.decsubprogramas = decsubprogramas;
+		
+		this.childs.add(new ListNode<DecSubprograma>(decsubprogramas));
 	}
 
 	@Override
@@ -18,11 +22,15 @@ public class SeccionSubprogramas extends Node {
 		if (!childs.isEmpty()) {
 			String ret = "subprogram\n";
 			
-			for (int i = 0; i < childs.size(); ++i)
-				ret += "\t" + childs.get(i).toString() + ";\n";
+			for (DecSubprograma decsp : decsubprogramas)
+				ret += "\t" + decsp + ";\n";
 			
 			return ret;
 		} else
 			return "";
+	}
+
+	public List<DecSubprograma> getDecsubprogramas() {
+		return decsubprogramas;
 	}
 }

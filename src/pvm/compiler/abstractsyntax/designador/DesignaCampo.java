@@ -1,21 +1,28 @@
 package pvm.compiler.abstractsyntax.designador;
 
 public class DesignaCampo extends Designador {
+	private Designador desig;
 	private String campo;
 	
 	public DesignaCampo(Designador desig, String campo) {
 		super();
 		
-		this.childs.add(desig);
+		this.desig = desig;
 		this.campo = campo;
+		
+		this.childs.add(desig);
 	}
 
 	@Override
 	public String toString() {
-		return childs.get(0) + "." + campo;
+		return desig + "." + campo;
 	}
 
 	public String getCampo() {
 		return campo;
+	}
+
+	public Designador getDesig() {
+		return desig;
 	}
 }

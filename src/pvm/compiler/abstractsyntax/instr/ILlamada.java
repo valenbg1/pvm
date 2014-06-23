@@ -2,33 +2,41 @@ package pvm.compiler.abstractsyntax.instr;
 
 import java.util.List;
 
+import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.exp.Exp;
 
 public class ILlamada extends Instruccion {
 	private String id;
+	
+	private List<Exp> args;
 	
 	public ILlamada(String id, List<Exp> args) {
 		super();
 		
 		this.id = id;
 		
-		for (Exp exp : args)
-			this.childs.add(exp);
+		this.args = args;
+		
+		this.childs.add(new ListNode<Exp>(args));
 	}
 
 	@Override
 	public String toString() {
-		String args = "";
+		String args_s = "";
 		
-		for (int i = 1; i < childs.size(); ++i)
-			args += childs.get(i).toString() + ", ";
+		for (Exp arg : args)
+			args_s += arg + ", ";
 		
-		args = args.subSequence(0, args.length()-2).toString();
+		args_s = args_s.subSequence(0, args_s.length()-2).toString();
 		
-		return id + "(" + args + ")" + ";";
+		return id + "(" + args_s + ")" + ";";
 	}
 
 	public String getId() {
 		return id;
+	}
+
+	public List<Exp> getArgs() {
+		return args;
 	}
 }

@@ -2,29 +2,42 @@ package pvm.compiler.abstractsyntax.instr.cond;
 
 import java.util.List;
 
+import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 
 public class Caso extends Node {
+	private Exp exp;
+	private List<Instruccion> instrs;
+	
 	public Caso(Exp exp, List<Instruccion> instrs) {
 		super();
 		
-		this.childs.add(exp);
+		this.exp = exp;
+		this.instrs = instrs;
 		
-		for (Instruccion inst : instrs)
-			this.childs.add(inst);
+		this.childs.add(exp);
+		this.childs.add(new ListNode<Instruccion>(instrs));
 	}
 
 	@Override
 	public String toString() {
-		String ret = childs.get(0).toString() + " : {\n";
+		String ret = exp + " : {\n";
 		
-		for (int i = 1; i < childs.size(); ++i)
-			ret += "\t" + childs.get(i).toString() + "\n";
+		for (Instruccion inst : instrs)
+			ret += "\t" + inst + "\n";
 		
 		ret += "}";
 		
 		return ret;
+	}
+
+	public Exp getExp() {
+		return exp;
+	}
+
+	public List<Instruccion> getInstrs() {
+		return instrs;
 	}
 }

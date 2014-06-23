@@ -2,6 +2,7 @@ package pvm.compiler.abstractsyntax.subprog;
 
 import java.util.List;
 
+import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
@@ -12,42 +13,68 @@ import pvm.compiler.abstractsyntax.subprog.param.Parametro;
 public class DecSubprograma extends Node {
 	private String id;
 	
+	private List<Parametro> params;
+	private SeccionTipos sectipos;
+	private SeccionVariables secvars;
+	private SeccionSubprogramas secsubprogs;
+	private List<Instruccion> instrs;
+	
 	public DecSubprograma(List<Parametro> params, String id,
 			SeccionTipos sectipos, SeccionVariables secvars,
 			SeccionSubprogramas secsubprogs, List<Instruccion> instrs) {
 		super();
 		
 		this.id = id;
+		this.params = params;
+		this.sectipos = sectipos;
+		this.secvars = secvars;
+		this.secsubprogs = secsubprogs;
+		this.instrs = instrs;
 		
-		for (Parametro param : params)
-			this.childs.add(param);
-		
+		this.childs.add(new ListNode<Parametro>(params));
 		this.childs.add(sectipos);
 		this.childs.add(secvars);
 		this.childs.add(secsubprogs);
-		
-		for (Instruccion instr : instrs)
-			this.childs.add(instr);
+		this.childs.add(new ListNode<Instruccion>(instrs));
 	}
 
 	@Override
 	public String toString() {
-		int i = 0;
 		String ret = "subprogram " + id + "(";
 		
-		for (; (i < childs.size()) && (childs.get(i) instanceof Parametro); ++i)
-			ret += childs.get(i).toString() + ", ";
+		for (Parametro param : params)
+			ret += param + ", ";
 		
 		ret = ret.subSequence(0, ret.length()-2).toString();
-		ret += ")\n" + childs.get(i++) + "\n" + childs.get(i++) + "\n" + childs.get(i++) + "\n{\n";
+		ret += ")\n" + sectipos + "\n" + secvars + "\n" + secsubprogs + "\n{\n";
 		
-		for (; (i < childs.size()) && (childs.get(i) instanceof Instruccion); ++i)
-			ret += "\t" + childs.get(i).toString() + "\n";
+		for (Instruccion instr : instrs)
+			ret += "\t" + instr + "\n";
 		
 		return ret += "}";
 	}
 
 	public String getId() {
 		return id;
+	}
+
+	public List<Parametro> getParams() {
+		return params;
+	}
+
+	public SeccionTipos getSectipos() {
+		return sectipos;
+	}
+
+	public SeccionVariables getSecvars() {
+		return secvars;
+	}
+
+	public SeccionSubprogramas getSecsubprogs() {
+		return secsubprogs;
+	}
+
+	public List<Instruccion> getInstrs() {
+		return instrs;
 	}
 }

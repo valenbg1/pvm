@@ -2,15 +2,19 @@ package pvm.compiler.abstractsyntax.seccion;
 
 import java.util.List;
 
+import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 
 public class SeccionVariables extends Node {
+	private List<DecTipo> dectipos;
+	
 	public SeccionVariables(List<DecTipo> dectipos) {
 		super();
 		
-		for (DecTipo dectipo : dectipos)
-			this.childs.add(dectipo);
+		this.dectipos = dectipos;
+		
+		this.childs.add(new ListNode<DecTipo>(dectipos));
 	}
 
 	@Override
@@ -18,11 +22,15 @@ public class SeccionVariables extends Node {
 		if (!childs.isEmpty()) {
 			String ret = "variables\n";
 			
-			for (int i = 0; i < childs.size(); ++i)
-				ret += "\t" + childs.get(i).toString() + ";\n";
+			for (DecTipo dectipo : dectipos)
+				ret += "\t" + dectipo + ";\n";
 			
 			return ret;
 		} else
 			return "";
+	}
+	
+	public List<DecTipo> getDectipos() {
+		return dectipos;
 	}
 }
