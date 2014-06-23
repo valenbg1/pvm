@@ -1,0 +1,3 @@
+JLEX: java -cp jlex.jar JLex.Main LexicalAnalyzer.l && mv LexicalAnalyzer.l.java LexicalAnalyzer.java
+
+CUP: java -cp cup.jar java_cup.Main -parser SyntacticAnalyzer -symbols LexicalClass -nopositions SyntacticAnalyzer.cup

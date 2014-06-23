@@ -1,0 +1,252 @@
+package pvm.compiler;
+
+import java_cup.runtime.*;
+
+scan with {: return getScanner().next_token(); :};
+parser code {: 
+   private ErrorsHandler errorsh;
+   public void syntax_error(Symbol lexicalUnit) {
+     errorsh.syntacticError((LexicalUnit)lexicalUnit);
+   }
+:};
+init with {: 
+   errorsh = new ErrorsHandler();
+   LexicalAnalyzer alex = (LexicalAnalyzer)getScanner();
+   alex.setErrorsHandler(errorsh);
+:};
+
+terminal PROGRAM, TYPES, STRUCT, POINTER, VARIABLES, SUBPROGRAMS, SUBPROGRAM, IF, ENDIF, DO, ENDDO, 
+         MAS, MENOS, POR, DIV, MOD, AND, OR, NOT, TOINT, TODOUBLE, ASIG, IGUAL, MENOR, MAYOR, MENOROIGUAL, MAYOROIGUAL,
+         DISTINTO, PYCOMA, COMA, PAP, PCIERRE, LLAVEAP, LLAVECIERRE, DOSPUNTOS, INT, BOOLEAN, DOUBLE, CAP, CCIERRE,
+         PUNTO, FLECHA, AMP, TRUE, FALSE, ARRAY, READ, WRITE, NEW, DELETE;
+terminal String NUMERO_NATURAL, NUMERO_REAL, ID;
+
+non terminal Programa Programa;
+non terminal SeccionTipos SeccionTipos;
+non terminal SeccionVariables SeccionVariables;
+non terminal SeccionSubprogramas SeccionSubprogramas;
+non terminal List<DecTipos> DecTipos, DecVariables, Campos;
+non terminal List<DecSubprograma> DecSubprogramas;
+non terminal DecTipo DecTipo, Campo, DecVariable;
+non terminal Tipo Tipo;
+non terminal DecSubprograma DecSubprograma;
+non terminal List<Parametro> Parametros, ListaParametros;
+non terminal Parametro Parametro;
+non terminal Instruccion Instruccion, IAsig, ICond, IBucle, IBloque, ILlamada, IRead, IWrite, INew, IDelete;
+non terminal Designador Designador;
+non terminal Exp Exp0, Exp1, Exp2, Exp3, Exp4;
+non terminal List<Instruccion> Instrucciones; 
+non terminal List<Caso> Casos;
+non terminal Caso Caso;
+non terminal List<Exp> Argumentos, ListaArgumentos;
+non terminal String OpComp, OpAditivo, OpMultiplicativo, OpUnario;
+
+Programa ::= PROGRAM SeccionTipos: aDeST SeccionVariables: aDeSV SeccionSubprogramas: aDeSS IBloque: aDeIB
+	{: RESULT = ops.decprograma(aDeST, aDeSV, aDeSS, aDeIB); :};
+SeccionTipos ::= TYPES DecTipos: aDeDT
+	{: RESULT = ops.decsectipos(aDeDT); :};
+SeccionTipos ::=  
+	{: RESULT = ops.decsectiposvacia(); :};
+SeccionVariables ::= VARIABLES DecVariables: aDeDV
+	{: RESULT = ops.decsecvar(aDeDV); :};
+SeccionVariables ::=  
+	{: RESULT = ops.decsecvarvacia(); :};
+SeccionSubprogramas ::= SUBPROGRAMS DecSubprogramas: aDeDSP
+	{: RESULT = ops.decsecsubprogramas(aDeDSP); :};
+SeccionSubprogramas ::=  
+	{: RESULT = ops.decsecsubprogramasvacia(); :};
+	
+DecTipos ::= DecTipos: aDeDTS1 PYCOMA DecTipo: aDeDT
+	{: RESULT = ops.dectiposcomp(aDeDTS1, aDeDT); :};
+DecTipos ::= DecTipo: aDeDT
+	{: RESULT = ops.dectipossimp(aDeDT); :};
+DecTipo ::= ID: lexDeID DOSPUNTOS Tipo: aDeTipo
+	{: RESULT = ops.dectiposstring(lexDeID, aDeTipo); :};
+Tipo    ::= INT
+	{: RESULT = ops.tipoint(); :};
+Tipo    ::= DOUBLE
+	{: RESULT = ops.tipodouble(); :};
+Tipo    ::= BOOLEAN
+	{: RESULT = ops.tipoboolean(); :};
+Tipo    ::= ID: lexDeID
+	{: RESULT = ops.tipoid(lexDeID); :};
+Tipo    ::= ARRAY Tipo: aDeTipo CAP NUMERO_NATURAL: lexDeNN CCIERRE
+	{: RESULT = ops.tipoint(aDeTipo, lexDeNN); :};
+Tipo    ::= STRUCT LLAVEAP Campos: aDeCampos LLAVECIERRE
+	{: RESULT = ops.tipostruct(aDeCampos); :};
+Tipo    ::= POINTER Tipo: aDeTipo
+	{: RESULT = ops.tipopointer(aDeTipo); :};
+Campos  ::= Campos: aDeCampos1 PYCOMA Campo: aDeCampo
+	{: RESULT = ops.dectiposcomp(aDeCampos1, aDeCampo); :};
+Campos  ::= Campo: aDeCampo
+	{: RESULT = ops.dectipossimp(aDeCampo); :};
+Campo   ::= ID: lexDeID DOSPUNTOS Tipo: aDeTipo
+	{: RESULT = ops.dectipostring(lexDeID, aDeTipo); :};
+	
+DecVariables ::= DecVariables: aDeDVS1 PYCOMA DecVariable: aDeDV
+	{: RESULT = ops.dectiposcomp(aDeDVS1, aDeDV); :};
+DecVariables ::= DecVariable: aDeDV
+	{: RESULT = ops.dectipossimp(aDeDV); :};
+DecVariable ::= ID: lexDeID DOSPUNTOS Tipo: aDeTipo
+	{: RESULT = ops.dectipostring(lexDeID, aDeTipo); :};
+
+DecSubprogramas ::= DecSubprogramas: aDeDSPS1 PYCOMA DecSubprograma: aDeDSP
+	{: RESULT = ops.decsubprogramacomp(aDeDSPS1, aDeDSP); :};
+DecSubprogramas ::= DecSubprograma: aDeDSP
+	{: RESULT = ops.decsubprogramasimp(aDeDSP); :};
+DecSubprograma ::= SUBPROGRAM ID: lexDeID Parametros: aDeP SeccionTipos: aDeSTS SeccionVariables: aDeSVS SeccionSubprogramas: aDeSPS IBloque: aDeIB
+	{: RESULT = ops.decsubprogram(lexDeID, aDeP, aDeSTS, aDeSVS, aDeSPS, aDeIB); :};
+Parametros ::= PAP ListaParametros: aDeLPS PCIERRE
+	{: RESULT = aDeLPS; :};
+Parametros ::= PAP PCIERRE
+	{: RESULT = ops.parametrosvacia(); :};
+ListaParametros ::= ListaParametros: aDeLPS COMA Parametro: aDeP
+	{: RESULT = ops.parametroscomp(aDeLSP, aDeP); :};
+ListaParametros ::= Parametro: aDeP
+	{: RESULT = ops.parametrossimp(aDeP); :};
+Parametro ::= ID: lexDeID DOSPUNTOS Tipo: aDeTipo
+	{: RESULT = ops.paramvalor(lexDeID, aDeTipo); :};
+Parametro ::= AMP ID: lexDeID DOSPUNTOS Tipo: aDeTipo
+	{: RESULT = ops.paramrefer(lexDeID, aDeTipo); :};
+
+Instruccion ::= IAsig: aDeIInstr
+	{: RESULT = aDeIInstr; :};
+Instruccion ::= IBloque: aDeIInstr
+	{: RESULT = aDeIInstr; :};
+Instruccion ::= ICond: aDeIInstr
+	{: RESULT = aDeIInstr; :};
+Instruccion ::= IBucle: aDeIInstr
+	{: RESULT = aDeIInstr; :};
+Instruccion ::= ILlamada: aDeIInstr
+	{: RESULT = aDeIInstr; :};
+Instruccion ::= IRead: aDeIInstr
+	{: RESULT = aDeIInstr; :};
+Instruccion ::= IWrite: aDeIInstr
+	{: RESULT = aDeIInstr; :};
+Instruccion ::= INew: aDeIInstr
+	{: RESULT = aDeIInstr; :};
+Instruccion ::= IDelete: aDeIInstr
+	{: RESULT = aDeIInstr; :};
+                
+IAsig ::= Designador: aDeD ASIG Exp0: aDeExp0
+	{: RESULT = ops.instasignacion(aDeD, aDeExp0); :};
+
+IBloque ::= LLAVEAP Instrucciones: aDeIS LLAVECIERRE
+	{: RESULT = aDeIS; :};
+IBloque ::= LLAVEAP LLAVECIERRE
+	{: RESULT = ops.decinstvacia(); :};
+Instrucciones ::= Instrucciones: aDeIS PYCOMA Instruccion: aDeI
+	{: RESULT = ops.decinstcomp(aDeIS, aDeI); :};
+Instrucciones ::= Instruccion: aDeI
+	{: RESULT = ops.decinstsimp(aDeI); :};
+	
+ICond ::= IF Casos: aDeCasos ENDIF
+	{: RESULT = ops.instif(aDeCasos); :};
+Casos ::= Casos: aDeCasos1 CAP CCIERRE Caso: aDeCaso
+	{: RESULT = ops.deccasoscomp(aDeCasos1, aDeCaso); :};
+Casos ::= Caso: aDeCaso
+	{: RESULT = ops.deccasossimmp(aDeCaso); :};
+Caso  ::= Exp0: aDeExp0 DOSPUNTOS IBloque: aDeIB
+	{: RESULT = ops.deccaso(aDeExp0, aDeIB); :};
+
+IBucle ::= DO Casos: aDeCasos ENDDO
+	{: RESULT = ops.instdo(aDeCasos); :};
+
+ILlamada  ::= ID: lexDeID Argumentos: aDeArgs
+	{: RESULT = ops.instllamada(lexDeID, aDeArgs); :};
+Argumentos ::= PAP ListaArgumentos: aDeListaArgs PCIERRE
+	{: RESULT = aDeListaArgs; :};
+Argumentos ::= PAP PCIERRE
+	{: RESULT = ops.argumentosvacia(); :};
+ListaArgumentos ::= ListaArgumentos: aDeListaArgs1 COMA Exp0: aDeExp0
+	{: RESULT = ops.listaargumentoscomp(aDeListaArgs1, aDeExp0); :};
+ListaArgumentos ::= Exp0: aDeExp0
+	{: RESULT = ops.listaargumentossimp(aDeExp0); :};
+
+IRead ::= READ Designador: aDeDesig
+	{: RESULT = ops.instread(aDeDesig); :};
+
+IWrite ::= WRITE Exp0: aDeExp0
+	{: RESULT = ops.instwrite(aDeExp0); :};
+
+INew ::= NEW Designador: aDeDesig
+	{: RESULT = ops.instnew(aDeDesig); :};
+
+IDelete ::= DELETE Designador: aDeDesig
+	{: RESULT = ops.instdelete(aDeDesig); :};
+
+Designador  ::= ID: lexDeID
+	{: RESULT = ops.designaid(lexDeID); :};
+Designador  ::= Designador: aDeDesig1 CAP Exp0: aDeExp0 CCIERRE
+	{: RESULT = ops.designaarray(aDeDesig1, aDeExp0); :};
+Designador  ::= Designador: aDeDesig1 PUNTO ID: lexDeID
+	{: RESULT = ops.designacampo(aDeDesig1, lexDeID); :};
+Designador  ::= Designador: aDeDesig1 FLECHA
+	{: RESULT = ops.designapointer(aDeDesig1); :};
+
+Exp0 ::= Exp1: aDeExp10 OpComp: opDeOpComp Exp1: aDeExp11
+	{: RESULT = ops.mkexp(opDeOpComp, aDeExp10, aDeExp11); :};
+Exp0 ::= Exp1: aDeExp1
+	{: RESULT = aDeExp1; :};
+Exp1 ::= Exp1: aDeExp11 OpAditivo: opDeOpAditivo Exp2: aDeExp2
+	{: RESULT = ops.mkexp(opDeOpAditivo, aDeExp11, aDeExp2); :};
+Exp1 ::= Exp2: aDeExp2
+	{: RESULT = aDeExp2; :};
+Exp2 ::= Exp2: aDeExp21 OpMultiplicativo: opDeOpMultiplicativo Exp3: aDeExp3
+	{: RESULT = ops.mkexp(opDeOpMultiplicativo, aDeExp21, aDeExp3); :};
+Exp2 ::= Exp3: aDeExp3
+	{: RESULT = aDeExp3; :};
+Exp3 ::= OpUnario: opDeOpUnario Exp3: aDeExp31
+	{: RESULT = ops.mkexp(opDeOpUnario, aDeExp31); :};
+Exp3 ::= Exp4: aDeExp4
+	{: RESULT = aDeExp4; :};
+Exp4 ::= TRUE
+	{: RESULT = ops.exptrue(); :};
+Exp4 ::= FALSE
+	{: RESULT = ops.expfalse(); :};
+Exp4 ::= NUMERO_NATURAL: lexDeNN
+	{: RESULT = ops.tonaturalnum(lexDeNN); :};
+Exp4 ::= NUMERO_REAL: lexDeNR
+	{: RESULT = ops.torealnum(lexDeNR); :};
+Exp4 ::= Designador: aDeDesig
+	{: RESULT = ops.expdesignador(aDeDesig); :};
+Exp4 ::= PAP Exp0: aDeExp0 PCIERRE
+	{: RESULT = aDeExp0; :};
+
+OpComp ::= IGUAL
+	{: RESULT = "=="; :};
+OpComp ::= DISTINTO
+	{: RESULT = "!="; :};
+OpComp ::= MAYOR
+	{: RESULT = ">"; :};
+OpComp ::= MAYOROIGUAL
+	{: RESULT = ">="; :};
+OpComp ::= MENOR 
+	{: RESULT = "<"; :};
+OpComp ::= MENOROIGUAL
+	{: RESULT = "<="; :};
+
+OpAditivo ::= MAS
+	{: RESULT = "+"; :};
+OpAditivo ::= MENOS
+	{: RESULT = "-"; :};
+OpAditivo ::= OR
+	{: RESULT = "or"; :};
+
+OpMultiplicativo ::= POR
+	{: RESULT = "*"; :};
+OpMultiplicativo ::= DIV
+	{: RESULT = "/"; :};
+OpMultiplicativo ::= MOD
+	{: RESULT = "%"; :};
+OpMultiplicativo ::= AND
+	{: RESULT = "and"; :};
+
+OpUnario ::= MENOS
+	{: RESULT = "-"; :};
+OpUnario ::= NOT
+	{: RESULT = "not"; :};
+OpUnario ::= TOINT
+	{: RESULT = "toint"; :};
+OpUnario ::= TODOUBLE
+	{: RESULT = "todouble"; :};

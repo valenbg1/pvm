@@ -1,19 +1,19 @@
-package tiny;
+package pvm.compiler;
 
 %%
 %cup
 %line
-%class AnalizadorLexicoTiny
+%class LexicalAnalyzer
 %unicode
 %public
 
 %{
-  private ALexOperations ops;
-  private GestionErroresTiny errores;
-  public String lexema() {return yytext();}
-  public int fila() {return yyline+1;}
-  public void fijaGestionErrores(GestionErroresTiny errores) {
-   this.errores = errores;
+  private LexAnOperations ops;
+  private ErrorsHandler errorsh;
+  public String lex() {return yytext();}
+  public int row() {return yyline+1;}
+  public void setErrorsHandler(ErrorsHandler errorsh) {
+   this.errorsh = errorsh;
   }
 %}
 
@@ -22,7 +22,7 @@ package tiny;
 %eofval}
 
 %init{
-  ops = new ALexOperations(this);
+  ops = new LexAnOperations(this);
 %init}
 
 digitoPositivo = [1-9]
@@ -142,4 +142,4 @@ comentario = #[^\n]*
 {punto}                   {return ops.unidadPunto();}
 {flecha}                  {return ops.unidadFlecha();}
 {amp}                     {return ops.unidadAmp();}
-[^]                       {errores.errorLexico(fila(),lexema());}  
+[^]                       {errorsh.lexicalError(row(),lex());}  
