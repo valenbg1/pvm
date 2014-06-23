@@ -18,7 +18,7 @@ public class TipoStruct extends Tipo {
 		String ret = "struct {\n";
 		
 		for (int i = 0; i < childs.size(); ++i)
-			ret += "\t" + childs.get(i).toString() + "\n";
+			ret += "\t" + childs.get(i).toString() + ";\n";
 		
 		ret += "};";
 		
