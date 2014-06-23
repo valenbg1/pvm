@@ -1,0 +1,1 @@
+java -cp jlex.jar JLex.Main LexicalAnalyzer.l && mv LexicalAnalyzer.l.java LexicalAnalyzer.java

@@ -1,0 +1,1 @@
+java -cp cup.jar java_cup.Main -parser SyntacticAnalyzer -symbols LexicalClass -nopositions SyntacticAnalyzer.cup

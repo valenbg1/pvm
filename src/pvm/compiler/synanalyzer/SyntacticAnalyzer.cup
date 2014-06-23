@@ -1,4 +1,9 @@
-package pvm.compiler;
+package pvm.compiler.synanalyzer;
+
+import java.util.List;
+import pvm.compiler.ErrorsHandler;
+import pvm.compiler.lexanalyzer.LexicalAnalyzer;
+import pvm.compiler.lexanalyzer.LexicalUnit;
 
 import java_cup.runtime.*;
 

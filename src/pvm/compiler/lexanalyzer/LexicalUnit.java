@@ -1,4 +1,4 @@
-package pvm.compiler;
+package pvm.compiler.lexanalyzer;
 
 import java_cup.runtime.Symbol;
 

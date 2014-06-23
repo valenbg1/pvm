@@ -1,4 +1,5 @@
-package pvm.compiler;
+package pvm.compiler.lexanalyzer;
+import pvm.compiler.ErrorsHandler;
 
 
 public class LexicalAnalyzer implements java_cup.runtime.Scanner {

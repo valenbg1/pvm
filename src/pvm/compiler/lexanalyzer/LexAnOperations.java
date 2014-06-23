@@ -1,4 +1,6 @@
-package pvm.compiler;
+package pvm.compiler.lexanalyzer;
+
+import pvm.compiler.synanalyzer.LexicalClass;
 
 public class LexAnOperations {
   private LexicalAnalyzer alex;
