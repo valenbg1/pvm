@@ -1,6 +1,7 @@
-package pvm.compiler.abstractsyntax.instr;
+package pvm.compiler.abstractsyntax.instr.dynmem;
 
 import pvm.compiler.abstractsyntax.designador.Designador;
+import pvm.compiler.abstractsyntax.instr.Instruccion;
 
 public class INew extends Instruccion {
 	public INew(Designador desig) {

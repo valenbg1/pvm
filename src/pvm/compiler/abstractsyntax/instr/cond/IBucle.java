@@ -1,6 +1,8 @@
-package pvm.compiler.abstractsyntax.instr;
+package pvm.compiler.abstractsyntax.instr.cond;
 
 import java.util.List;
+
+import pvm.compiler.abstractsyntax.instr.Instruccion;
 
 public class IBucle extends Instruccion {
 	public IBucle(List<Caso> casos) {

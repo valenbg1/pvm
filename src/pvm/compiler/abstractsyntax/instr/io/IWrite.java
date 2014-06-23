@@ -1,6 +1,7 @@
-package pvm.compiler.abstractsyntax.instr;
+package pvm.compiler.abstractsyntax.instr.io;
 
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.instr.Instruccion;
 
 public class IWrite extends Instruccion {
 	public IWrite(Exp exp) {

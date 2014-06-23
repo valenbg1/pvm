@@ -1,9 +1,10 @@
-package pvm.compiler.abstractsyntax.instr;
+package pvm.compiler.abstractsyntax.instr.cond;
 
 import java.util.List;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.instr.Instruccion;
 
 public class Caso extends Node {
 	public Caso(Exp exp, List<Instruccion> instrs) {

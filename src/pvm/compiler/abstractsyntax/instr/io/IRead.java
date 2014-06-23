@@ -1,6 +1,7 @@
-package pvm.compiler.abstractsyntax.instr;
+package pvm.compiler.abstractsyntax.instr.io;
 
 import pvm.compiler.abstractsyntax.designador.Designador;
+import pvm.compiler.abstractsyntax.instr.Instruccion;
 
 public class IRead extends Instruccion {
 	public IRead(Designador desig) {

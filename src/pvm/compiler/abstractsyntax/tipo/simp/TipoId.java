@@ -1,4 +1,6 @@
-package pvm.compiler.abstractsyntax.tipo;
+package pvm.compiler.abstractsyntax.tipo.simp;
+
+import pvm.compiler.abstractsyntax.tipo.Tipo;
 
 public class TipoId extends Tipo {
 	public TipoId(String id) {
