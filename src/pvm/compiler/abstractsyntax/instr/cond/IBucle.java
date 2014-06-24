@@ -3,6 +3,7 @@ package pvm.compiler.abstractsyntax.instr.cond;
 import java.util.List;
 
 import pvm.compiler.abstractsyntax.instr.Instruccion;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class IBucle extends Instruccion {
 	private List<Caso> casos;
@@ -39,5 +40,12 @@ public class IBucle extends Instruccion {
 
 	@Override
 	public void vinculaDefPunteros() {
+	}
+
+	@Override
+	public void chequea() throws CheckFailException {
+		for (Caso caso : this.getCasos()) {
+			caso.chequea();
+		}
 	}
 }

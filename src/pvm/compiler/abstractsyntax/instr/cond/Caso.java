@@ -5,6 +5,8 @@ import java.util.List;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
+import pvm.compiler.abstractsyntax.tipo.simp.TipoBoolean;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class Caso implements Node {
 	private Exp exp;
@@ -41,5 +43,11 @@ public class Caso implements Node {
 
 	@Override
 	public void vinculaDefPunteros() {
+	}
+
+	@Override
+	public void chequea() throws CheckFailException {
+		if(this.getExp().getTipo() != TipoBoolean.TIPO)
+			throw new CheckFailException("el caso "+this.getExp()+" no es de tipo booleano");
 	}
 }

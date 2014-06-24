@@ -2,6 +2,7 @@ package pvm.compiler.abstractsyntax.instr;
 
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class IAsig extends Instruccion {
 	private Designador desig;
@@ -33,5 +34,14 @@ public class IAsig extends Instruccion {
 
 	@Override
 	public void vinculaDefPunteros() {	
+	}
+
+	@Override
+	public void chequea() throws CheckFailException {
+		this.getDesig().chequea();
+		this.getExp().chequea();
+		
+		if(this.getDesig().getTipo() != this.getExp().getTipo())
+			throw new CheckFailException("asignación, tipo no coincide, se esperaba "+this.getDesig().getTipo());
 	}
 }

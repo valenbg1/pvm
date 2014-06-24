@@ -17,5 +17,20 @@ public class TipoBoolean extends Tipo {
 	@Override
 	public void simplificaDefTipos() {	
 	}
+
+	@Override
+	public boolean esNumero() {
+		return false;
+	}
+
+	@Override
+	public boolean esBooleano() {
+		return true;
+	}
+
+	@Override
+	public boolean esEntradaSalida() {
+		return true;
+	}
 	
 }

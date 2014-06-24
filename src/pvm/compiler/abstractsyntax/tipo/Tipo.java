@@ -12,5 +12,9 @@ public abstract class Tipo implements Node {
 	}
 	
 	public abstract void simplificaDefTipos();
+	public abstract boolean esNumero();
+	public abstract boolean esBooleano();
+	public abstract boolean esEntradaSalida();
+	
 	
 }

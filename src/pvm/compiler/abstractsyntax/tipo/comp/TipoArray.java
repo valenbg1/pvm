@@ -46,4 +46,19 @@ public class TipoArray extends Tipo {
 	public void simplificaDefTipos() {
 		this.getTipoBase().simplificaDefTipos();
 	}
+
+	@Override
+	public boolean esNumero() {
+		return false;
+	}
+
+	@Override
+	public boolean esBooleano() {
+		return false;
+	}
+
+	@Override
+	public boolean esEntradaSalida() {
+		return false;
+	}
 }

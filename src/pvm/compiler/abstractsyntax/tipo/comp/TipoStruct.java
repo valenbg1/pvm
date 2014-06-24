@@ -77,4 +77,19 @@ public class TipoStruct extends Tipo {
 			campo.getTipo().simplificaDefTipos();
 		}
 	}
+
+	@Override
+	public boolean esNumero() {
+		return false;
+	}
+
+	@Override
+	public boolean esBooleano() {
+		return false;
+	}
+
+	@Override
+	public boolean esEntradaSalida() {
+		return false;
+	}
 }

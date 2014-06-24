@@ -17,5 +17,19 @@ public class TipoInt extends Tipo {
 	@Override
 	public void simplificaDefTipos() {
 	}
+	
+	@Override
+	public boolean esNumero() {
+		return true;
+	}
 
+	@Override
+	public boolean esBooleano() {
+		return false;
+	}
+
+	@Override
+	public boolean esEntradaSalida() {
+		return true;
+	}
 }

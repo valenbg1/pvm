@@ -3,6 +3,8 @@ package pvm.compiler.abstractsyntax.instr.cond;
 import java.util.List;
 
 import pvm.compiler.abstractsyntax.instr.Instruccion;
+import pvm.compiler.abstractsyntax.tipo.simp.TipoBoolean;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class ICond extends Instruccion {
 	private List<Caso> casos;
@@ -39,5 +41,12 @@ public class ICond extends Instruccion {
 
 	@Override
 	public void vinculaDefPunteros() {
+	}
+
+	@Override
+	public void chequea() throws CheckFailException {
+		for (Caso caso : this.getCasos()) {
+			caso.chequea();
+		}
 	}
 }

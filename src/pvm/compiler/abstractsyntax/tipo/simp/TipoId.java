@@ -73,4 +73,19 @@ public class TipoId extends Tipo {
 		this.tipo = tipo;
 	}
 
+	@Override
+	public boolean esNumero() {
+		return tipo.esNumero();
+	}
+
+	@Override
+	public boolean esBooleano() {
+		return tipo.esBooleano();
+	}
+
+	@Override
+	public boolean esEntradaSalida() {
+		return tipo.esEntradaSalida();
+	}
+
 }
