@@ -1,4 +1,4 @@
-package pvm.vm.instructions.aux;
+package pvm.vm.instructions.auxiliar;
 
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.values.DoubleValue;

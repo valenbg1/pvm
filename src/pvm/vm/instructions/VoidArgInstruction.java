@@ -5,7 +5,7 @@ import java.util.Stack;
 
 import pvm.vm.PMachine;
 import pvm.vm.exceptions.InvalidValueTypeException;
-import pvm.vm.instructions.aux.NumOps;
+import pvm.vm.instructions.auxiliar.NumOps;
 import pvm.vm.values.BoolValue;
 import pvm.vm.values.IntValue;
 import pvm.vm.values.Value;
