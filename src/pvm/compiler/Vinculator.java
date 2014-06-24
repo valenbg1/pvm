@@ -188,7 +188,7 @@ public class Vinculator {
 	private void vinculaDecTipo(DecTipo node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
 		vincula(node.getTipo());
 		
-		if (!sym_t.insertaId(node.getId(), node))
+		if (!sym_t.insertaId(node.getId(), node.getTipo()))
 			throw new DuplicatedIdException(node.getId(), node.getRow());
 	}
 
@@ -227,7 +227,7 @@ public class Vinculator {
 	}
 
 	private void vinculaDefPunterosTipoPointer(TipoPointer node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
-		if (node.getTipo() instanceof TipoPointer)
+		if (node.getTipo() instanceof TipoId)
 			vincula(node.getTipo());
 		else
 			vinculaDefPunteros(node.getTipo());
