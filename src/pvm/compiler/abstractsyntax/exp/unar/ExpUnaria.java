@@ -7,7 +7,7 @@ public abstract class ExpUnaria extends Exp {
 	
 	protected Exp exp;
 	
-	public ExpUnaria(Exp exp, String op) {
+	protected ExpUnaria(Exp exp, String op) {
 		this.op = op;
 		this.exp = exp;
 	}

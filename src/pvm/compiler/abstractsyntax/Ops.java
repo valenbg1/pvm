@@ -122,8 +122,8 @@ public class Ops {
 
 	public static DecSubprograma decsubprogram(String lexDeID,
 			List<Parametro> aDeP, SeccionTipos aDeSTS, SeccionVariables aDeSVS,
-			SeccionSubprogramas aDeSPS, List<Instruccion> aDeIB) {
-		return new DecSubprograma(aDeP, lexDeID, aDeSTS, aDeSVS, aDeSPS, aDeIB);
+			SeccionSubprogramas aDeSPS, List<Instruccion> aDeIB, int row) {
+		return new DecSubprograma(aDeP, lexDeID, aDeSTS, aDeSVS, aDeSPS, aDeIB, row);
 	}
 
 	public static List<DecSubprograma> decsubprogramacomp(
@@ -144,24 +144,24 @@ public class Ops {
 		return listasimp(aDeDT);
 	}
 
-	public static DecTipo dectipostring(String lexDeID, Tipo aDeTipo) {
-		return new DecTipo(lexDeID, aDeTipo);
+	public static DecTipo dectipostring(String lexDeID, Tipo aDeTipo, int row) {
+		return new DecTipo(lexDeID, aDeTipo, row);
 	}
 
-	public static Designador designaarray(Designador aDeDesig1, Exp aDeExp0) {
-		return new DesignaArray(aDeDesig1, aDeExp0);
+	public static Designador designaarray(Designador aDeDesig1, Exp aDeExp0, int row) {
+		return new DesignaArray(aDeDesig1, aDeExp0, row);
 	}
 
-	public static Designador designacampo(Designador aDeDesig1, String lexDeID) {
-		return new DesignaCampo(aDeDesig1, lexDeID);
+	public static Designador designacampo(Designador aDeDesig1, String lexDeID, int row) {
+		return new DesignaCampo(aDeDesig1, lexDeID, row);
 	}
 
-	public static Designador designaid(String lexDeID) {
-		return new DesignaId(lexDeID);
+	public static Designador designaid(String lexDeID, int row) {
+		return new DesignaId(lexDeID, row);
 	}
 
-	public static Designador designapointer(Designador aDeDesig1) {
-		return new DesignaPointer(aDeDesig1);
+	public static Designador designapointer(Designador aDeDesig1, int row) {
+		return new DesignaPointer(aDeDesig1, row);
 	}
 
 	public static Exp expdesignador(Designador aDeDesig) {
@@ -196,8 +196,8 @@ public class Ops {
 		return new ICond(aDeCasos);
 	}
 
-	public static Instruccion instllamada(String lexDeID, List<Exp> aDeArgs) {
-		return new ILlamada(lexDeID, aDeArgs);
+	public static Instruccion instllamada(String lexDeID, List<Exp> aDeArgs, int row) {
+		return new ILlamada(lexDeID, aDeArgs, row);
 	}
 
 	public static Instruccion instnew(Designador aDeDesig) {
@@ -344,16 +344,16 @@ public class Ops {
 		return new TipoDouble();
 	}
 
-	public static Tipo tipoid(String lexDeID) {
-		return new TipoId(lexDeID);
+	public static Tipo tipoid(String lexDeID, int row) {
+		return new TipoId(lexDeID, row);
 	}
 
 	public static Tipo tipoint() {
 		return new TipoInt();
 	}
 
-	public static Tipo tipopointer(Tipo aDeTipo) {
-		return new TipoPointer(aDeTipo);
+	public static Tipo tipopointer(Tipo aDeTipo, int row) {
+		return new TipoPointer(aDeTipo, row);
 	}
 
 	public static Tipo tipostruct(List<DecTipo> aDeCampos) {

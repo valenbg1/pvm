@@ -7,8 +7,13 @@ public class DecTipo implements Node {
 	
 	private Tipo tipo;
 	
-	public DecTipo(String id, Tipo tipo) {
+	private Node vinculo;
+	private int row;
+	
+	public DecTipo(String id, Tipo tipo, int row) {
 		this.id = id;
+		
+		this.row = row;
 		
 		this.tipo = tipo;
 	}
@@ -24,5 +29,17 @@ public class DecTipo implements Node {
 
 	public Tipo getTipo() {
 		return tipo;
+	}
+
+	public Node getVinculo() {
+		return vinculo;
+	}
+
+	public void setVinculo(Node vinculo) {
+		this.vinculo = vinculo;
+	}
+
+	public int getRow() {
+		return row;
 	}
 }

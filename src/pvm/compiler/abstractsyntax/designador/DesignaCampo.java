@@ -4,7 +4,7 @@ public class DesignaCampo extends Designador {
 	private Designador desig;
 	private String campo;
 	
-	public DesignaCampo(Designador desig, String campo) {
+	public DesignaCampo(Designador desig, String campo, int vinculo_row) {
 		this.desig = desig;
 		this.campo = campo;
 	}

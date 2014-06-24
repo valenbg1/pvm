@@ -8,7 +8,7 @@ public abstract class ExpBin extends Exp {
 	protected Exp exp0;
 	protected Exp exp1;
 	
-	public ExpBin(Exp exp0, Exp exp1, String op) {
+	protected ExpBin(Exp exp0, Exp exp1, String op) {
 		this.op = op;
 		this.exp0 = exp0;
 		this.exp1 = exp1;

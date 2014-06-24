@@ -23,15 +23,15 @@ import java_cup.runtime.*;
 
 scan with {: return getScanner().next_token(); :};
 parser code {: 
-   private ErrorsHandler errorsh;
    public void syntax_error(Symbol lexicalUnit) {
-     errorsh.syntacticError((LexicalUnit)lexicalUnit);
+     ErrorsHandler.syntacticError((LexicalUnit)lexicalUnit);
+   }
+   
+   public LexicalAnalyzer getLexAn() {
+     return (LexicalAnalyzer)getScanner();
    }
 :};
 init with {: 
-   errorsh = new ErrorsHandler();
-   LexicalAnalyzer alex = (LexicalAnalyzer)getScanner();
-   alex.setErrorsHandler(errorsh);
 :};
 
 terminal PROGRAM, TYPES, STRUCT, POINTER, VARIABLES, SUBPROGRAMS, SUBPROGRAM, IF, ENDIF, DO, ENDDO, 
@@ -80,7 +80,7 @@ DecTipos ::= DecTipos: aDeDTS1 PYCOMA DecTipo: aDeDT
 DecTipos ::= DecTipo: aDeDT
 	{: RESULT = Ops.dectipossimp(aDeDT); :};
 DecTipo ::= ID: lexDeID DOSPUNTOS Tipo: aDeTipo
-	{: RESULT = Ops.dectipostring(lexDeID, aDeTipo); :};
+	{: RESULT = Ops.dectipostring(lexDeID, aDeTipo, parser.getLexAn().row()); :};
 Tipo    ::= INT
 	{: RESULT = Ops.tipoint(); :};
 Tipo    ::= DOUBLE
@@ -88,33 +88,33 @@ Tipo    ::= DOUBLE
 Tipo    ::= BOOLEAN
 	{: RESULT = Ops.tipoboolean(); :};
 Tipo    ::= ID: lexDeID
-	{: RESULT = Ops.tipoid(lexDeID); :};
+	{: RESULT = Ops.tipoid(lexDeID, parser.getLexAn().row()); :};
 Tipo    ::= ARRAY Tipo: aDeTipo CAP NUMERO_NATURAL: lexDeNN CCIERRE
 	{: RESULT = Ops.tipoarray(aDeTipo, lexDeNN); :};
 Tipo    ::= STRUCT LLAVEAP Campos: aDeCampos LLAVECIERRE
 	{: RESULT = Ops.tipostruct(aDeCampos); :};
 Tipo    ::= POINTER Tipo: aDeTipo
-	{: RESULT = Ops.tipopointer(aDeTipo); :};
+	{: RESULT = Ops.tipopointer(aDeTipo, parser.getLexAn().row()); :};
 Campos  ::= Campos: aDeCampos1 PYCOMA Campo: aDeCampo
 	{: RESULT = Ops.dectiposcomp(aDeCampos1, aDeCampo); :};
 Campos  ::= Campo: aDeCampo
 	{: RESULT = Ops.dectipossimp(aDeCampo); :};
 Campo   ::= ID: lexDeID DOSPUNTOS Tipo: aDeTipo
-	{: RESULT = Ops.dectipostring(lexDeID, aDeTipo); :};
+	{: RESULT = Ops.dectipostring(lexDeID, aDeTipo, parser.getLexAn().row()); :};
 	
 DecVariables ::= DecVariables: aDeDVS1 PYCOMA DecVariable: aDeDV
 	{: RESULT = Ops.dectiposcomp(aDeDVS1, aDeDV); :};
 DecVariables ::= DecVariable: aDeDV
 	{: RESULT = Ops.dectipossimp(aDeDV); :};
 DecVariable ::= ID: lexDeID DOSPUNTOS Tipo: aDeTipo
-	{: RESULT = Ops.dectipostring(lexDeID, aDeTipo); :};
+	{: RESULT = Ops.dectipostring(lexDeID, aDeTipo, parser.getLexAn().row()); :};
 
 DecSubprogramas ::= DecSubprogramas: aDeDSPS1 PYCOMA DecSubprograma: aDeDSP
 	{: RESULT = Ops.decsubprogramacomp(aDeDSPS1, aDeDSP); :};
 DecSubprogramas ::= DecSubprograma: aDeDSP
 	{: RESULT = Ops.decsubprogramasimp(aDeDSP); :};
 DecSubprograma ::= SUBPROGRAM ID: lexDeID Parametros: aDeP SeccionTipos: aDeSTS SeccionVariables: aDeSVS SeccionSubprogramas: aDeSPS IBloque: aDeIB
-	{: RESULT = Ops.decsubprogram(lexDeID, aDeP, aDeSTS, aDeSVS, aDeSPS, aDeIB); :};
+	{: RESULT = Ops.decsubprogram(lexDeID, aDeP, aDeSTS, aDeSVS, aDeSPS, aDeIB, parser.getLexAn().row()); :};
 Parametros ::= PAP ListaParametros: aDeLPS PCIERRE
 	{: RESULT = aDeLPS; :};
 Parametros ::= PAP PCIERRE
@@ -172,7 +172,7 @@ IBucle ::= DO Casos: aDeCasos ENDDO
 	{: RESULT = Ops.instdo(aDeCasos); :};
 
 ILlamada  ::= ID: lexDeID Argumentos: aDeArgs
-	{: RESULT = Ops.instllamada(lexDeID, aDeArgs); :};
+	{: RESULT = Ops.instllamada(lexDeID, aDeArgs, parser.getLexAn().row()); :};
 Argumentos ::= PAP ListaArgumentos: aDeListaArgs PCIERRE
 	{: RESULT = aDeListaArgs; :};
 Argumentos ::= PAP PCIERRE
@@ -195,13 +195,13 @@ IDelete ::= DELETE Designador: aDeDesig
 	{: RESULT = Ops.instdelete(aDeDesig); :};
 
 Designador  ::= ID: lexDeID
-	{: RESULT = Ops.designaid(lexDeID); :};
+	{: RESULT = Ops.designaid(lexDeID, parser.getLexAn().row()); :};
 Designador  ::= Designador: aDeDesig1 CAP Exp0: aDeExp0 CCIERRE
-	{: RESULT = Ops.designaarray(aDeDesig1, aDeExp0); :};
+	{: RESULT = Ops.designaarray(aDeDesig1, aDeExp0, parser.getLexAn().row()); :};
 Designador  ::= Designador: aDeDesig1 PUNTO ID: lexDeID
-	{: RESULT = Ops.designacampo(aDeDesig1, lexDeID); :};
+	{: RESULT = Ops.designacampo(aDeDesig1, lexDeID, parser.getLexAn().row()); :};
 Designador  ::= Designador: aDeDesig1 FLECHA
-	{: RESULT = Ops.designapointer(aDeDesig1); :};
+	{: RESULT = Ops.designapointer(aDeDesig1, parser.getLexAn().row()); :};
 
 Exp0 ::= Exp1: aDeExp10 OpComp: opDeOpComp Exp1: aDeExp11
 	{: RESULT = Ops.mkexp(opDeOpComp, aDeExp10, aDeExp11); :};

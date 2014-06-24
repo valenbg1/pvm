@@ -6,7 +6,7 @@ public class DesignaArray extends Designador {
 	private Designador desig;
 	private Exp exp;
 	
-	public DesignaArray(Designador desig, Exp exp) {
+	public DesignaArray(Designador desig, Exp exp, int vinculo_row) {
 		this.desig = desig;
 		this.exp = exp;
 	}

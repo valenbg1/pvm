@@ -12,6 +12,8 @@ import pvm.compiler.abstractsyntax.subprog.param.Parametro;
 public class DecSubprograma implements Node {
 	private String id;
 	
+	private int row;
+	
 	private List<Parametro> params;
 	private SeccionTipos sectipos;
 	private SeccionVariables secvars;
@@ -20,13 +22,15 @@ public class DecSubprograma implements Node {
 	
 	public DecSubprograma(List<Parametro> params, String id,
 			SeccionTipos sectipos, SeccionVariables secvars,
-			SeccionSubprogramas secsubprogs, List<Instruccion> instrs) {
+			SeccionSubprogramas secsubprogs, List<Instruccion> instrs, int row) {
 		this.id = id;
 		this.params = params;
 		this.sectipos = sectipos;
 		this.secvars = secvars;
 		this.secsubprogs = secsubprogs;
 		this.instrs = instrs;
+		
+		this.row = row;
 	}
 
 	@Override
@@ -66,5 +70,9 @@ public class DecSubprograma implements Node {
 
 	public List<Instruccion> getInstrs() {
 		return instrs;
+	}
+
+	public int getRow() {
+		return row;
 	}
 }

@@ -4,13 +4,18 @@ public class DuplicatedIdException extends Exception {
 	private static final long serialVersionUID = 5353530700376034967L;
 	
 	private String id;
+	private int row;
 	
-	public DuplicatedIdException(String id) {
+	public DuplicatedIdException(String id, int row) {
 		this.id = id;
+		this.row = row;
 	}
-	
-	@Override
-	public String getMessage() {
+
+	public String getId() {
 		return id;
+	}
+
+	public int getRow() {
+		return row;
 	}
 }

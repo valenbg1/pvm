@@ -11,12 +11,8 @@ import pvm.compiler.ErrorsHandler;
 
 %{
   private LexAnOperations ops;
-  private ErrorsHandler errorsh;
   public String lex() {return yytext();}
   public int row() {return yyline+1;}
-  public void setErrorsHandler(ErrorsHandler errorsh) {
-   this.errorsh = errorsh;
-  }
 %}
 
 %eofval{
@@ -144,4 +140,4 @@ comentario = #[^\n]*
 {punto}                   {return ops.unidadPunto();}
 {flecha}                  {return ops.unidadFlecha();}
 {amp}                     {return ops.unidadAmp();}
-[^]                       {errorsh.lexicalError(row(),lex());}  
+[^]                       {ErrorsHandler.lexicalError(row(),lex());}  

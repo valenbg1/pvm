@@ -4,13 +4,18 @@ public class UndeclaredIdException extends Exception {
 	private static final long serialVersionUID = 627323466721812385L;
 	
 	private String id;
+	private int row;
 	
-	public UndeclaredIdException(String id) {
+	public UndeclaredIdException(String id, int row) {
 		this.id = id;
+		this.row = row;
 	}
-	
-	@Override
-	public String getMessage() {
+
+	public String getId() {
 		return id;
+	}
+
+	public int getRow() {
+		return row;
 	}
 }

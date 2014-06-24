@@ -14,12 +14,8 @@ public class LexicalAnalyzer implements java_cup.runtime.Scanner {
 	private final int YY_EOF = 65537;
 
   private LexAnOperations ops;
-  private ErrorsHandler errorsh;
   public String lex() {return yytext();}
   public int row() {return yyline+1;}
-  public void setErrorsHandler(ErrorsHandler errorsh) {
-   this.errorsh = errorsh;
-  }
 	private java.io.BufferedReader yy_reader;
 	private int yy_buffer_index;
 	private int yy_buffer_read;
@@ -481,7 +477,7 @@ public class LexicalAnalyzer implements java_cup.runtime.Scanner {
 					case -4:
 						break;
 					case 4:
-						{errorsh.lexicalError(row(),lex());}
+						{ErrorsHandler.lexicalError(row(),lex());}
 					case -5:
 						break;
 					case 5:
@@ -697,7 +693,7 @@ public class LexicalAnalyzer implements java_cup.runtime.Scanner {
 					case -58:
 						break;
 					case 59:
-						{errorsh.lexicalError(row(),lex());}
+						{ErrorsHandler.lexicalError(row(),lex());}
 					case -59:
 						break;
 					case 60:

@@ -1,10 +1,22 @@
 package pvm.compiler.abstractsyntax.designador;
 
+import pvm.compiler.abstractsyntax.Node;
+
 public class DesignaId extends Designador {
+	private Node vinculo;
+	
 	private String id;
 	
-	public DesignaId(String id) {
+	private int row;
+	
+	public DesignaId(String id, int row) {
+		this.row = row;
+		
 		this.id = id;
+	}
+	
+	public Node getVinculo() {
+		return vinculo;
 	}
 
 	@Override
@@ -14,5 +26,13 @@ public class DesignaId extends Designador {
 
 	public String getId() {
 		return id;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setVinculo(Node vinculo) {
+		this.vinculo = vinculo;
 	}
 }
