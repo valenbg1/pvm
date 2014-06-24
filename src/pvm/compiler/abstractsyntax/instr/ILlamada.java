@@ -3,12 +3,15 @@ package pvm.compiler.abstractsyntax.instr;
 import java.util.List;
 
 import pvm.compiler.abstractsyntax.ListNode;
+import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.exp.Exp;
 
 public class ILlamada extends Instruccion {
 	private String id;
 	
 	private List<Exp> args;
+	
+	private Node vinculo;
 	
 	public ILlamada(String id, List<Exp> args) {
 		super();
@@ -38,5 +41,13 @@ public class ILlamada extends Instruccion {
 
 	public List<Exp> getArgs() {
 		return args;
+	}
+
+	public Node getVinculo() {
+		return vinculo;
+	}
+
+	public void setVinculo(Node vinculo) {
+		this.vinculo = vinculo;
 	}
 }
