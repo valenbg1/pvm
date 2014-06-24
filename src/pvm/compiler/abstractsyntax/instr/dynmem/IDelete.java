@@ -18,4 +18,13 @@ public class IDelete extends Instruccion {
 	public Designador getDesig() {
 		return desig;
 	}
+
+	@Override
+	public void vincula() {
+		this.getDesig().vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {	
+	}
 }

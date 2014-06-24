@@ -22,4 +22,14 @@ public class IBloque extends Instruccion {
 
 		return ret += "}";
 	}
+
+	@Override
+	public void vincula() {
+		for (Instruccion instr : this.getInstrs())
+			instr.vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
+	}
 }

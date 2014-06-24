@@ -18,4 +18,13 @@ public class IWrite extends Instruccion {
 	public Exp getExp() {
 		return exp;
 	}
+
+	@Override
+	public void vincula() {
+		this.getExp().vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {	
+	}
 }

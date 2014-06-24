@@ -1,5 +1,6 @@
 package pvm.compiler.abstractsyntax.designador;
 
+
 public class DesignaPointer extends Designador {
 	private Designador desig;
 	
@@ -14,5 +15,14 @@ public class DesignaPointer extends Designador {
 
 	public Designador getDesig() {
 		return desig;
+	}
+
+	@Override
+	public void vincula() {
+		this.getDesig().vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
 	}
 }

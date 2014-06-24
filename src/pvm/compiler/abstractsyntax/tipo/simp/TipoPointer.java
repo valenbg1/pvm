@@ -35,4 +35,20 @@ public class TipoPointer extends Tipo {
 	public int getRow() {
 		return row;
 	}
+
+	@Override
+	public void vincula() {
+		if (!(this.getTipo() instanceof TipoId))
+			this.getTipo().vincula();
+		
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
+		if (this.getTipo() instanceof TipoId)
+			this.getTipo().vincula();
+		else
+			this.getTipo().vinculaDefPunteros();
+		
+	}
 }

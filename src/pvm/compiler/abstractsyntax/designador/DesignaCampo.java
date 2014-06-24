@@ -1,5 +1,6 @@
 package pvm.compiler.abstractsyntax.designador;
 
+
 public class DesignaCampo extends Designador {
 	private Designador desig;
 	private String campo;
@@ -20,5 +21,14 @@ public class DesignaCampo extends Designador {
 
 	public Designador getDesig() {
 		return desig;
+	}
+
+	@Override
+	public void vincula() {
+		this.getDesig().vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
 	}
 }

@@ -23,4 +23,14 @@ public class DesignaArray extends Designador {
 	public Exp getExp() {
 		return exp;
 	}
+
+	@Override
+	public void vincula() {
+		this.getDesig().vincula();
+		this.getExp().vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
+	}
 }

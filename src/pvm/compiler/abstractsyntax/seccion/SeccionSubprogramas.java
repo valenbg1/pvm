@@ -28,4 +28,12 @@ public class SeccionSubprogramas implements Node {
 	public List<DecSubprograma> getDecsubprogramas() {
 		return decsubprogramas;
 	}
+
+	@Override
+	public void vincula() {	
+	}
+
+	@Override
+	public void vinculaDefPunteros() {	
+	}
 }

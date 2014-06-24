@@ -6,6 +6,8 @@ import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
+import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
+import pvm.compiler.abstractsyntax.tipo.DecTipo;
 
 public class Programa implements Node {
 	private SeccionTipos sectipos;
@@ -47,5 +49,41 @@ public class Programa implements Node {
 			ret += "\t" + instr + "\n";
 
 		return ret += "}";
+	}
+
+	@Override
+	public void vincula(){
+		sym_t.abreBloque();
+		
+
+		for (DecTipo dectipo : this.getSectipos().getDectipos())
+			dectipo.vincula();
+		
+		for (DecTipo decvar : this.getSecvars().getDectipos())
+			decvar.vincula();
+		
+		for (DecSubprograma decsubprog : this.getSecsubprogs().getDecsubprogramas())
+			decsubprog.vincula();
+		
+		
+		for (DecTipo dectipo : this.getSectipos().getDectipos())
+			dectipo.vinculaDefPunteros();
+		
+		for (DecTipo decvar : this.getSecvars().getDectipos())
+			decvar.vinculaDefPunteros();
+		
+		for (DecSubprograma decsubprog : this.getSecsubprogs().getDecsubprogramas())
+			decsubprog.vinculaDefPunteros();
+		
+		
+		for (Instruccion instr : this.getInstrs())
+			instr.vincula();
+			
+	
+		
+	}
+
+	@Override
+	public void vinculaDefPunteros(){		
 	}
 }

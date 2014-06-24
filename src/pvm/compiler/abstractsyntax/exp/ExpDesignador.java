@@ -1,7 +1,6 @@
 package pvm.compiler.abstractsyntax.exp;
 
 import pvm.compiler.abstractsyntax.designador.Designador;
-import pvm.compiler.abstractsyntax.exp.Exp;
 
 public class ExpDesignador extends Exp {
 	private Designador desig;
@@ -17,5 +16,14 @@ public class ExpDesignador extends Exp {
 
 	public Designador getDesig() {
 		return desig;
+	}
+
+	@Override
+	public void vincula() {
+		this.getDesig().vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
 	}
 }

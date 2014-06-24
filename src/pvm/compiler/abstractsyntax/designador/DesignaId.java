@@ -1,5 +1,6 @@
 package pvm.compiler.abstractsyntax.designador;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
 
 public class DesignaId extends Designador {
@@ -34,5 +35,17 @@ public class DesignaId extends Designador {
 
 	public void setVinculo(Node vinculo) {
 		this.vinculo = vinculo;
+	}
+
+	@Override
+	public void vincula() {
+		this.setVinculo(sym_t.declaracion(this.getId()));
+		
+		if (this.getVinculo() == null)
+			ErrorsHandler.vinculaUndeclaredId(this.getId(), this.getRow());
+	}
+
+	@Override
+	public void vinculaDefPunteros() {	
 	}
 }

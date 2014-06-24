@@ -26,4 +26,14 @@ public abstract class Parametro implements Node {
 	public Tipo getTipo() {
 		return tipo;
 	}
+	
+	@Override
+	public void vincula() {
+		this.getTipo().vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
+		this.getTipo().vinculaDefPunteros();
+	}
 }

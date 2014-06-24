@@ -7,4 +7,5 @@ public class TipoDouble extends Tipo {
 	public String toString() {
 		return "double";
 	}
+
 }

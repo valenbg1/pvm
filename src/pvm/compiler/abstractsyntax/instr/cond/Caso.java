@@ -34,4 +34,12 @@ public class Caso implements Node {
 	public List<Instruccion> getInstrs() {
 		return instrs;
 	}
+
+	@Override
+	public void vincula() {
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
+	}
 }

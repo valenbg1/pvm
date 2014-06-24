@@ -30,4 +30,14 @@ public abstract class ExpBin extends Exp {
 	public Exp getExp1() {
 		return exp1;
 	}
+	
+	@Override
+	public void vincula() {
+		this.getExp0().vincula();
+		this.getExp1().vincula();	
+	}
+	
+	@Override
+	public void vinculaDefPunteros() {	
+	}
 }

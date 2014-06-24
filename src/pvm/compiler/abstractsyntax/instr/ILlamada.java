@@ -2,6 +2,7 @@ package pvm.compiler.abstractsyntax.instr;
 
 import java.util.List;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.exp.Exp;
 
@@ -49,5 +50,22 @@ public class ILlamada extends Instruccion {
 
 	public void setVinculo(Node vinculo) {
 		this.vinculo = vinculo;
+	}
+
+	@Override
+	public void vincula() {
+		this.setVinculo(sym_t.declaracion(this.getId()));
+		
+		if (this.getVinculo() == null){
+			ErrorsHandler.vinculaUndeclaredId(this.getId(), this.getRow());
+			return;
+		}
+		
+		for (Exp exp : this.getArgs())
+			exp.vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
 	}
 }

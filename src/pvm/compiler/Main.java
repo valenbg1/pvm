@@ -18,7 +18,8 @@ public class Main {
 
 		System.out.println(programa);
 		
-		Vinculator vinculator = new Vinculator();
-		vinculator.vincula(programa);
+		programa.vincula();
+		
+		programa.getInstrs();
 	}
 }

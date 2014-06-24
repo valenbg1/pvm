@@ -7,4 +7,5 @@ public class TipoBoolean extends Tipo {
 	public String toString() {
 		return "boolean";
 	}
+	
 }

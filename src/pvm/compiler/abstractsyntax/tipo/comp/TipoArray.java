@@ -25,4 +25,14 @@ public class TipoArray extends Tipo {
 	public Tipo getTipo() {
 		return tipo;
 	}
+
+	@Override
+	public void vincula() {
+		this.getTipo().vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
+		this.getTipo().vinculaDefPunteros();
+	}
 }

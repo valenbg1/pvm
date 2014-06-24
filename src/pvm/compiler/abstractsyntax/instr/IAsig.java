@@ -24,4 +24,14 @@ public class IAsig extends Instruccion {
 	public Exp getExp() {
 		return exp;
 	}
+
+	@Override
+	public void vincula() {
+		this.getDesig().vincula();
+		this.getExp().vincula();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {	
+	}
 }

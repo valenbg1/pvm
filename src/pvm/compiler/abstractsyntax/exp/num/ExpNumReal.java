@@ -17,4 +17,5 @@ public class ExpNumReal extends Exp {
 	public double getNumReal() {
 		return numreal;
 	}
+
 }

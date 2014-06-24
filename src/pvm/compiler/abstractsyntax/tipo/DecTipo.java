@@ -1,5 +1,6 @@
 package pvm.compiler.abstractsyntax.tipo;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
 
 public class DecTipo implements Node {
@@ -32,5 +33,18 @@ public class DecTipo implements Node {
 
 	public int getRow() {
 		return row;
+	}
+
+	@Override
+	public void vincula()  {
+		this.getTipo().vincula();
+		
+		if (!sym_t.insertaId(this.getId(), this.getTipo()))
+			ErrorsHandler.vinculaDuplicatedId(this.getId(), this.getRow());
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
+		this.getTipo().vinculaDefPunteros();		
 	}
 }

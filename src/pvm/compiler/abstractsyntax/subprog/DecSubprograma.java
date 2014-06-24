@@ -2,12 +2,14 @@ package pvm.compiler.abstractsyntax.subprog;
 
 import java.util.List;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
 import pvm.compiler.abstractsyntax.subprog.param.Parametro;
+import pvm.compiler.abstractsyntax.tipo.DecTipo;
 
 public class DecSubprograma implements Node {
 	private String id;
@@ -74,5 +76,49 @@ public class DecSubprograma implements Node {
 
 	public int getRow() {
 		return row;
+	}
+
+	@Override
+	public void vincula() {
+		if (!sym_t.insertaId(this.getId(), this))
+			ErrorsHandler.vinculaDuplicatedId(this.getId(), this.getRow());
+		
+		sym_t.abreBloque();
+		sym_t.insertaId(this.getId(), this);
+		
+		for (Parametro param : this.getParams())
+			sym_t.insertaId(param.getId(), param);
+		
+		
+		for (DecTipo dectipo : this.getSectipos().getDectipos())
+			dectipo.vincula();
+		
+		for (DecTipo decvar : this.getSecvars().getDectipos())
+			decvar.vincula();
+		
+		for (DecSubprograma decsubprog : this.getSecsubprogs().getDecsubprogramas())
+			decsubprog.vincula();
+		
+		
+		for (DecTipo dectipo : this.getSectipos().getDectipos())
+			dectipo.vinculaDefPunteros();
+		
+		for (DecTipo decvar : this.getSecvars().getDectipos())
+			decvar.vinculaDefPunteros();
+		
+		for (DecSubprograma decsubprog : this.getSecsubprogs().getDecsubprogramas())
+			decsubprog.vinculaDefPunteros();
+		
+		
+		for (Instruccion instr : this.getInstrs())
+			instr.vincula();
+		
+		sym_t.cierraBloque();
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
+		for (Parametro param : this.getParams())
+			param.getTipo().vinculaDefPunteros();
 	}
 }

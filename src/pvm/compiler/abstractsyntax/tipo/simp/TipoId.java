@@ -1,5 +1,6 @@
 package pvm.compiler.abstractsyntax.tipo.simp;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
 
@@ -34,5 +35,18 @@ public class TipoId extends Tipo {
 
 	public int getRow() {
 		return row;
+	}
+
+	@Override
+	public void vincula() {
+		this.setVinculo(sym_t.declaracion(this.getId()));
+		
+		if (this.getVinculo() == null)
+			ErrorsHandler.vinculaUndeclaredId(this.getId(), this.getRow());
+		
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
 	}
 }

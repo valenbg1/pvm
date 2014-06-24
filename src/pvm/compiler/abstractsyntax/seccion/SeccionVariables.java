@@ -28,4 +28,12 @@ public class SeccionVariables implements Node {
 	public List<DecTipo> getDectipos() {
 		return dectipos;
 	}
+
+	@Override
+	public void vincula() {
+	}
+
+	@Override
+	public void vinculaDefPunteros() {	
+	}
 }

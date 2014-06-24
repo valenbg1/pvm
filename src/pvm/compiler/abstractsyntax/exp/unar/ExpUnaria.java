@@ -24,4 +24,13 @@ public abstract class ExpUnaria extends Exp {
 	public Exp getExp() {
 		return exp;
 	}
+	
+	@Override
+	public void vincula() {
+		this.getExp().vincula();
+	}
+	
+	@Override
+	public void vinculaDefPunteros() {
+	}
 }

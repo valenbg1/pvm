@@ -17,4 +17,5 @@ public class ExpNumNat extends Exp {
 	public int getNumNat() {
 		return numnat;
 	}
+
 }

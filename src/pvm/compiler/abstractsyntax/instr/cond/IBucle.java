@@ -26,4 +26,18 @@ public class IBucle extends Instruccion {
 	public List<Caso> getCasos() {
 		return casos;
 	}
+
+	@Override
+	public void vincula() {
+		for (Caso caso : this.getCasos()) {
+			caso.getExp().vincula();
+			
+			for (Instruccion instr : caso.getInstrs())
+				instr.vincula();
+		}
+	}
+
+	@Override
+	public void vinculaDefPunteros() {
+	}
 }
