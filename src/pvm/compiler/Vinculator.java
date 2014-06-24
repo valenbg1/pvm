@@ -4,7 +4,29 @@ import java.util.HashMap;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.Programa;
+import pvm.compiler.abstractsyntax.designador.DesignaArray;
+import pvm.compiler.abstractsyntax.designador.DesignaCampo;
+import pvm.compiler.abstractsyntax.designador.DesignaId;
+import pvm.compiler.abstractsyntax.designador.DesignaPointer;
+import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.exp.ExpDesignador;
+import pvm.compiler.abstractsyntax.exp.bin.ExpBin;
+import pvm.compiler.abstractsyntax.exp.bool.ExpFalse;
+import pvm.compiler.abstractsyntax.exp.bool.ExpTrue;
+import pvm.compiler.abstractsyntax.exp.num.ExpNumNat;
+import pvm.compiler.abstractsyntax.exp.num.ExpNumReal;
+import pvm.compiler.abstractsyntax.exp.unar.ExpUnaria;
+import pvm.compiler.abstractsyntax.instr.IAsig;
+import pvm.compiler.abstractsyntax.instr.IBloque;
+import pvm.compiler.abstractsyntax.instr.ILlamada;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
+import pvm.compiler.abstractsyntax.instr.cond.Caso;
+import pvm.compiler.abstractsyntax.instr.cond.IBucle;
+import pvm.compiler.abstractsyntax.instr.cond.ICond;
+import pvm.compiler.abstractsyntax.instr.dynmem.IDelete;
+import pvm.compiler.abstractsyntax.instr.dynmem.INew;
+import pvm.compiler.abstractsyntax.instr.io.IRead;
+import pvm.compiler.abstractsyntax.instr.io.IWrite;
 import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
 import pvm.compiler.abstractsyntax.subprog.param.Parametro;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
@@ -17,13 +39,12 @@ import pvm.compiler.abstractsyntax.tipo.simp.TipoPointer;
 import pvm.compiler.exceptions.DuplicatedFieldException;
 import pvm.compiler.exceptions.DuplicatedIdException;
 import pvm.compiler.exceptions.NodeTypeErrorException;
+import pvm.compiler.exceptions.UndeclaredIdException;
 
 public class Vinculator {
 	private SymbolsTable sym_t = null;
 	
-	private void vincula(Node node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException {
-		// TODO pág 5 procesamiento de las instrucciones
-		
+	private void vincula(Node node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
 		if (node instanceof DecTipo)
 			vinculaDecTipo((DecTipo) node);
 		else if (node instanceof DecSubprograma)
@@ -40,11 +61,51 @@ public class Vinculator {
 			vinculaTipoStruct((TipoStruct) node);
 		else if (node instanceof TipoPointer)
 			vinculaTipoPointer((TipoPointer) node);
+		else if (node instanceof IAsig)
+			vinculaIAsig((IAsig) node);
+		else if (node instanceof IWrite)
+			vincula(((IWrite) node).getExp());
+		else if (node instanceof IRead)
+			vincula(((IRead) node).getDesig());
+		else if (node instanceof INew)
+			vincula(((INew) node).getDesig());
+		else if (node instanceof IDelete)
+			vincula(((IDelete) node).getDesig());
+		else if (node instanceof ICond)
+			vinculaICond((ICond) node);
+		else if (node instanceof IBucle)
+			vinculaIBucle((IBucle) node);
+		else if (node instanceof IBloque)
+			vinculaIBloque((IBloque) node);
+		else if (node instanceof ILlamada)
+			vinculaILlamada((ILlamada) node);
+		else if (node instanceof DesignaId)
+			vinculaDesignaId((DesignaId) node);
+		else if (node instanceof DesignaCampo)
+			vincula(((DesignaCampo) node).getDesig());
+		else if (node instanceof DesignaArray)
+			vinculaDesignaArray((DesignaArray) node);
+		else if (node instanceof DesignaPointer)
+			vincula(((DesignaPointer) node).getDesig());
+		else if (node instanceof ExpTrue)
+			return;
+		else if (node instanceof ExpFalse)
+			return;
+		else if (node instanceof ExpNumNat)
+			return;
+		else if (node instanceof ExpNumReal)
+			return;
+		else if (node instanceof ExpDesignador)
+			vincula(((ExpDesignador) node).getDesig());
+		else if (node instanceof ExpBin)
+			vinculaExpBin((ExpBin) node);
+		else if (node instanceof ExpUnaria)
+			vinculaExpUnaria((ExpUnaria) node);
 		else
-			throw new NodeTypeErrorException();
+			throw new NodeTypeErrorException(node.getClass().getSimpleName());
 	}
 	
-	public void vincula(Programa programa) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException {
+	public void vincula(Programa programa) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
 		sym_t = new SymbolsTable();
 		sym_t.abreBloque();
 		
@@ -71,10 +132,10 @@ public class Vinculator {
 		for (Instruccion instr : programa.getInstrs())
 			vincula(instr);
 	}
-	
-	private void vinculaDecSubprograma(DecSubprograma node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException {
+
+	private void vinculaDecSubprograma(DecSubprograma node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
 		if (!sym_t.insertaId(node.getId(), node))
-			throw new DuplicatedIdException();
+			throw new DuplicatedIdException(node.getId());
 		
 		sym_t.abreBloque();
 		sym_t.insertaId(node.getId(), node);
@@ -109,16 +170,14 @@ public class Vinculator {
 		sym_t.cierraBloque();
 	}
 
-	private void vinculaDecTipo(DecTipo node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException {
+	private void vinculaDecTipo(DecTipo node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
 		vincula(node.getTipo());
 		
 		if (!sym_t.insertaId(node.getId(), node))
-			throw new DuplicatedIdException();
+			throw new DuplicatedIdException(node.getId());
 	}
 
-	private void vinculaDefPunteros(Node node) throws NodeTypeErrorException, DuplicatedIdException, DuplicatedFieldException {
-		// TODO pág 5 procesamiento de las instrucciones
-		
+	private void vinculaDefPunteros(Node node) throws NodeTypeErrorException, DuplicatedIdException, DuplicatedFieldException, UndeclaredIdException {
 		if (node instanceof DecTipo)
 			vinculaDefPunteros(((DecTipo) node).getTipo());
 		else if (node instanceof DecSubprograma)
@@ -136,48 +195,107 @@ public class Vinculator {
 		else if (node instanceof TipoPointer)
 			vinculaDefPunterosTipoPointer((TipoPointer) node);
 		else
-			throw new NodeTypeErrorException();
+			throw new NodeTypeErrorException(node.getClass().getSimpleName());
 	}
 
-	private void vinculaDefPunterosDecSubprograma(DecSubprograma node) throws NodeTypeErrorException, DuplicatedIdException, DuplicatedFieldException {
+	private void vinculaDefPunterosDecSubprograma(DecSubprograma node) throws NodeTypeErrorException, DuplicatedIdException, DuplicatedFieldException, UndeclaredIdException {
 		for (Parametro param : node.getParams())
 			vinculaDefPunteros(param.getTipo());
 	}
 
-	private void vinculaDefPunterosTipoPointer(TipoPointer node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException {
+	private void vinculaDefPunterosTipoPointer(TipoPointer node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
 		if (node.getTipo() instanceof TipoPointer)
 			vincula(node.getTipo());
 		else
 			vinculaDefPunteros(node.getTipo());
 	}
 
-	private void vinculaDefPunterosTipoStruct(TipoStruct node) throws NodeTypeErrorException, DuplicatedIdException, DuplicatedFieldException {
+	private void vinculaDefPunterosTipoStruct(TipoStruct node) throws NodeTypeErrorException, DuplicatedIdException, DuplicatedFieldException, UndeclaredIdException {
 		for (DecTipo dectipo : node.getDectipos())
 			vinculaDefPunteros(dectipo.getTipo());
 	}
 
-	private void vinculaTipoArray(TipoArray node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException {
-		vincula(node.getTipo());
+	private void vinculaDesignaArray(DesignaArray node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
+		vincula(node.getDesig());
+		vincula(node.getExp());
 	}
 
-	private void vinculaTipoId(TipoId node) throws DuplicatedIdException {
+	private void vinculaDesignaId(DesignaId node) throws UndeclaredIdException {
 		node.setVinculo(sym_t.declaracion(node.getId()));
 		
 		if (node.getVinculo() == null)
-			throw new DuplicatedIdException();
+			throw new UndeclaredIdException(node.getId());
 	}
 
-	private void vinculaTipoPointer(TipoPointer node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException {
-		if (!((node.getTipo() instanceof TipoPointer)))
+	private void vinculaExpBin(ExpBin node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
+		vincula(node.getExp0());
+		vincula(node.getExp1());
+	}
+	
+	private void vinculaExpUnaria(ExpUnaria node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
+		vincula(node.getExp());
+	}
+
+	private void vinculaIAsig(IAsig node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
+		vincula(node.getDesig());
+		vincula(node.getExp());
+	}
+
+	private void vinculaIBloque(IBloque node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
+		for (Instruccion instr : node.getInstrs())
+			vincula(instr);
+	}
+
+	private void vinculaIBucle(IBucle node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
+		for (Caso caso : node.getCasos()) {
+			vincula(caso.getExp());
+			
+			for (Instruccion instr : caso.getInstrs())
+				vincula(instr);
+		}
+	}
+
+	private void vinculaICond(ICond node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
+		for (Caso caso : node.getCasos()) {
+			vincula(caso.getExp());
+			
+			for (Instruccion instr : caso.getInstrs())
+				vincula(instr);
+		}
+	}
+
+	private void vinculaILlamada(ILlamada node) throws UndeclaredIdException, DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException {
+		node.setVinculo(sym_t.declaracion(node.getId()));
+		
+		if (node.getVinculo() == null)
+			throw new UndeclaredIdException(node.getId());
+		
+		for (Exp exp : node.getArgs())
+			vincula(exp);
+	}
+
+	private void vinculaTipoArray(TipoArray node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
+		vincula(node.getTipo());
+	}
+
+	private void vinculaTipoId(TipoId node) throws DuplicatedIdException, UndeclaredIdException {
+		node.setVinculo(sym_t.declaracion(node.getId()));
+		
+		if (node.getVinculo() == null)
+			throw new UndeclaredIdException(node.getId());
+	}
+
+	private void vinculaTipoPointer(TipoPointer node) throws DuplicatedIdException, NodeTypeErrorException, DuplicatedFieldException, UndeclaredIdException {
+		if (!(node.getTipo() instanceof TipoId))
 			vincula(node.getTipo());
 	}
 
-	private void vinculaTipoStruct(TipoStruct node) throws DuplicatedFieldException, DuplicatedIdException, NodeTypeErrorException {
+	private void vinculaTipoStruct(TipoStruct node) throws DuplicatedFieldException, DuplicatedIdException, NodeTypeErrorException, UndeclaredIdException {
 		node.setCampos(new HashMap<String, Node>());
 		
 		for (DecTipo campo : node.getDectipos()) {
 			if (node.getCampos().containsKey(campo.getId()))
-				throw new DuplicatedFieldException();
+				throw new DuplicatedFieldException(campo.getId());
 			else
 				node.getCampos().put(campo.getId(), campo);
 			
