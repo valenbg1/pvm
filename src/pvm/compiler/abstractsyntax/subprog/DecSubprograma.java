@@ -86,8 +86,10 @@ public class DecSubprograma implements Node {
 		sym_t.abreBloque();
 		sym_t.insertaId(this.getId(), this);
 		
-		for (Parametro param : this.getParams())
+		for (Parametro param : this.getParams()){
 			sym_t.insertaId(param.getId(), param);
+			param.vincula();
+		}
 		
 		
 		for (DecTipo dectipo : this.getSectipos().getDectipos())
@@ -99,6 +101,9 @@ public class DecSubprograma implements Node {
 		for (DecSubprograma decsubprog : this.getSecsubprogs().getDecsubprogramas())
 			decsubprog.vincula();
 		
+		for (Parametro param : this.getParams()){
+			param.vinculaDefPunteros();
+		}
 		
 		for (DecTipo dectipo : this.getSectipos().getDectipos())
 			dectipo.vinculaDefPunteros();
