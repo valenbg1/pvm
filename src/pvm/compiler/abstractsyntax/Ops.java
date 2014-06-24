@@ -1,312 +1,370 @@
 package pvm.compiler.abstractsyntax;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import pvm.compiler.abstractsyntax.designador.DesignaArray;
+import pvm.compiler.abstractsyntax.designador.DesignaCampo;
+import pvm.compiler.abstractsyntax.designador.DesignaId;
+import pvm.compiler.abstractsyntax.designador.DesignaPointer;
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.exp.ExpDesignador;
+import pvm.compiler.abstractsyntax.exp.bin.arithm.Division;
+import pvm.compiler.abstractsyntax.exp.bin.arithm.Modulo;
+import pvm.compiler.abstractsyntax.exp.bin.arithm.Multiplicacion;
+import pvm.compiler.abstractsyntax.exp.bin.arithm.Resta;
+import pvm.compiler.abstractsyntax.exp.bin.arithm.Suma;
+import pvm.compiler.abstractsyntax.exp.bin.bool.And;
+import pvm.compiler.abstractsyntax.exp.bin.bool.Or;
+import pvm.compiler.abstractsyntax.exp.bin.comp.Desigualdad;
+import pvm.compiler.abstractsyntax.exp.bin.comp.Igualdad;
+import pvm.compiler.abstractsyntax.exp.bin.comp.Mayor;
+import pvm.compiler.abstractsyntax.exp.bin.comp.MayorOigual;
+import pvm.compiler.abstractsyntax.exp.bin.comp.Menor;
+import pvm.compiler.abstractsyntax.exp.bin.comp.MenorOigual;
+import pvm.compiler.abstractsyntax.exp.bool.ExpFalse;
+import pvm.compiler.abstractsyntax.exp.bool.ExpTrue;
+import pvm.compiler.abstractsyntax.exp.num.ExpNumNat;
+import pvm.compiler.abstractsyntax.exp.num.ExpNumReal;
+import pvm.compiler.abstractsyntax.exp.unar.arithm.Menos;
+import pvm.compiler.abstractsyntax.exp.unar.bool.Not;
+import pvm.compiler.abstractsyntax.exp.unar.cast.ToDouble;
+import pvm.compiler.abstractsyntax.exp.unar.cast.ToInt;
+import pvm.compiler.abstractsyntax.instr.IAsig;
+import pvm.compiler.abstractsyntax.instr.IBloque;
+import pvm.compiler.abstractsyntax.instr.ILlamada;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.compiler.abstractsyntax.instr.cond.Caso;
+import pvm.compiler.abstractsyntax.instr.cond.IBucle;
+import pvm.compiler.abstractsyntax.instr.cond.ICond;
+import pvm.compiler.abstractsyntax.instr.dynmem.IDelete;
+import pvm.compiler.abstractsyntax.instr.dynmem.INew;
+import pvm.compiler.abstractsyntax.instr.io.IRead;
+import pvm.compiler.abstractsyntax.instr.io.IWrite;
 import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
 import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
+import pvm.compiler.abstractsyntax.subprog.param.ParamRefer;
+import pvm.compiler.abstractsyntax.subprog.param.ParamValor;
 import pvm.compiler.abstractsyntax.subprog.param.Parametro;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
+import pvm.compiler.abstractsyntax.tipo.comp.TipoArray;
+import pvm.compiler.abstractsyntax.tipo.comp.TipoStruct;
+import pvm.compiler.abstractsyntax.tipo.simp.TipoBoolean;
+import pvm.compiler.abstractsyntax.tipo.simp.TipoDouble;
+import pvm.compiler.abstractsyntax.tipo.simp.TipoId;
+import pvm.compiler.abstractsyntax.tipo.simp.TipoInt;
+import pvm.compiler.abstractsyntax.tipo.simp.TipoPointer;
 
 public class Ops {
 	public static List<Exp> argumentosvacia() {
-		// TODO Auto-generated method stub
-		return null;
+		return listavacia();
 	}
 
 	public static Caso deccaso(Exp aDeExp0, List<Instruccion> aDeIB) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Caso(aDeExp0, aDeIB);
 	}
 
 	public static List<Caso> deccasoscomp(List<Caso> aDeCasos1, Caso aDeCaso) {
-		// TODO Auto-generated method stub
-		return null;
+		return listacomp(aDeCasos1, aDeCaso);
 	}
 
 	public static List<Caso> deccasossimmp(Caso aDeCaso) {
-		// TODO Auto-generated method stub
-		return null;
+		return listasimp(aDeCaso);
 	}
 
 	public static List<Instruccion> decinstcomp(List<Instruccion> aDeIS,
 			Instruccion aDeI) {
-		// TODO Auto-generated method stub
-		return null;
+		return listacomp(aDeIS, aDeI);
 	}
 
 	public static List<Instruccion> decinstsimp(Instruccion aDeI) {
-		// TODO Auto-generated method stub
-		return null;
+		return listasimp(aDeI);
 	}
 
 	public static List<Instruccion> decinstvacia() {
-		// TODO Auto-generated method stub
-		return null;
+		return listavacia();
 	}
 
 	public static Programa decprograma(SeccionTipos aDeST,
 			SeccionVariables aDeSV, SeccionSubprogramas aDeSS,
 			List<Instruccion> aDeIB) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Programa(aDeST, aDeSV, aDeSS, aDeIB);
 	}
 
 	public static SeccionSubprogramas decsecsubprogramas(
 			List<DecSubprograma> aDeDSP) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SeccionSubprogramas(aDeDSP);
 	}
 
 	public static SeccionSubprogramas decsecsubprogramasvacia() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SeccionSubprogramas(new ArrayList<DecSubprograma>());
 	}
 
 	public static SeccionTipos decsectipos(List<DecTipo> aDeDT) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SeccionTipos(aDeDT);
 	}
 
 	public static SeccionTipos decsectiposvacia() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SeccionTipos(new ArrayList<DecTipo>());
 	}
 
 	public static SeccionVariables decsecvar(List<DecTipo> aDeDV) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SeccionVariables(aDeDV);
 	}
 
 	public static SeccionVariables decsecvarvacia() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SeccionVariables(new ArrayList<DecTipo>());
 	}
 
 	public static DecSubprograma decsubprogram(String lexDeID,
 			List<Parametro> aDeP, SeccionTipos aDeSTS, SeccionVariables aDeSVS,
 			SeccionSubprogramas aDeSPS, List<Instruccion> aDeIB) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DecSubprograma(aDeP, lexDeID, aDeSTS, aDeSVS, aDeSPS, aDeIB);
 	}
 
 	public static List<DecSubprograma> decsubprogramacomp(
 			List<DecSubprograma> aDeDSPS1, DecSubprograma aDeDSP) {
-		// TODO Auto-generated method stub
-		return null;
+		return listacomp(aDeDSPS1, aDeDSP);
 	}
 
 	public static List<DecSubprograma> decsubprogramasimp(DecSubprograma aDeDSP) {
-		// TODO Auto-generated method stub
-		return null;
+		return listasimp(aDeDSP);
 	}
 
 	public static List<DecTipo> dectiposcomp(List<DecTipo> aDeDTS1,
 			DecTipo aDeDT) {
-		// TODO Auto-generated method stub
-		return null;
+		return listacomp(aDeDTS1, aDeDT);
 	}
 
 	public static List<DecTipo> dectipossimp(DecTipo aDeDT) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static DecTipo dectiposstring(String lexDeID, Tipo aDeTipo) {
-		// TODO Auto-generated method stub
-		return null;
+		return listasimp(aDeDT);
 	}
 
 	public static DecTipo dectipostring(String lexDeID, Tipo aDeTipo) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DecTipo(lexDeID, aDeTipo);
 	}
 
 	public static Designador designaarray(Designador aDeDesig1, Exp aDeExp0) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DesignaArray(aDeDesig1, aDeExp0);
 	}
 
 	public static Designador designacampo(Designador aDeDesig1, String lexDeID) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DesignaCampo(aDeDesig1, lexDeID);
 	}
 
 	public static Designador designaid(String lexDeID) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DesignaId(lexDeID);
 	}
 
 	public static Designador designapointer(Designador aDeDesig1) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DesignaPointer(aDeDesig1);
 	}
 
 	public static Exp expdesignador(Designador aDeDesig) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ExpDesignador(aDeDesig);
 	}
 
 	public static Exp expfalse() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ExpFalse();
 	}
 
 	public static Exp exptrue() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ExpTrue();
 	}
 
 	public static Instruccion instasignacion(Designador aDeD, Exp aDeExp0) {
-		// TODO Auto-generated method stub
-		return null;
+		return new IAsig(aDeD, aDeExp0);
 	}
 
 	public static Instruccion instbloque(List<Instruccion> aDeIInstr) {
-		// TODO Auto-generated method stub
-		return null;
+		return new IBloque(aDeIInstr);
 	}
 
 	public static Instruccion instdelete(Designador aDeDesig) {
-		// TODO Auto-generated method stub
-		return null;
+		return new IDelete(aDeDesig);
 	}
 
 	public static Instruccion instdo(List<Caso> aDeCasos) {
-		// TODO Auto-generated method stub
-		return null;
+		return new IBucle(aDeCasos);
 	}
 
 	public static Instruccion instif(List<Caso> aDeCasos) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ICond(aDeCasos);
 	}
 
 	public static Instruccion instllamada(String lexDeID, List<Exp> aDeArgs) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ILlamada(lexDeID, aDeArgs);
 	}
 
 	public static Instruccion instnew(Designador aDeDesig) {
-		// TODO Auto-generated method stub
-		return null;
+		return new INew(aDeDesig);
 	}
 
 	public static Instruccion instread(Designador aDeDesig) {
-		// TODO Auto-generated method stub
-		return null;
+		return new IRead(aDeDesig);
 	}
 
 	public static Instruccion instwrite(Exp aDeExp0) {
-		// TODO Auto-generated method stub
-		return null;
+		return new IWrite(aDeExp0);
 	}
 
 	public static List<Exp> listaargumentoscomp(List<Exp> aDeListaArgs1,
 			Exp aDeExp0) {
-		// TODO Auto-generated method stub
-		return null;
+		return listacomp(aDeListaArgs1, aDeExp0);
 	}
 
 	public static List<Exp> listaargumentossimp(Exp aDeExp0) {
-		// TODO Auto-generated method stub
-		return null;
+		return listasimp(aDeExp0);
+	}
+
+	private static <E> List<E> listacomp(List<E> list, E elem) {
+		list.add(elem);
+
+		return list;
+	}
+
+	private static <E> List<E> listasimp(E elem) {
+		List<E> ret = new ArrayList<E>();
+		ret.add(elem);
+
+		return ret;
+	}
+
+	private static <E> List<E> listavacia() {
+		return new ArrayList<E>();
 	}
 
 	public static Exp mkexp(String opun, Exp aDeExp) {
-		// TODO Auto-generated method stub
-		return null;
+		switch (opun) {
+			case "-":
+				return new Menos(aDeExp);
+	
+			case "not":
+				return new Not(aDeExp);
+	
+			case "todouble":
+				return new ToDouble(aDeExp);
+	
+			case "toint":
+				return new ToInt(aDeExp);
+	
+			default:
+				return null;
+		}
 	}
 
 	public static Exp mkexp(String opbin, Exp aDeExp10, Exp aDeExp11) {
-		// TODO Auto-generated method stub
-		return null;
+		switch (opbin) {
+			case "/":
+				return new Division(aDeExp10, aDeExp11);
+	
+			case "%":
+				return new Modulo(aDeExp10, aDeExp11);
+	
+			case "*":
+				return new Multiplicacion(aDeExp10, aDeExp11);
+	
+			case "-":
+				return new Resta(aDeExp10, aDeExp11);
+	
+			case "+":
+				return new Suma(aDeExp10, aDeExp11);
+	
+			case "and":
+				return new And(aDeExp10, aDeExp11);
+	
+			case "or":
+				return new Or(aDeExp10, aDeExp11);
+	
+			case "!=":
+				return new Desigualdad(aDeExp10, aDeExp11);
+	
+			case "==":
+				return new Igualdad(aDeExp10, aDeExp11);
+	
+			case ">":
+				return new Mayor(aDeExp10, aDeExp11);
+	
+			case ">=":
+				return new MayorOigual(aDeExp10, aDeExp11);
+	
+			case "<":
+				return new Menor(aDeExp10, aDeExp11);
+	
+			case "<=":
+				return new MenorOigual(aDeExp10, aDeExp11);
+	
+			default:
+				return null;
+		}
 	}
 
-	public static Exp numnatural(int tonaturalnum) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Exp numnatural(int naturalnum) {
+		return new ExpNumNat(naturalnum);
 	}
 
-	public static Exp numreal(double torealnum) {
-		// TODO Auto-generated method stub
-		return null;
+	public static Exp numreal(double realnum) {
+		return new ExpNumReal(realnum);
 	}
 
 	public static List<Parametro> parametroscomp(List<Parametro> aDeLPS,
 			Parametro aDeP) {
-		// TODO Auto-generated method stub
-		return null;
+		return listacomp(aDeLPS, aDeP);
 	}
 
 	public static List<Parametro> parametrossimp(Parametro aDeP) {
-		// TODO Auto-generated method stub
-		return null;
+		return listasimp(aDeP);
 	}
 
 	public static List<Parametro> parametrosvacia() {
-		// TODO Auto-generated method stub
-		return null;
+		return listavacia();
 	}
 
 	public static Parametro paramrefer(String lexDeID, Tipo aDeTipo) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ParamRefer(lexDeID, aDeTipo);
 	}
 
 	public static Parametro paramvalor(String lexDeID, Tipo aDeTipo) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ParamValor(lexDeID, aDeTipo);
 	}
 
 	public static Tipo tipoarray(Tipo aDeTipo, String lexDeNN) {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoArray(aDeTipo, Integer.valueOf(lexDeNN));
 	}
 
 	public static Tipo tipoboolean() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoBoolean();
 	}
 
 	public static Tipo tipodouble() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoDouble();
 	}
 
 	public static Tipo tipoid(String lexDeID) {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoId(lexDeID);
 	}
 
 	public static Tipo tipoint() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoInt();
 	}
 
 	public static Tipo tipopointer(Tipo aDeTipo) {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoPointer(aDeTipo);
 	}
 
 	public static Tipo tipostruct(List<DecTipo> aDeCampos) {
-		// TODO Auto-generated method stub
-		return null;
+		return new TipoStruct(aDeCampos);
 	}
 
 	public static int tonaturalnum(String lexDeNN) {
-		// TODO Auto-generated method stub
-		return 0;
+		return Integer.valueOf(lexDeNN);
 	}
 
 	public static double torealnum(String lexDeNR) {
-		// TODO Auto-generated method stub
-		return 0;
+		return Double.valueOf(lexDeNR);
 	}
 }
