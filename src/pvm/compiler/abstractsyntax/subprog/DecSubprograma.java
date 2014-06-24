@@ -2,7 +2,6 @@ package pvm.compiler.abstractsyntax.subprog;
 
 import java.util.List;
 
-import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
@@ -10,7 +9,7 @@ import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
 import pvm.compiler.abstractsyntax.subprog.param.Parametro;
 
-public class DecSubprograma extends Node {
+public class DecSubprograma implements Node {
 	private String id;
 	
 	private List<Parametro> params;
@@ -22,20 +21,12 @@ public class DecSubprograma extends Node {
 	public DecSubprograma(List<Parametro> params, String id,
 			SeccionTipos sectipos, SeccionVariables secvars,
 			SeccionSubprogramas secsubprogs, List<Instruccion> instrs) {
-		super();
-		
 		this.id = id;
 		this.params = params;
 		this.sectipos = sectipos;
 		this.secvars = secvars;
 		this.secsubprogs = secsubprogs;
 		this.instrs = instrs;
-		
-		this.childs.add(new ListNode<Parametro>(params));
-		this.childs.add(sectipos);
-		this.childs.add(secvars);
-		this.childs.add(secsubprogs);
-		this.childs.add(new ListNode<Instruccion>(instrs));
 	}
 
 	@Override

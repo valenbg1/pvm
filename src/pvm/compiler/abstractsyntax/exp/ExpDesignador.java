@@ -7,11 +7,7 @@ public class ExpDesignador extends Exp {
 	private Designador desig;
 	
 	public ExpDesignador(Designador desig) {
-		super();
-		
 		this.desig = desig;
-		
-		this.childs.add(desig);
 	}
 
 	@Override

@@ -4,8 +4,6 @@ import pvm.compiler.abstractsyntax.tipo.Tipo;
 
 public class TipoId extends Tipo {
 	public TipoId(String id) {
-		super();
-		
 		this.id = id;
 	}
 

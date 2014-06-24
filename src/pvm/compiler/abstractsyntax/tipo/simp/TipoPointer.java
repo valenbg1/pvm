@@ -6,11 +6,7 @@ public class TipoPointer extends Tipo {
 	private Tipo tipo;
 	
 	public TipoPointer(Tipo tipo) {
-		super();
-		
 		this.tipo = tipo;
-		
-		this.childs.add(tipo);
 	}
 
 	@Override

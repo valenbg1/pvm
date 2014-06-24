@@ -5,12 +5,8 @@ public class DesignaCampo extends Designador {
 	private String campo;
 	
 	public DesignaCampo(Designador desig, String campo) {
-		super();
-		
 		this.desig = desig;
 		this.campo = campo;
-		
-		this.childs.add(desig);
 	}
 
 	@Override

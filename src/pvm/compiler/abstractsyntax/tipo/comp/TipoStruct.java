@@ -3,7 +3,6 @@ package pvm.compiler.abstractsyntax.tipo.comp;
 import java.util.List;
 import java.util.Map;
 
-import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
@@ -14,11 +13,7 @@ public class TipoStruct extends Tipo {
 	private Map<String, Node> campos;
 	
 	public TipoStruct(List<DecTipo> dectipos) {
-		super();
-		
 		this.dectipos = dectipos;
-		
-		this.childs.add(new ListNode<DecTipo>(dectipos));
 	}
 
 	@Override

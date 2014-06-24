@@ -2,7 +2,6 @@ package pvm.compiler.abstractsyntax.instr;
 
 import java.util.List;
 
-import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.exp.Exp;
 
@@ -15,13 +14,9 @@ public class ILlamada extends Instruccion {
 	private int vinculo_row, vinculo_col;
 	
 	public ILlamada(String id, List<Exp> args) {
-		super();
-		
 		this.id = id;
 		
 		this.args = args;
-		
-		this.childs.add(new ListNode<Exp>(args));
 	}
 
 	@Override

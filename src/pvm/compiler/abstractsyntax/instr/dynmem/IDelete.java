@@ -7,11 +7,7 @@ public class IDelete extends Instruccion {
 	private Designador desig;
 	
 	public IDelete(Designador desig) {
-		super();
-		
 		this.desig = desig;
-		
-		this.childs.add(desig);
 	}
 
 	@Override

@@ -8,12 +8,8 @@ public abstract class ExpUnaria extends Exp {
 	protected Exp exp;
 	
 	public ExpUnaria(Exp exp, String op) {
-		super();
-		
 		this.op = op;
 		this.exp = exp;
-		
-		this.childs.add(exp);
 	}
 
 	@Override

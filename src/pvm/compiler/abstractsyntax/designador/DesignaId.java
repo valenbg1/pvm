@@ -4,8 +4,6 @@ public class DesignaId extends Designador {
 	private String id;
 	
 	public DesignaId(String id) {
-		super();
-		
 		this.id = id;
 	}
 

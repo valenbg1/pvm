@@ -7,11 +7,7 @@ public class IRead extends Instruccion {
 	private Designador desig;
 	
 	public IRead(Designador desig) {
-		super();
-		
 		this.desig = desig;
-		
-		this.childs.add(desig);
 	}
 
 	@Override

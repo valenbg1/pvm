@@ -2,19 +2,14 @@ package pvm.compiler.abstractsyntax.seccion;
 
 import java.util.List;
 
-import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 
-public class SeccionTipos extends Node {
+public class SeccionTipos implements Node {
 	private List<DecTipo> dectipos;
 	
 	public SeccionTipos(List<DecTipo> dectipos) {
-		super();
-		
 		this.dectipos = dectipos;
-		
-		this.childs.add(new ListNode<DecTipo>(dectipos));
 	}
 
 	@Override

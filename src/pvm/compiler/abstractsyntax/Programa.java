@@ -7,7 +7,7 @@ import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
 
-public class Programa extends Node {
+public class Programa implements Node {
 	private SeccionTipos sectipos;
 	private SeccionVariables secvars;
 	private SeccionSubprogramas secsubprogs;
@@ -15,17 +15,10 @@ public class Programa extends Node {
 
 	public Programa(SeccionTipos sectipos, SeccionVariables secvars,
 			SeccionSubprogramas secsubprogs, List<Instruccion> instrs) {
-		super();
-
 		this.sectipos = sectipos;
 		this.secvars = secvars;
 		this.secsubprogs = secsubprogs;
 		this.instrs = instrs;
-
-		this.childs.add(sectipos);
-		this.childs.add(secvars);
-		this.childs.add(secsubprogs);
-		this.childs.add(new ListNode<Instruccion>(instrs));
 	}
 
 	public List<Instruccion> getInstrs() {

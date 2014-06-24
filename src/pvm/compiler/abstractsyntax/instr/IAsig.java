@@ -8,13 +8,8 @@ public class IAsig extends Instruccion {
 	private Exp exp;
 	
 	public IAsig(Designador desig, Exp exp) {
-		super();
-		
 		this.desig = desig;
 		this.exp = exp;
-		
-		this.childs.add(desig);
-		this.childs.add(exp);
 	}
 
 	@Override

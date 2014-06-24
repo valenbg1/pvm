@@ -4,11 +4,7 @@ public class DesignaPointer extends Designador {
 	private Designador desig;
 	
 	public DesignaPointer(Designador desig) {
-		super();
-		
 		this.desig = desig;
-		
-		this.childs.add(desig);
 	}
 
 	@Override

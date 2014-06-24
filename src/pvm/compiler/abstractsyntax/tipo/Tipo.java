@@ -2,13 +2,9 @@ package pvm.compiler.abstractsyntax.tipo;
 
 import pvm.compiler.abstractsyntax.Node;
 
-public abstract class Tipo extends Node {
+public abstract class Tipo implements Node {
 	protected Node vinculo;
 	protected int vinculo_row, vinculo_col;
-	
-	public Tipo() {
-		super();
-	}
 
 	public Node getVinculo() {
 		return vinculo;

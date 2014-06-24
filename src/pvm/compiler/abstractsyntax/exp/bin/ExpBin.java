@@ -9,14 +9,9 @@ public abstract class ExpBin extends Exp {
 	protected Exp exp1;
 	
 	public ExpBin(Exp exp0, Exp exp1, String op) {
-		super();
-		
 		this.op = op;
 		this.exp0 = exp0;
 		this.exp1 = exp1;
-		
-		this.childs.add(exp0);
-		this.childs.add(exp1);
 	}
 
 	@Override

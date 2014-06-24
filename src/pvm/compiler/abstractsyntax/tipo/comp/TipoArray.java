@@ -8,13 +8,9 @@ public class TipoArray extends Tipo {
 	private Tipo tipo;
 	
 	public TipoArray(Tipo tipo, int num) {
-		super();
-		
 		this.num = num;
 		
 		this.tipo = tipo;
-		
-		this.childs.add(tipo);
 	}
 
 	@Override

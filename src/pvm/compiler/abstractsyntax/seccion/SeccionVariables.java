@@ -2,19 +2,14 @@ package pvm.compiler.abstractsyntax.seccion;
 
 import java.util.List;
 
-import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 
-public class SeccionVariables extends Node {
+public class SeccionVariables implements Node {
 	private List<DecTipo> dectipos;
 	
 	public SeccionVariables(List<DecTipo> dectipos) {
-		super();
-		
 		this.dectipos = dectipos;
-		
-		this.childs.add(new ListNode<DecTipo>(dectipos));
 	}
 
 	@Override

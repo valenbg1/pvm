@@ -7,13 +7,8 @@ public class DesignaArray extends Designador {
 	private Exp exp;
 	
 	public DesignaArray(Designador desig, Exp exp) {
-		super();
-		
 		this.desig = desig;
 		this.exp = exp;
-		
-		this.childs.add(desig);
-		this.childs.add(exp);
 	}
 
 	@Override

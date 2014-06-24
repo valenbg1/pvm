@@ -2,19 +2,14 @@ package pvm.compiler.abstractsyntax.seccion;
 
 import java.util.List;
 
-import pvm.compiler.abstractsyntax.ListNode;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
 
-public class SeccionSubprogramas extends Node {
+public class SeccionSubprogramas implements Node {
 	private List<DecSubprograma> decsubprogramas;
 	
 	public SeccionSubprogramas(List<DecSubprograma> decsubprogramas) {
-		super();
-		
 		this.decsubprogramas = decsubprogramas;
-		
-		this.childs.add(new ListNode<DecSubprograma>(decsubprogramas));
 	}
 
 	@Override

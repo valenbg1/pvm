@@ -7,11 +7,7 @@ public class IWrite extends Instruccion {
 	private Exp exp;
 	
 	public IWrite(Exp exp) {
-		super();
-		
 		this.exp = exp;
-		
-		this.childs.add(exp);
 	}
 
 	@Override

@@ -2,13 +2,9 @@ package pvm.compiler.abstractsyntax.designador;
 
 import pvm.compiler.abstractsyntax.Node;
 
-public abstract class Designador extends Node {
+public abstract class Designador implements Node {
 	protected Node vinculo;
 	protected int vinculo_row, vinculo_col;
-	
-	public Designador() {
-		super();
-	}
 
 	public Node getVinculo() {
 		return vinculo;

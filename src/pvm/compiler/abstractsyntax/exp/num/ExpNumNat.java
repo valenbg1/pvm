@@ -6,7 +6,6 @@ public class ExpNumNat extends Exp {
 	private int numnat;
 	
 	public ExpNumNat(int numnat) {
-		super();
 		this.numnat = numnat;
 	}
 
