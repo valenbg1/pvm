@@ -8,4 +8,12 @@ public class TipoInt extends Tipo {
 		return "int";
 	}
 
+	@Override
+	public void chequea() {
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+	}
+
 }

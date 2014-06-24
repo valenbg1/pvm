@@ -20,7 +20,7 @@ public class TipoPointer extends Tipo {
 		return "pointer " + tipo;
 	}
 
-	public Tipo getTipo() {
+	public Tipo getTipoBase() {
 		return tipo;
 	}
 
@@ -38,22 +38,27 @@ public class TipoPointer extends Tipo {
 
 	@Override
 	public void vincula() {
-		if (!(this.getTipo() instanceof TipoId))
-			this.getTipo().vincula();
+		if (!(this.getTipoBase() instanceof TipoId))
+			this.getTipoBase().vincula();
 		
 	}
 
 	@Override
 	public void vinculaDefPunteros() {
-		if (this.getTipo() instanceof TipoId)
-			this.getTipo().vincula();
+		if (this.getTipoBase() instanceof TipoId)
+			this.getTipoBase().vincula();
 		else
-			this.getTipo().vinculaDefPunteros();
+			this.getTipoBase().vinculaDefPunteros();
 		
 	}
 
 	@Override
 	public void chequea() {
-		this.getTipo().chequea();
+		this.getTipoBase().chequea();
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+		this.getTipoBase().simplificaDefTipos();
 	}
 }
