@@ -2,6 +2,7 @@ package pvm.compiler.abstractsyntax.tipo.simp;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class TipoPointer extends Tipo {
 	private Tipo tipo;
@@ -53,7 +54,7 @@ public class TipoPointer extends Tipo {
 	}
 
 	@Override
-	public void chequea() {
+	public void chequea() throws CheckFailException {
 		this.getTipoBase().chequea();
 	}
 

@@ -8,6 +8,7 @@ import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class TipoStruct extends Tipo {
 	private List<DecTipo> dectipos;
@@ -64,7 +65,7 @@ public class TipoStruct extends Tipo {
 	}
 
 	@Override
-	public void chequea() {
+	public void chequea() throws CheckFailException {
 		for(Node campo : this.getCampos().values()){
 			campo.chequea();
 		}

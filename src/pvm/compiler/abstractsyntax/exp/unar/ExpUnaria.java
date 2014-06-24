@@ -1,6 +1,7 @@
 package pvm.compiler.abstractsyntax.exp.unar;
 
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.tipo.Tipo;
 
 public abstract class ExpUnaria extends Exp {
 	protected String op;
@@ -32,5 +33,10 @@ public abstract class ExpUnaria extends Exp {
 	
 	@Override
 	public void vinculaDefPunteros() {
+	}
+	
+	@Override
+	public Tipo getTipo() {
+		return getExp().getTipo();
 	}
 }

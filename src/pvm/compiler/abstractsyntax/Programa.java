@@ -9,6 +9,7 @@ import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
 import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
 import pvm.compiler.abstractsyntax.subprog.param.Parametro;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class Programa implements Node {
 	private SeccionTipos sectipos;
@@ -87,21 +88,10 @@ public class Programa implements Node {
 	}
 
 	@Override
-	public void chequea() {
+	public void chequea() throws CheckFailException {
 		this.getSectipos().chequea();
-		
-		for(DecTipo dec : this.getSectipos().getDectipos()){
-			dec.getTipo().simplificaDefTipos();
-		}
-		
-		for(DecTipo dec : this.getSecvars().getDectipos()){
-			dec.getTipo().simplificaDefTipos();
-		}
-		
-		for(DecSubprograma dec: this.getSecsubprogs().getDecsubprogramas()){
-			for(Parametro param : dec.getParams())
-				param.getTipo().simplificaDefTipos();
-		}
+		this.getSecvars().chequea();
+		this.getSecsubprogs().chequea();
 		
 		for(Instruccion inst : this.getInstrs()){
 			inst.chequea();

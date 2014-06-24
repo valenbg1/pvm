@@ -1,6 +1,7 @@
 package pvm.compiler.abstractsyntax.tipo.comp;
 
 import pvm.compiler.abstractsyntax.tipo.Tipo;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class TipoArray extends Tipo {
 	private int num;
@@ -37,7 +38,7 @@ public class TipoArray extends Tipo {
 	}
 
 	@Override
-	public void chequea() {
+	public void chequea() throws CheckFailException {
 		this.getTipoBase().chequea();
 	}
 

@@ -2,6 +2,7 @@ package pvm.compiler.abstractsyntax.subprog.param;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
+import pvm.compiler.exceptions.CheckFailException;
 
 public abstract class Parametro implements Node {
 	protected String id;
@@ -35,5 +36,10 @@ public abstract class Parametro implements Node {
 	@Override
 	public void vinculaDefPunteros() {
 		this.getTipo().vinculaDefPunteros();
+	}
+	
+	@Override
+	public void chequea() throws CheckFailException {
+		this.getTipo().chequea();
 	}
 }

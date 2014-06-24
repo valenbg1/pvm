@@ -3,27 +3,46 @@ package pvm.compiler;
 import pvm.compiler.lexanalyzer.LexicalUnit;
 
 public class ErrorsHandler {
-   public static void lexicalError(int row, String lex) {
-     System.err.println("ERROR fila "+row+": Caracter inexperado: "+lex); 
-     System.exit(1);
-   }  
-   public static void syntacticError(LexicalUnit lexicalUnit) {
-     System.err.println("ERROR fila "+lexicalUnit.row()+": Elemento inexperado "+lexicalUnit.value+" ("+lexicalUnit.sym+")");
-     System.exit(1);
-   }
-   
-   public static void vinculaUndeclaredId(String id, int row) {
-     System.err.println("ERROR id sin declarar '" + id + "' en la fila " + row);
-     System.exit(1);
-   }
-   
-   public static void vinculaDuplicatedId(String id, int row) {
-     System.err.println("ERROR id duplicado '" + id + "' en la fila: " + row);
-     System.exit(1);
-   }
-   
-   public static void vinculaDuplicatedField(String field, int row) {
-     System.err.println("ERROR campo duplicado '" + field + "' en la fila " + row);
-     System.exit(1);
-   }
+	public static void lexicalError(int row, String lex) {
+		System.err.println("ERROR fila " + row + ": Caracter inexperado: "
+				+ lex);
+		System.exit(1);
+	}
+
+	public static void syntacticError(LexicalUnit lexicalUnit) {
+		System.err.println("ERROR fila " + lexicalUnit.row()
+				+ ": Elemento inexperado " + lexicalUnit.value + " ("
+				+ lexicalUnit.sym + ")");
+		System.exit(1);
+	}
+
+	public static void vinculaUndeclaredId(String id, int row) {
+		System.err.println("ERROR id sin declarar '" + id + "' en la fila " + row);
+		System.exit(1);
+	}
+
+	public static void vinculaDuplicatedId(String id, int row) {
+		System.err.println("ERROR id duplicado '" + id + "' en la fila: " + row);
+		System.exit(1);
+	}
+
+	public static void vinculaDuplicatedField(String field, int row) {
+		System.err.println("ERROR campo duplicado '" + field + "' en la fila " + row);
+		System.exit(1);
+	}
+
+	public static void chequeaIdentificadorNoEsTipo(String id, int row) {
+		System.err.println("ERROR identificador '" + id + "' no es un tipo definido " + row);
+		System.exit(1);
+	}
+	
+	public static void chequeaIdentificadorNoEsSubprograma(String id, int row) {
+		System.err.println("ERROR identificador '" + id + "' no es un subprograma definido " + row);
+		System.exit(1);
+	}
+	
+	public static void error(String error) {
+		System.err.println(error);
+		System.exit(1);
+	}
 }

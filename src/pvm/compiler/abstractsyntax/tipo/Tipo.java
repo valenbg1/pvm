@@ -12,4 +12,5 @@ public abstract class Tipo implements Node {
 	}
 	
 	public abstract void simplificaDefTipos();
+	
 }

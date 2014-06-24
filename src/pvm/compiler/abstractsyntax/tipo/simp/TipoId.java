@@ -2,10 +2,12 @@ package pvm.compiler.abstractsyntax.tipo.simp;
 
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
+import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
 
 public class TipoId extends Tipo {
 	private Node vinculo;
+	private Tipo tipo;
 	private int row;
 	
 	public TipoId(String id, int row) {
@@ -48,6 +50,27 @@ public class TipoId extends Tipo {
 
 	@Override
 	public void vinculaDefPunteros() {
+	}
+
+	@Override
+	public void chequea() {
+		if(!(this.vinculo instanceof DecTipo))
+			ErrorsHandler.chequeaIdentificadorNoEsTipo(this.getId(), this.getRow());
+		
+		this.setTipo(((DecTipo)this.vinculo).getTipo()); 
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+		this.tipo.simplificaDefTipos();
+	}
+
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
 	}
 
 }

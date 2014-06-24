@@ -2,6 +2,7 @@ package pvm.compiler.abstractsyntax.tipo;
 
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class DecTipo implements Node {
 	private String id;
@@ -49,7 +50,7 @@ public class DecTipo implements Node {
 	}
 
 	@Override
-	public void chequea() {
+	public void chequea() throws CheckFailException {
 		this.getTipo().chequea();
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
+import pvm.compiler.exceptions.CheckFailException;
 
 public class SeccionTipos implements Node {
 	private List<DecTipo> dectipos;
@@ -35,5 +36,13 @@ public class SeccionTipos implements Node {
 
 	@Override
 	public void vinculaDefPunteros() {	
+	}
+
+	@Override
+	public void chequea() throws CheckFailException {
+		for(DecTipo dec : this.getDectipos()){
+			dec.chequea();
+			dec.getTipo().simplificaDefTipos();
+		}
 	}
 }
