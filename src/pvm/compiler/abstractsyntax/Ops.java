@@ -10,6 +10,7 @@ import pvm.compiler.abstractsyntax.designador.DesignaPointer;
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.exp.ExpDesignador;
+import pvm.compiler.abstractsyntax.exp.ExpNull;
 import pvm.compiler.abstractsyntax.exp.bin.arithm.Division;
 import pvm.compiler.abstractsyntax.exp.bin.arithm.Modulo;
 import pvm.compiler.abstractsyntax.exp.bin.arithm.Multiplicacion;
@@ -172,6 +173,10 @@ public class Ops {
 		return new ExpFalse();
 	}
 
+	public static Exp expnull() {
+		return new ExpNull();
+	}
+	
 	public static Exp exptrue() {
 		return new ExpTrue();
 	}

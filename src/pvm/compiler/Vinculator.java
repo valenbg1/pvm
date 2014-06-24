@@ -10,6 +10,7 @@ import pvm.compiler.abstractsyntax.designador.DesignaId;
 import pvm.compiler.abstractsyntax.designador.DesignaPointer;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.exp.ExpDesignador;
+import pvm.compiler.abstractsyntax.exp.ExpNull;
 import pvm.compiler.abstractsyntax.exp.bin.ExpBin;
 import pvm.compiler.abstractsyntax.exp.bool.ExpFalse;
 import pvm.compiler.abstractsyntax.exp.bool.ExpTrue;
@@ -95,6 +96,8 @@ public class Vinculator {
 			else if (node instanceof ExpTrue)
 				return;
 			else if (node instanceof ExpFalse)
+				return;
+			else if (node instanceof ExpNull)
 				return;
 			else if (node instanceof ExpNumNat)
 				return;
@@ -189,25 +192,33 @@ public class Vinculator {
 			throw new DuplicatedIdException(node.getId(), node.getRow());
 	}
 
-	private void vinculaDefPunteros(Node node) throws NodeTypeErrorException, DuplicatedIdException, DuplicatedFieldException, UndeclaredIdException {
-		if (node instanceof DecTipo)
-			vinculaDefPunteros(((DecTipo) node).getTipo());
-		else if (node instanceof DecSubprograma)
-			vinculaDefPunterosDecSubprograma((DecSubprograma) node);
-		else if (node instanceof TipoBoolean)
-			return;
-		else if (node instanceof TipoInt)
-			return;
-		else if (node instanceof TipoId)
-			return;
-		else if (node instanceof TipoArray)
-			vinculaDefPunteros(((TipoArray) node).getTipo());
-		else if (node instanceof TipoStruct)
-			vinculaDefPunterosTipoStruct((TipoStruct) node);
-		else if (node instanceof TipoPointer)
-			vinculaDefPunterosTipoPointer((TipoPointer) node);
-		else
-			throw new NodeTypeErrorException(node.getClass().getSimpleName());
+	private void vinculaDefPunteros(Node node) throws NodeTypeErrorException {
+		try {
+			if (node instanceof DecTipo)
+				vinculaDefPunteros(((DecTipo) node).getTipo());
+			else if (node instanceof DecSubprograma)
+				vinculaDefPunterosDecSubprograma((DecSubprograma) node);
+			else if (node instanceof TipoBoolean)
+				return;
+			else if (node instanceof TipoInt)
+				return;
+			else if (node instanceof TipoId)
+				return;
+			else if (node instanceof TipoArray)
+				vinculaDefPunteros(((TipoArray) node).getTipo());
+			else if (node instanceof TipoStruct)
+				vinculaDefPunterosTipoStruct((TipoStruct) node);
+			else if (node instanceof TipoPointer)
+				vinculaDefPunterosTipoPointer((TipoPointer) node);
+			else
+				throw new NodeTypeErrorException(node.getClass().getSimpleName());
+		} catch (UndeclaredIdException e) {
+			ErrorsHandler.vinculaUndeclaredId(e.getId(), e.getRow());
+		} catch (DuplicatedFieldException e) {
+			ErrorsHandler.vinculaUndeclaredId(e.getField(), e.getRow());
+		} catch (DuplicatedIdException e) {
+			ErrorsHandler.vinculaUndeclaredId(e.getId(), e.getRow());
+		}
 	}
 
 	private void vinculaDefPunterosDecSubprograma(DecSubprograma node) throws NodeTypeErrorException, DuplicatedIdException, DuplicatedFieldException, UndeclaredIdException {

@@ -57,6 +57,7 @@ toint = (t|T)(o|O)(i|I)(n|N)(t|T)
 todouble = (t|T)(o|O)(d|D)(o|O)(u|U)(b|B)(l|L)(e|E)
 true = (t|T)(r|R)(u|U)(e|E)
 false = (f|F)(a|A)(l|L)(s|S)(e|E)
+null = (n|N)(u|U)(l|L)(l|L)
 identificador = {letra}({letra}|{digito})*
 mas = \+
 menos = \-
@@ -115,6 +116,7 @@ comentario = #[^\n]*
 {todouble}                {return ops.unidadToDouble();}
 {true}                    {return ops.unidadTrue();}
 {false}                   {return ops.unidadFalse();}
+{null}                    {return ops.unidadNull();}
 {identificador}           {return ops.unidadId();}
 {mas}                     {return ops.unidadMas();}
 {menos}                   {return ops.unidadMenos();}

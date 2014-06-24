@@ -1,5 +1,6 @@
 package pvm.compiler.lexanalyzer;
 
+import java_cup.runtime.Symbol;
 import pvm.compiler.synanalyzer.LexicalClass;
 
 public class LexAnOperations {
@@ -166,6 +167,9 @@ public class LexAnOperations {
   }
   public LexicalUnit unidadFalse() {
      return new LexicalUnit(alex.row(),LexicalClass.FALSE,alex.lex());     
+  }
+  public LexicalUnit unidadNull() {
+     return new LexicalUnit(alex.row(),LexicalClass.NULL,alex.lex());     
   }
   public LexicalUnit unidadEof() {
      return new LexicalUnit(alex.row(),LexicalClass.EOF,"<EOF>"); 

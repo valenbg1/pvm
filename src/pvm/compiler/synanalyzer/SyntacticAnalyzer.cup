@@ -37,7 +37,7 @@ init with {:
 terminal PROGRAM, TYPES, STRUCT, POINTER, VARIABLES, SUBPROGRAMS, SUBPROGRAM, IF, ENDIF, DO, ENDDO, 
          MAS, MENOS, POR, DIV, MOD, AND, OR, NOT, TOINT, TODOUBLE, ASIG, IGUAL, MENOR, MAYOR, MENOROIGUAL, MAYOROIGUAL,
          DISTINTO, PYCOMA, COMA, PAP, PCIERRE, LLAVEAP, LLAVECIERRE, DOSPUNTOS, INT, BOOLEAN, DOUBLE, CAP, CCIERRE,
-         PUNTO, FLECHA, AMP, TRUE, FALSE, ARRAY, READ, WRITE, NEW, DELETE;
+         PUNTO, FLECHA, AMP, TRUE, FALSE, NULL, ARRAY, READ, WRITE, NEW, DELETE;
 terminal String NUMERO_NATURAL, NUMERO_REAL, ID;
 
 non terminal Programa Programa;
@@ -223,6 +223,8 @@ Exp4 ::= TRUE
 	{: RESULT = Ops.exptrue(); :};
 Exp4 ::= FALSE
 	{: RESULT = Ops.expfalse(); :};
+Exp4 ::= NULL
+	{: RESULT = Ops.expnull(); :};
 Exp4 ::= NUMERO_NATURAL: lexDeNN
 	{: RESULT = Ops.numnatural(Ops.tonaturalnum(lexDeNN)); :};
 Exp4 ::= NUMERO_REAL: lexDeNR

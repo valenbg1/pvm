@@ -13,17 +13,17 @@ public class ErrorsHandler {
    }
    
    public static void vinculaUndeclaredId(String id, int row) {
-     System.err.println("ERROR id sin declarar " + id + " en fila: " + row);
+     System.err.println("ERROR id sin declarar '" + id + "' en la fila " + row);
      System.exit(1);
    }
    
    public static void vinculaDuplicatedId(String id, int row) {
-     System.err.println("ERROR id duplicado " + id + " en fila: " + row);
+     System.err.println("ERROR id duplicado '" + id + "' en la fila: " + row);
      System.exit(1);
    }
    
    public static void vinculaDuplicatedField(String field, int row) {
-     System.err.println("ERROR campo duplicado " + field + " en fila: " + row);
+     System.err.println("ERROR campo duplicado '" + field + "' en la fila " + row);
      System.exit(1);
    }
 }
