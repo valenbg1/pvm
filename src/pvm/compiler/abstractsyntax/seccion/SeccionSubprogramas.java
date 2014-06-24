@@ -19,8 +19,8 @@ public class SeccionSubprogramas extends Node {
 
 	@Override
 	public String toString() {
-		if (!childs.isEmpty()) {
-			String ret = "subprogram\n";
+		if (!decsubprogramas.isEmpty()) {
+			String ret = "SUBPROGRAMS\n";
 			
 			for (DecSubprograma decsp : decsubprogramas)
 				ret += "\t" + decsp + ";\n";

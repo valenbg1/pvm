@@ -18,12 +18,12 @@ public class ICond extends Instruccion {
 
 	@Override
 	public String toString() {
-		String ret = "if\n";
+		String ret = "IF\n";
 		
 		for (Caso caso : casos)
-			ret += "\t" + caso + "\n";
+			ret += "\t\t" + caso + "\t[]\n";
 		
-		ret += "endif;";
+		ret += "\tENDIF;";
 		
 		return ret;
 	}

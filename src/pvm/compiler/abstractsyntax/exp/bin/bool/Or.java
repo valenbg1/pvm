@@ -5,6 +5,6 @@ import pvm.compiler.abstractsyntax.exp.bin.ExpBin;
 
 public class Or extends ExpBin {
 	public Or(Exp exp0, Exp exp1) {
-		super(exp0, exp1, "or");
+		super(exp0, exp1, "OR");
 	}
 }

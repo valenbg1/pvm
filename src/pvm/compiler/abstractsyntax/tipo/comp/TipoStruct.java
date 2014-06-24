@@ -26,9 +26,9 @@ public class TipoStruct extends Tipo {
 		String ret = "struct {\n";
 		
 		for (DecTipo dectipo : dectipos)
-			ret += "\t" + dectipo + ";\n";
+			ret += "\t\t" + dectipo + "\n";
 		
-		ret += "};";
+		ret += "\t}";
 		
 		return ret;
 	}

@@ -16,7 +16,7 @@ public class INew extends Instruccion {
 
 	@Override
 	public String toString() {
-		return "new " + desig + ";";
+		return "NEW " + desig + ";";
 	}
 	
 	public Designador getDesig() {

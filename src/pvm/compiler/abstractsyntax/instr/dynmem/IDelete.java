@@ -16,7 +16,7 @@ public class IDelete extends Instruccion {
 
 	@Override
 	public String toString() {
-		return "delete " + desig + ";";
+		return "DELETE " + desig + ";";
 	}
 
 	public Designador getDesig() {

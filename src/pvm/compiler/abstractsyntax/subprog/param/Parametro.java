@@ -20,7 +20,7 @@ public abstract class Parametro extends Node {
 
 	@Override
 	public String toString() {
-		return id + " : " + tipo;
+		return id + ": " + tipo;
 	}
 
 	public String getId() {

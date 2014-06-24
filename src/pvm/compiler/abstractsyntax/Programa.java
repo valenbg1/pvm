@@ -46,9 +46,9 @@ public class Programa extends Node {
 
 	@Override
 	public String toString() {
-		String ret = "program ";
+		String ret = "PROGRAM\n";
 
-		ret += "\n" + sectipos + "\n" + secvars + "\n" + secsubprogs + "\n{\n";
+		ret += sectipos + "\n" + secvars + "\n" + secsubprogs + "\n{\n";
 
 		for (Instruccion instr : instrs)
 			ret += "\t" + instr + "\n";

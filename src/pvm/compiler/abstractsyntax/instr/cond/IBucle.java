@@ -18,12 +18,12 @@ public class IBucle extends Instruccion {
 
 	@Override
 	public String toString() {
-		String ret = "do\n";
+		String ret = "DO\n";
 		
 		for (Caso caso : casos)
-			ret += "\t" + caso + "\n";
+			ret += "\t\t" + caso + "\t[]\n";
 		
-		ret += "enddo;";
+		ret += "\tENDDO;";
 		
 		return ret;
 	}

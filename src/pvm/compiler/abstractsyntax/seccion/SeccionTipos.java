@@ -19,11 +19,11 @@ public class SeccionTipos extends Node {
 
 	@Override
 	public String toString() {
-		if (!childs.isEmpty()) {
-			String ret = "types\n";
+		if (!dectipos.isEmpty()) {
+			String ret = "TYPES\n";
 			
 			for (DecTipo dectipo : dectipos)
-				ret += "\t" + dectipo + ";\n";
+				ret += "\t" + dectipo + "\n";
 			
 			return ret;
 		} else

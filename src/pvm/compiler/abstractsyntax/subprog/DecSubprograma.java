@@ -40,13 +40,12 @@ public class DecSubprograma extends Node {
 
 	@Override
 	public String toString() {
-		String ret = "subprogram " + id + "(";
+		String ret = "SUBPROGRAM " + id + "(";
 		
 		for (Parametro param : params)
 			ret += param + ", ";
 		
-		ret = ret.subSequence(0, ret.length()-2).toString();
-		ret += ")\n" + sectipos + "\n" + secvars + "\n" + secsubprogs + "\n{\n";
+		ret += ")\n\t" + sectipos + "\n\t" + secvars + "\n\t" + secsubprogs + "{\n";
 		
 		for (Instruccion instr : instrs)
 			ret += "\t" + instr + "\n";

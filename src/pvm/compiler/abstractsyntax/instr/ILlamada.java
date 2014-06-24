@@ -31,8 +31,6 @@ public class ILlamada extends Instruccion {
 		for (Exp arg : args)
 			args_s += arg + ", ";
 		
-		args_s = args_s.subSequence(0, args_s.length()-2).toString();
-		
 		return id + "(" + args_s + ")" + ";";
 	}
 

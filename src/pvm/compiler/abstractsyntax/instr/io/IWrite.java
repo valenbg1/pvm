@@ -16,7 +16,7 @@ public class IWrite extends Instruccion {
 
 	@Override
 	public String toString() {
-		return "write " + exp + ";";
+		return "WRITE " + exp + ";";
 	}
 
 	public Exp getExp() {

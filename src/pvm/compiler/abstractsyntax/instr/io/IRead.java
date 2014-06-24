@@ -16,7 +16,7 @@ public class IRead extends Instruccion {
 
 	@Override
 	public String toString() {
-		return "read " + desig + ";";
+		return "READ " + desig + ";";
 	}
 	
 	public Designador getDesig() {

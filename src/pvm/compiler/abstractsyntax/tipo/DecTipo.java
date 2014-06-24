@@ -19,7 +19,7 @@ public class DecTipo extends Node {
 
 	@Override
 	public String toString() {
-		return id + " : " + tipo + ";";
+		return id + ": " + tipo + ";";
 	}
 
 	public String getId() {

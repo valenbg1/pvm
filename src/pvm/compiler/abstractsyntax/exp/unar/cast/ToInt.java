@@ -5,6 +5,6 @@ import pvm.compiler.abstractsyntax.exp.unar.ExpUnaria;
 
 public class ToInt extends ExpUnaria {
 	public ToInt(Exp exp) {
-		super(exp, "toint");
+		super(exp, "TOINT");
 	}
 }

@@ -9,6 +9,6 @@ public class ExpFalse extends Exp {
 
 	@Override
 	public String toString() {
-		return "false";
+		return "FALSE";
 	}
 }

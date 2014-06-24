@@ -5,6 +5,6 @@ import pvm.compiler.abstractsyntax.exp.unar.ExpUnaria;
 
 public class ToDouble extends ExpUnaria {
 	public ToDouble(Exp exp) {
-		super(exp, "todouble");
+		super(exp, "TODOUBLE");
 	}
 }

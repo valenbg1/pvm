@@ -19,11 +19,11 @@ public class SeccionVariables extends Node {
 
 	@Override
 	public String toString() {
-		if (!childs.isEmpty()) {
-			String ret = "variables\n";
+		if (!dectipos.isEmpty()) {
+			String ret = "VARIABLES\n";
 			
 			for (DecTipo dectipo : dectipos)
-				ret += "\t" + dectipo + ";\n";
+				ret += "\t" + dectipo + "\n";
 			
 			return ret;
 		} else

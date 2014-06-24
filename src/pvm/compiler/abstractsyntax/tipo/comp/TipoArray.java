@@ -19,7 +19,7 @@ public class TipoArray extends Tipo {
 
 	@Override
 	public String toString() {
-		return "array " + tipo + "[" + num + "]";
+		return "ARRAY " + tipo + "[" + num + "]";
 	}
 
 	public int getNum() {

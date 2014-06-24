@@ -21,7 +21,7 @@ public abstract class ExpBin extends Exp {
 
 	@Override
 	public String toString() {
-		return exp0 + " " + op + " " + exp1;
+		return "(" + exp0 + " " + op + " " + exp1 + ")";
 	}
 
 	public String getOp() {

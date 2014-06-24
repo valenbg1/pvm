@@ -18,7 +18,7 @@ public abstract class ExpUnaria extends Exp {
 
 	@Override
 	public String toString() {
-		return op + " " + exp;
+		return "(" + op + " " + exp + ")";
 	}
 
 	public String getOp() {
