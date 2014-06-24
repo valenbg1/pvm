@@ -12,7 +12,7 @@ import pvm.compiler.abstractsyntax.tipo.Tipo;
 public class TipoStruct extends Tipo {
 	private List<DecTipo> dectipos;
 	
-	private Map<String, Node> campos;
+	private Map<String, DecTipo> campos;
 	
 	public TipoStruct(List<DecTipo> dectipos) {
 		this.dectipos = dectipos;
@@ -34,17 +34,17 @@ public class TipoStruct extends Tipo {
 		return dectipos;
 	}
 
-	public Map<String, Node> getCampos() {
+	public Map<String, DecTipo> getCampos() {
 		return campos;
 	}
 
-	public void setCampos(Map<String, Node> campos) {
+	public void setCampos(Map<String, DecTipo> campos) {
 		this.campos = campos;
 	}
 
 	@Override
 	public void vincula() {
-		this.setCampos(new HashMap<String, Node>());
+		this.setCampos(new HashMap<String, DecTipo>());
 		
 		for (DecTipo campo : this.getDectipos()) {
 			if (this.getCampos().containsKey(campo.getId())){
@@ -61,5 +61,19 @@ public class TipoStruct extends Tipo {
 	public void vinculaDefPunteros() {
 		for (DecTipo dectipo : this.getDectipos())
 			dectipo.getTipo().vinculaDefPunteros();
+	}
+
+	@Override
+	public void chequea() {
+		for(Node campo : this.getCampos().values()){
+			campo.chequea();
+		}
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+		for(DecTipo campo : this.getCampos().values()){
+			campo.getTipo().simplificaDefTipos();
+		}
 	}
 }

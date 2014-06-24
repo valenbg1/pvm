@@ -126,4 +126,24 @@ public class DecSubprograma implements Node {
 		for (Parametro param : this.getParams())
 			param.getTipo().vinculaDefPunteros();
 	}
+
+	@Override
+	public void chequea() {
+		for(Parametro param : this.getParams())
+			param.chequea();
+		
+		for(DecTipo dec : this.getSectipos().getDectipos()){
+			dec.chequea();
+			dec.getTipo().simplificaDefTipos();
+		}
+		
+		for(DecTipo dec : this.getSecvars().getDectipos()){
+			dec.chequea();
+			dec.getTipo().simplificaDefTipos();
+		}
+		
+		for(Instruccion inst : this.getInstrs()){
+			inst.chequea();
+		}
+	}
 }

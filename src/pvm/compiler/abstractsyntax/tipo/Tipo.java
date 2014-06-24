@@ -10,4 +10,6 @@ public abstract class Tipo implements Node {
 	@Override
 	public void vinculaDefPunteros()  {		
 	}
+	
+	public abstract void simplificaDefTipos();
 }

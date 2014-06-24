@@ -8,4 +8,12 @@ public class TipoDouble extends Tipo {
 		return "double";
 	}
 
+	@Override
+	public void chequea() {
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+	}
+
 }

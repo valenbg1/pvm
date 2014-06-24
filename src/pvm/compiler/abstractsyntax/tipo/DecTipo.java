@@ -47,4 +47,9 @@ public class DecTipo implements Node {
 	public void vinculaDefPunteros() {
 		this.getTipo().vinculaDefPunteros();		
 	}
+
+	@Override
+	public void chequea() {
+		this.getTipo().chequea();
+	}
 }

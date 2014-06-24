@@ -8,4 +8,6 @@ public interface Node {
 	public abstract String toString();
 	public abstract void vincula();
 	public abstract void vinculaDefPunteros();
+	
+	public abstract void chequea();
 }

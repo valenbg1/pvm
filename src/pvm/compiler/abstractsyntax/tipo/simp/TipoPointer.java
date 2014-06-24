@@ -51,4 +51,9 @@ public class TipoPointer extends Tipo {
 			this.getTipo().vinculaDefPunteros();
 		
 	}
+
+	@Override
+	public void chequea() {
+		this.getTipo().chequea();
+	}
 }

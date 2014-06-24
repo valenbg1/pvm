@@ -7,5 +7,13 @@ public class TipoBoolean extends Tipo {
 	public String toString() {
 		return "boolean";
 	}
+
+	@Override
+	public void chequea() {
+	}
+
+	@Override
+	public void simplificaDefTipos() {	
+	}
 	
 }

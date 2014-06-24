@@ -22,17 +22,27 @@ public class TipoArray extends Tipo {
 		return num;
 	}
 
-	public Tipo getTipo() {
+	public Tipo getTipoBase() {
 		return tipo;
 	}
 
 	@Override
 	public void vincula() {
-		this.getTipo().vincula();
+		this.getTipoBase().vincula();
 	}
 
 	@Override
 	public void vinculaDefPunteros() {
-		this.getTipo().vinculaDefPunteros();
+		this.getTipoBase().vinculaDefPunteros();
+	}
+
+	@Override
+	public void chequea() {
+		this.getTipoBase().chequea();
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+		this.getTipoBase().simplificaDefTipos();
 	}
 }

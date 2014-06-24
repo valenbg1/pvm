@@ -7,6 +7,7 @@ import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
 import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
+import pvm.compiler.abstractsyntax.subprog.param.Parametro;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 
 public class Programa implements Node {
@@ -78,12 +79,32 @@ public class Programa implements Node {
 		
 		for (Instruccion instr : this.getInstrs())
 			instr.vincula();
-			
-	
 		
 	}
 
 	@Override
 	public void vinculaDefPunteros(){		
+	}
+
+	@Override
+	public void chequea() {
+		this.getSectipos().chequea();
+		
+		for(DecTipo dec : this.getSectipos().getDectipos()){
+			dec.getTipo().simplificaDefTipos();
+		}
+		
+		for(DecTipo dec : this.getSecvars().getDectipos()){
+			dec.getTipo().simplificaDefTipos();
+		}
+		
+		for(DecSubprograma dec: this.getSecsubprogs().getDecsubprogramas()){
+			for(Parametro param : dec.getParams())
+				param.getTipo().simplificaDefTipos();
+		}
+		
+		for(Instruccion inst : this.getInstrs()){
+			inst.chequea();
+		}
 	}
 }

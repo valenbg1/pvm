@@ -49,4 +49,5 @@ public class TipoId extends Tipo {
 	@Override
 	public void vinculaDefPunteros() {
 	}
+
 }
