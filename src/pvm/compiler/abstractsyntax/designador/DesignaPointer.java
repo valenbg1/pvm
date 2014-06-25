@@ -1,16 +1,25 @@
 package pvm.compiler.abstractsyntax.designador;
 
+import pvm.compiler.ErrorsHandler;
+
 
 public class DesignaPointer extends Designador {
 	private Designador desig;
 	
-	public DesignaPointer(Designador desig, int vinculo_row) {
+	public DesignaPointer(Designador desig, int row) {
 		this.desig = desig;
+		this.row = row;
 	}
 
 	@Override
-	public String toString() {
-		return desig + "->";
+	public void chequea() {
+		desig.chequea();
+		
+		if ((desig.getTipo_infer() != null) &&
+				(desig.getTipo_infer().esPointer()))
+			tipo_infer = desig.getTipo_infer().getTipo_infer();
+		else
+			ErrorsHandler.chequeaDesignadorNoEsDeTipo("pointer", desig, row);
 	}
 
 	public Designador getDesig() {
@@ -18,11 +27,12 @@ public class DesignaPointer extends Designador {
 	}
 
 	@Override
-	public void vincula() {
-		this.getDesig().vincula();
+	public String toString() {
+		return desig + "->";
 	}
 
 	@Override
-	public void vinculaDefPunteros() {
+	public void vincula() {
+		desig.vincula();
 	}
 }

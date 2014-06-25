@@ -1,5 +1,7 @@
 package pvm.compiler;
 
+import pvm.compiler.abstractsyntax.designador.Designador;
+import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.lexanalyzer.LexicalUnit;
 
 public class ErrorsHandler {
@@ -36,8 +38,43 @@ public class ErrorsHandler {
 		System.exit(1);
 	}
 	
+	public static void chequeaDesignadorNoEsDeTipo(String tipo, Designador desig, int row) {
+		System.err.println("ERROR designador '" + desig + "' no es de tipo " + tipo + " en la fila " + row);
+		System.exit(1);
+	}
+	
+	public static void chequeaExpresionNoEsDeTipo(String tipo, Exp exp, int row) {
+		System.err.println("ERROR expresion '" + exp + "' no es de tipo " + tipo + " en la fila " + row);
+		System.exit(1);
+	}
+	
+	public static void chequeaIdentificadorNoDeEsTipo(String tipo, String id, int row) {
+		System.err.println("ERROR identificador '" + id + "' no es de tipo " + tipo + " en la fila " + row);
+		System.exit(1);
+	}
+	
+	public static void chequeaTiposNoAritmeticos(Exp exp, int row) {
+		System.err.println("ERROR los tipos en '" + exp + "' no son aritmeticos en la fila " + row);
+		System.exit(1);
+	}
+	
+	public static void chequeaTiposNoComparables(Exp exp, int row) {
+		System.err.println("ERROR los tipos en '" + exp + "' no son comparables en la fila " + row);
+		System.exit(1);
+	}
+	
+	public static void chequeaTiposNoBooleanos(Exp exp, int row) {
+		System.err.println("ERROR los tipos en '" + exp + "' no son booleanos en la fila " + row);
+		System.exit(1);
+	}
+	
+	public static void chequeaCampoNoExiste(String campo, Designador desig, int row) {
+		System.err.println("ERROR campo '" + campo + "' no existe en " + desig + " en la fila " + row);
+		System.exit(1);
+	}
+	
 	public static void chequeaIdentificadorNoEsSubprograma(String id, int row) {
-		System.err.println("ERROR identificador '" + id + "' no es un subprograma definido " + row);
+		System.err.println("ERROR identificador '" + id + "' no es un subprograma definido" + " en la fila " + row);
 		System.exit(1);
 	}
 	

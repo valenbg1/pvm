@@ -107,7 +107,7 @@ DecVariables ::= DecVariables: aDeDVS1 PYCOMA DecVariable: aDeDV
 DecVariables ::= DecVariable: aDeDV
 	{: RESULT = Ops.dectipossimp(aDeDV); :};
 DecVariable ::= ID: lexDeID DOSPUNTOS Tipo: aDeTipo
-	{: RESULT = Ops.dectipostring(lexDeID, aDeTipo, parser.getLexAn().row()); :};
+	{: RESULT = Ops.dectipostringvar(lexDeID, aDeTipo, parser.getLexAn().row()); :};
 
 DecSubprogramas ::= DecSubprogramas: aDeDSPS1 PYCOMA DecSubprograma: aDeDSP
 	{: RESULT = Ops.decsubprogramacomp(aDeDSPS1, aDeDSP); :};

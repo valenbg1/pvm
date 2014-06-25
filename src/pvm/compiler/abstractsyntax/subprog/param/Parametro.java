@@ -4,7 +4,7 @@ import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
 import pvm.compiler.exceptions.CheckFailException;
 
-public abstract class Parametro implements Node {
+public abstract class Parametro extends Node {
 	protected String id;
 	
 	protected Tipo tipo;
@@ -13,6 +13,11 @@ public abstract class Parametro implements Node {
 		this.id = id;
 		
 		this.tipo = tipo;
+	}
+	
+	@Override
+	public boolean esParametro() {
+		return true;
 	}
 
 	@Override
@@ -39,7 +44,7 @@ public abstract class Parametro implements Node {
 	}
 	
 	@Override
-	public void chequea() throws CheckFailException {
+	public void chequea() {
 		this.getTipo().chequea();
 	}
 }

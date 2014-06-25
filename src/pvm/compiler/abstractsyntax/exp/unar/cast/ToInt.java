@@ -1,12 +1,10 @@
 package pvm.compiler.abstractsyntax.exp.unar.cast;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.exp.unar.ExpUnaria;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
-import pvm.compiler.abstractsyntax.tipo.simp.TipoBoolean;
-import pvm.compiler.abstractsyntax.tipo.simp.TipoDouble;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoInt;
-import pvm.compiler.exceptions.CheckFailException;
 
 public class ToInt extends ExpUnaria {
 	public ToInt(Exp exp) {
@@ -14,14 +12,15 @@ public class ToInt extends ExpUnaria {
 	}
 
 	@Override
-	public void chequea() throws CheckFailException {
-		if((exp.getTipo() != TipoDouble.TIPO)  &&
-				   (exp.getTipo() != TipoInt.TIPO))
-			throw new CheckFailException("casting de tipo "+exp.getTipo()+ " a int no soportado");
+	protected void errorTiposNoValidos() {
+		ErrorsHandler.chequeaTiposNoAritmeticos(this, row);
 	}
 	
 	@Override
-	public Tipo getTipo() {
-		return TipoInt.TIPO;
+	protected Tipo operacionValida() {
+		if (exp.getTipo_infer().esInt() || exp.getTipo_infer().esDouble())
+			return new TipoInt();
+		
+		return null;
 	}
 }

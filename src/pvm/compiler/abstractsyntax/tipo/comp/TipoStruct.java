@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import pvm.compiler.ErrorsHandler;
-import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
-import pvm.compiler.exceptions.CheckFailException;
 
 public class TipoStruct extends Tipo {
 	private List<DecTipo> dectipos;
@@ -17,6 +15,37 @@ public class TipoStruct extends Tipo {
 	
 	public TipoStruct(List<DecTipo> dectipos) {
 		this.dectipos = dectipos;
+	}
+
+	@Override
+	public void chequea() {
+		for (DecTipo dectipo : dectipos)
+			dectipo.getTipo_infer().chequea();
+	}
+
+	@Override
+	public boolean esStruct() {
+		return true;
+	}
+
+	public Map<String, DecTipo> getCampos() {
+		return campos;
+	}
+
+	public List<DecTipo> getDectipos() {
+		return dectipos;
+	}
+
+	public void setCampos(Map<String, DecTipo> campos) {
+		this.campos = campos;
+	}
+
+	@Override
+	public Tipo tipoSimplificado() {
+		for (DecTipo dectipo : dectipos)
+			dectipo.setTipo_infer(dectipo.getTipo_infer().tipoSimplificado());
+		
+		return this;
 	}
 
 	@Override
@@ -31,65 +60,23 @@ public class TipoStruct extends Tipo {
 		return ret;
 	}
 
-	public List<DecTipo> getDectipos() {
-		return dectipos;
-	}
-
-	public Map<String, DecTipo> getCampos() {
-		return campos;
-	}
-
-	public void setCampos(Map<String, DecTipo> campos) {
-		this.campos = campos;
-	}
-
 	@Override
 	public void vincula() {
 		this.setCampos(new HashMap<String, DecTipo>());
 		
-		for (DecTipo campo : this.getDectipos()) {
-			if (this.getCampos().containsKey(campo.getId())){
+		for (DecTipo campo : dectipos) {
+			if (campos.containsKey(campo.getId()))
 				ErrorsHandler.vinculaDuplicatedField(campo.getId(), campo.getRow());
-				return;
-			}else
-				this.getCampos().put(campo.getId(), campo);
+			else
+				campos.put(campo.getId(), campo);
 			
-			campo.getTipo().vincula();
+			campo.getTipo_infer().vincula();
 		}
 	}
 
 	@Override
 	public void vinculaDefPunteros() {
-		for (DecTipo dectipo : this.getDectipos())
-			dectipo.getTipo().vinculaDefPunteros();
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		for(Node campo : this.getCampos().values()){
-			campo.chequea();
-		}
-	}
-
-	@Override
-	public void simplificaDefTipos() {
-		for(DecTipo campo : this.getCampos().values()){
-			campo.getTipo().simplificaDefTipos();
-		}
-	}
-
-	@Override
-	public boolean esNumero() {
-		return false;
-	}
-
-	@Override
-	public boolean esBooleano() {
-		return false;
-	}
-
-	@Override
-	public boolean esEntradaSalida() {
-		return false;
+		for (DecTipo dectipo : dectipos)
+			dectipo.getTipo_infer().vinculaDefPunteros();
 	}
 }

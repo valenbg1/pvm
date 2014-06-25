@@ -1,6 +1,5 @@
 package pvm.compiler.lexanalyzer;
 
-import java_cup.runtime.Symbol;
 import pvm.compiler.synanalyzer.LexicalClass;
 
 public class LexAnOperations {

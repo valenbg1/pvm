@@ -1,23 +1,26 @@
 package pvm.compiler.abstractsyntax.designador;
 
 import pvm.compiler.ErrorsHandler;
-import pvm.compiler.abstractsyntax.Node;
 
 public class DesignaId extends Designador {
-	private Node vinculo;
-	
 	private String id;
-	
-	private int row;
 	
 	public DesignaId(String id, int row) {
 		this.row = row;
 		
 		this.id = id;
 	}
-	
-	public Node getVinculo() {
-		return vinculo;
+
+	@Override
+	public void chequea() {
+		if (!vinculo.esVariable() || !vinculo.esParametro())
+			ErrorsHandler.chequeaIdentificadorNoDeEsTipo("param o var", id, row);
+		
+		tipo_infer = vinculo.getTipo_infer();
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	@Override
@@ -25,27 +28,11 @@ public class DesignaId extends Designador {
 		return id;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public int getRow() {
-		return row;
-	}
-
-	public void setVinculo(Node vinculo) {
-		this.vinculo = vinculo;
-	}
-
 	@Override
 	public void vincula() {
-		this.setVinculo(sym_t.declaracion(this.getId()));
+		vinculo = sym_t.declaracion(id);
 		
-		if (this.getVinculo() == null)
-			ErrorsHandler.vinculaUndeclaredId(this.getId(), this.getRow());
-	}
-
-	@Override
-	public void vinculaDefPunteros() {	
+		if (vinculo == null)
+			ErrorsHandler.vinculaUndeclaredId(id, row);
 	}
 }

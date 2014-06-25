@@ -1,8 +1,11 @@
 package pvm.compiler.abstractsyntax.designador;
 
 import pvm.compiler.abstractsyntax.Node;
-import pvm.compiler.abstractsyntax.tipo.Tipo;
 
-public abstract class Designador implements Node {
-	public abstract Tipo getTipo();
+public abstract class Designador extends Node {
+	@Override
+	public void simplificaDefTipos() {}
+	
+	@Override
+	public void vinculaDefPunteros() {}
 }

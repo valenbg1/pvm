@@ -148,6 +148,10 @@ public class Ops {
 	public static DecTipo dectipostring(String lexDeID, Tipo aDeTipo, int row) {
 		return new DecTipo(lexDeID, aDeTipo, row);
 	}
+	
+	public static DecTipo dectipostringvar(String lexDeID, Tipo aDeTipo, int row) {
+		return DecTipo.DecTipoVar(lexDeID, aDeTipo, row);
+	}
 
 	public static Designador designaarray(Designador aDeDesig1, Exp aDeExp0, int row) {
 		return new DesignaArray(aDeDesig1, aDeExp0, row);

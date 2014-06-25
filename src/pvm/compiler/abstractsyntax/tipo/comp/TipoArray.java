@@ -1,64 +1,49 @@
 package pvm.compiler.abstractsyntax.tipo.comp;
 
 import pvm.compiler.abstractsyntax.tipo.Tipo;
-import pvm.compiler.exceptions.CheckFailException;
 
 public class TipoArray extends Tipo {
 	private int num;
 	
-	private Tipo tipo;
-	
 	public TipoArray(Tipo tipo, int num) {
 		this.num = num;
 		
-		this.tipo = tipo;
+		this.tipo_infer = tipo;
 	}
 
 	@Override
-	public String toString() {
-		return "ARRAY " + tipo + "[" + num + "]";
+	public void chequea() {
+		tipo_infer.chequea();
+	}
+
+	@Override
+	public boolean esArray() {
+		return true;
 	}
 
 	public int getNum() {
 		return num;
 	}
 
-	public Tipo getTipoBase() {
-		return tipo;
+	@Override
+	public Tipo tipoSimplificado() {
+		tipo_infer = tipo_infer.tipoSimplificado();
+		
+		return this;
 	}
 
 	@Override
+	public String toString() {
+		return "ARRAY " + tipo_infer + "[" + num + "]";
+	}
+	
+	@Override
 	public void vincula() {
-		this.getTipoBase().vincula();
+		tipo_infer.vincula();
 	}
 
 	@Override
 	public void vinculaDefPunteros() {
-		this.getTipoBase().vinculaDefPunteros();
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		this.getTipoBase().chequea();
-	}
-
-	@Override
-	public void simplificaDefTipos() {
-		this.getTipoBase().simplificaDefTipos();
-	}
-
-	@Override
-	public boolean esNumero() {
-		return false;
-	}
-
-	@Override
-	public boolean esBooleano() {
-		return false;
-	}
-
-	@Override
-	public boolean esEntradaSalida() {
-		return false;
+		tipo_infer.vinculaDefPunteros();
 	}
 }

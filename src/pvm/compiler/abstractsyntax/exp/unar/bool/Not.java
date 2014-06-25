@@ -1,9 +1,10 @@
 package pvm.compiler.abstractsyntax.exp.unar.bool;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.exp.unar.ExpUnaria;
+import pvm.compiler.abstractsyntax.tipo.Tipo;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoBoolean;
-import pvm.compiler.exceptions.CheckFailException;
 
 public class Not extends ExpUnaria {
 	public Not(Exp exp) {
@@ -11,8 +12,15 @@ public class Not extends ExpUnaria {
 	}
 
 	@Override
-	public void chequea() throws CheckFailException {
-		if(getExp().getTipo() != TipoBoolean.TIPO)
-			throw new CheckFailException("Expected type "+TipoBoolean.TIPO.toString());
+	protected void errorTiposNoValidos() {
+		ErrorsHandler.chequeaTiposNoBooleanos(this, row);
+	}
+	
+	@Override
+	protected Tipo operacionValida() {
+		if (exp.getTipo_infer().esBooleano())
+			return new TipoBoolean();
+		
+		return null;
 	}
 }

@@ -1,7 +1,6 @@
 package pvm.compiler.abstractsyntax.exp.num;
 
 import pvm.compiler.abstractsyntax.exp.Exp;
-import pvm.compiler.abstractsyntax.tipo.Tipo;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoDouble;
 
 public class ExpNumReal extends Exp {
@@ -12,8 +11,8 @@ public class ExpNumReal extends Exp {
 	}
 
 	@Override
-	public String toString() {
-		return Double.toString(numreal);
+	public void chequea() {
+		tipo_infer = new TipoDouble();
 	}
 
 	public double getNumReal() {
@@ -21,12 +20,10 @@ public class ExpNumReal extends Exp {
 	}
 
 	@Override
-	public void chequea() {
+	public String toString() {
+		return Double.toString(numreal);
 	}
 
 	@Override
-	public Tipo getTipo() {
-		return TipoDouble.TIPO;
-	}
-
+	public void vincula() {}
 }

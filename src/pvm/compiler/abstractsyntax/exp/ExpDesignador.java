@@ -1,8 +1,6 @@
 package pvm.compiler.abstractsyntax.exp;
 
 import pvm.compiler.abstractsyntax.designador.Designador;
-import pvm.compiler.abstractsyntax.tipo.Tipo;
-import pvm.compiler.exceptions.CheckFailException;
 
 public class ExpDesignador extends Exp {
 	private Designador desig;
@@ -12,8 +10,10 @@ public class ExpDesignador extends Exp {
 	}
 
 	@Override
-	public String toString() {
-		return desig.toString();
+	public void chequea() {
+		desig.chequea();
+		
+		tipo_infer = desig.getTipo_infer();
 	}
 
 	public Designador getDesig() {
@@ -21,22 +21,12 @@ public class ExpDesignador extends Exp {
 	}
 
 	@Override
+	public String toString() {
+		return desig.toString();
+	}
+
+	@Override
 	public void vincula() {
-		this.getDesig().vincula();
-	}
-
-	@Override
-	public void vinculaDefPunteros() {
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Tipo getTipo() {
-		return getDesig().getTipo();
+		desig.vincula();
 	}
 }

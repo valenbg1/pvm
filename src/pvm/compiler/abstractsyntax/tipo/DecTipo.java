@@ -2,55 +2,64 @@ package pvm.compiler.abstractsyntax.tipo;
 
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
-import pvm.compiler.exceptions.CheckFailException;
 
-public class DecTipo implements Node {
+public class DecTipo extends Node {
+	public static DecTipo DecTipoVar(String id, Tipo tipo, int row) {
+		return new DecTipo(id, tipo, row, true);
+	}
+	
 	private String id;
 	
-	private Tipo tipo;
-	
-	private int row;
+	private boolean esVariable;
 	
 	public DecTipo(String id, Tipo tipo, int row) {
+		this(id, tipo, row, false);
+	}
+	
+	private DecTipo(String id, Tipo tipo, int row, boolean esVariable) {
 		this.id = id;
 		
 		this.row = row;
 		
-		this.tipo = tipo;
+		this.tipo_infer = tipo;
+		
+		this.esVariable = esVariable;
+	}
+	
+	@Override
+	public void chequea() {
+		tipo_infer.chequea();
 	}
 
 	@Override
-	public String toString() {
-		return id + ": " + tipo + ";";
+	public boolean esVariable() {
+		return esVariable;
 	}
 
 	public String getId() {
 		return id;
 	}
 
-	public Tipo getTipo() {
-		return tipo;
+	@Override
+	public void simplificaDefTipos() {
+		tipo_infer = tipo_infer.tipoSimplificado();
 	}
 
-	public int getRow() {
-		return row;
+	@Override
+	public String toString() {
+		return id + ": " + tipo_infer + ";";
 	}
 
 	@Override
 	public void vincula()  {
-		this.getTipo().vincula();
+		tipo_infer.vincula();
 		
-		if (!sym_t.insertaId(this.getId(), this.getTipo()))
-			ErrorsHandler.vinculaDuplicatedId(this.getId(), this.getRow());
+		if (!sym_t.insertaId(this.getId(), tipo_infer))
+			ErrorsHandler.vinculaDuplicatedId(id, row);
 	}
 
 	@Override
 	public void vinculaDefPunteros() {
-		this.getTipo().vinculaDefPunteros();		
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		this.getTipo().chequea();
+		tipo_infer.vinculaDefPunteros();		
 	}
 }

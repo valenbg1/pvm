@@ -41,7 +41,7 @@ public class IAsig extends Instruccion {
 		this.getDesig().chequea();
 		this.getExp().chequea();
 		
-		if(this.getDesig().getTipo() != this.getExp().getTipo())
-			throw new CheckFailException("asignación, tipo no coincide, se esperaba "+this.getDesig().getTipo());
+		if(this.getDesig().getTipo_infer() != this.getExp().getTipo())
+			throw new CheckFailException("asignación, tipo no coincide, se esperaba "+this.getDesig().getTipo_infer());
 	}
 }

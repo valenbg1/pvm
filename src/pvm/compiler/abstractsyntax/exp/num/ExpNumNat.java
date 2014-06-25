@@ -1,7 +1,6 @@
 package pvm.compiler.abstractsyntax.exp.num;
 
 import pvm.compiler.abstractsyntax.exp.Exp;
-import pvm.compiler.abstractsyntax.tipo.Tipo;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoInt;
 
 public class ExpNumNat extends Exp {
@@ -12,8 +11,8 @@ public class ExpNumNat extends Exp {
 	}
 
 	@Override
-	public String toString() {
-		return Integer.toString(numnat);
+	public void chequea() {
+		tipo_infer = new TipoInt();
 	}
 
 	public int getNumNat() {
@@ -21,12 +20,10 @@ public class ExpNumNat extends Exp {
 	}
 
 	@Override
-	public void chequea() {
+	public String toString() {
+		return Integer.toString(numnat);
 	}
 
 	@Override
-	public Tipo getTipo() {
-		return TipoInt.TIPO;
-	}
-
+	public void vincula() {}
 }

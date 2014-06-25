@@ -12,7 +12,7 @@ import pvm.compiler.abstractsyntax.subprog.param.Parametro;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.compiler.exceptions.CheckFailException;
 
-public class DecSubprograma implements Node {
+public class DecSubprograma extends Node {
 	private String id;
 	
 	private int row;
@@ -129,7 +129,7 @@ public class DecSubprograma implements Node {
 	}
 
 	@Override
-	public void chequea() throws CheckFailException {
+	public void chequea() {
 		for(Parametro param : this.getParams()){
 			param.chequea();
 			param.getTipo().simplificaDefTipos();
@@ -148,5 +148,11 @@ public class DecSubprograma implements Node {
 		for(Instruccion inst : this.getInstrs()){
 			inst.chequea();
 		}
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+		// TODO Auto-generated method stub
+		
 	}
 }

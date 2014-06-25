@@ -4,14 +4,28 @@ import java.util.List;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
-import pvm.compiler.abstractsyntax.subprog.param.Parametro;
-import pvm.compiler.exceptions.CheckFailException;
 
-public class SeccionSubprogramas implements Node {
+public class SeccionSubprogramas extends Node {
 	private List<DecSubprograma> decsubprogramas;
 	
 	public SeccionSubprogramas(List<DecSubprograma> decsubprogramas) {
 		this.decsubprogramas = decsubprogramas;
+	}
+
+	@Override
+	public void chequea() {
+		for(DecSubprograma decsubprogram: decsubprogramas)
+			decsubprogram.chequea();
+	}
+
+	public List<DecSubprograma> getDecsubprogramas() {
+		return decsubprogramas;
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+		for(DecSubprograma decsubprogram: decsubprogramas)
+			decsubprogram.simplificaDefTipos();
 	}
 
 	@Override
@@ -27,22 +41,15 @@ public class SeccionSubprogramas implements Node {
 			return "";
 	}
 
-	public List<DecSubprograma> getDecsubprogramas() {
-		return decsubprogramas;
+	@Override
+	public void vincula() {
+		for (DecSubprograma decsubprogram : decsubprogramas)
+			decsubprogram.vincula();
 	}
 
 	@Override
-	public void vincula() {	
-	}
-
-	@Override
-	public void vinculaDefPunteros() {	
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		for(DecSubprograma dec: this.getDecsubprogramas()){
-			dec.chequea();
-		}
+	public void vinculaDefPunteros() {
+		for (DecSubprograma decsubprogram : decsubprogramas)
+			decsubprogram.vinculaDefPunteros();
 	}
 }

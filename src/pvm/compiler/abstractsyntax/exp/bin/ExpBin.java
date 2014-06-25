@@ -1,6 +1,7 @@
 package pvm.compiler.abstractsyntax.exp.bin;
 
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.tipo.Tipo;
 
 public abstract class ExpBin extends Exp {
 	protected String op;
@@ -15,13 +16,23 @@ public abstract class ExpBin extends Exp {
 	}
 
 	@Override
-	public String toString() {
-		return "(" + exp0 + " " + op + " " + exp1 + ")";
+	public void chequea() {
+		exp0.chequea();
+		exp1.chequea();
+		
+		if ((exp0.getTipo_infer() != null) &&
+				(exp1.getTipo_infer() != null)) {
+			Tipo tipo = operacionValida();
+			
+			if (tipo != null)
+				tipo_infer = tipo;
+		}
+		
+		if (tipo_infer == null)
+			errorTiposNoValidos();
 	}
 
-	public String getOp() {
-		return op;
-	}
+	protected abstract void errorTiposNoValidos();
 
 	public Exp getExp0() {
 		return exp0;
@@ -31,13 +42,20 @@ public abstract class ExpBin extends Exp {
 		return exp1;
 	}
 	
-	@Override
-	public void vincula() {
-		this.getExp0().vincula();
-		this.getExp1().vincula();	
+	public String getOp() {
+		return op;
 	}
 	
+	protected abstract Tipo operacionValida();
+	
 	@Override
-	public void vinculaDefPunteros() {	
+	public String toString() {
+		return "(" + exp0 + " " + op + " " + exp1 + ")";
+	}
+
+	@Override
+	public void vincula() {
+		exp0.vincula();
+		exp1.vincula();	
 	}
 }

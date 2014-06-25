@@ -4,13 +4,28 @@ import java.util.List;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
-import pvm.compiler.exceptions.CheckFailException;
 
-public class SeccionTipos implements Node {
+public class SeccionTipos extends Node {
 	private List<DecTipo> dectipos;
 	
 	public SeccionTipos(List<DecTipo> dectipos) {
 		this.dectipos = dectipos;
+	}
+
+	@Override
+	public void chequea() {
+		for(DecTipo dectipo: dectipos)
+			dectipo.chequea();
+	}
+
+	public List<DecTipo> getDectipos() {
+		return dectipos;
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+		for(DecTipo dectipo: dectipos)
+			dectipo.simplificaDefTipos();
 	}
 
 	@Override
@@ -26,23 +41,15 @@ public class SeccionTipos implements Node {
 			return "";
 	}
 
-	public List<DecTipo> getDectipos() {
-		return dectipos;
+	@Override
+	public void vincula() {
+		for (DecTipo dectipo : dectipos)
+			dectipo.vincula();
 	}
 
 	@Override
-	public void vincula() {	
-	}
-
-	@Override
-	public void vinculaDefPunteros() {	
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		for(DecTipo dec : this.getDectipos()){
-			dec.chequea();
-			dec.getTipo().simplificaDefTipos();
-		}
+	public void vinculaDefPunteros() {
+		for (DecTipo dectipo : dectipos)
+			dectipo.vinculaDefPunteros();
 	}
 }

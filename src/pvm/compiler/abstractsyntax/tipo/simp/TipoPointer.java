@@ -1,83 +1,65 @@
 package pvm.compiler.abstractsyntax.tipo.simp;
 
-import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
-import pvm.compiler.exceptions.CheckFailException;
 
 public class TipoPointer extends Tipo {
-	private Tipo tipo;
+	public static TipoPointer TipoPointerNull() {
+		return new TipoPointer(null, -1, true);
+	}
 	
-	private Node vinculo;
-	private int row;
+	private boolean isNull;
 	
 	public TipoPointer(Tipo tipo, int row) {
+		this(tipo, row, false);
+	}
+	
+	private TipoPointer(Tipo tipo, int row, boolean isNull) {
 		this.row = row;
 		
-		this.tipo = tipo;
+		this.tipo_infer = tipo;
+		
+		this.isNull = isNull;
+	}
+	
+	@Override
+	public void chequea() {
+		tipo_infer.chequea();
+	}
+
+	@Override
+	public boolean esPointer() {
+		return true;
+	}
+
+	public boolean isNull() {
+		return isNull;
+	}
+
+	@Override
+	public Tipo tipoSimplificado() {
+		tipo_infer = tipo_infer.tipoSimplificado();
+
+		return this;
 	}
 
 	@Override
 	public String toString() {
-		return "pointer " + tipo;
-	}
-
-	public Tipo getTipoBase() {
-		return tipo;
-	}
-
-	public Node getVinculo() {
-		return vinculo;
-	}
-
-	public void setVinculo(Node vinculo) {
-		this.vinculo = vinculo;
-	}
-
-	public int getRow() {
-		return row;
+		return "pointer " + tipo_infer;
 	}
 
 	@Override
 	public void vincula() {
-		if (!(this.getTipoBase() instanceof TipoId))
-			this.getTipoBase().vincula();
+		if (!(tipo_infer.esId()))
+			tipo_infer.vincula();
 		
 	}
 
 	@Override
 	public void vinculaDefPunteros() {
-		if (this.getTipoBase() instanceof TipoId)
-			this.getTipoBase().vincula();
+		if (tipo_infer.esId())
+			tipo_infer.vincula();
 		else
-			this.getTipoBase().vinculaDefPunteros();
+			tipo_infer.vinculaDefPunteros();
 		
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		this.getTipoBase().chequea();
-	}
-
-	@Override
-	public void simplificaDefTipos() {
-		this.getTipoBase().simplificaDefTipos();
-	}
-
-	@Override
-	public boolean esNumero() {
-		
-		return false;
-	}
-
-	@Override
-	public boolean esBooleano() {
-		
-		return false;
-	}
-
-	@Override
-	public boolean esEntradaSalida() {
-		
-		return false;
 	}
 }

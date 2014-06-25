@@ -14,29 +14,40 @@ public abstract class ExpUnaria extends Exp {
 	}
 
 	@Override
-	public String toString() {
-		return "(" + op + " " + exp + ")";
+	public void chequea() {
+		exp.chequea();
+		
+		if ((exp.getTipo_infer() != null)) {
+			Tipo tipo = operacionValida();
+			
+			if (tipo != null)
+				tipo_infer = tipo;
+		}
+		
+		if (tipo_infer == null)
+			errorTiposNoValidos();
 	}
 
-	public String getOp() {
-		return op;
-	}
+	protected abstract void errorTiposNoValidos();
 
 	public Exp getExp() {
 		return exp;
 	}
 	
+	
+	public String getOp() {
+		return op;
+	}
+	
+	protected abstract Tipo operacionValida();
+	
+	@Override
+	public String toString() {
+		return "(" + op + " " + exp + ")";
+	}
+
 	@Override
 	public void vincula() {
-		this.getExp().vincula();
-	}
-	
-	@Override
-	public void vinculaDefPunteros() {
-	}
-	
-	@Override
-	public Tipo getTipo() {
-		return getExp().getTipo();
+		exp.vincula();	
 	}
 }

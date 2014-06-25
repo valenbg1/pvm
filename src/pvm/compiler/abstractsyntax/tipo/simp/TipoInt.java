@@ -3,33 +3,27 @@ package pvm.compiler.abstractsyntax.tipo.simp;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
 
 public class TipoInt extends Tipo {
-	public static final TipoInt TIPO = new TipoInt(); 
+	@Override
+	public void chequea() {}
+
+	@Override
+	public boolean esInt() {
+		return true;
+	}
 	
+	@Override
+	public Tipo tipoSimplificado() {
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		return "int";
 	}
 
 	@Override
-	public void chequea() {
-	}
+	public void vincula() {}
 
 	@Override
-	public void simplificaDefTipos() {
-	}
-	
-	@Override
-	public boolean esNumero() {
-		return true;
-	}
-
-	@Override
-	public boolean esBooleano() {
-		return false;
-	}
-
-	@Override
-	public boolean esEntradaSalida() {
-		return true;
-	}
+	public void vinculaDefPunteros() {}
 }

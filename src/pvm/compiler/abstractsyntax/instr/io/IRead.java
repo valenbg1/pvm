@@ -34,9 +34,9 @@ public class IRead extends Instruccion {
 
 	@Override
 	public void chequea() throws CheckFailException {
-		if((desig.getTipo() != TipoBoolean.TIPO) &&
-		   (desig.getTipo() != TipoDouble.TIPO)  &&
-		   (desig.getTipo() != TipoInt.TIPO))
-			throw new CheckFailException("El tipo "+desig.getTipo()+" no se puede leer");
+		if((desig.getTipo_infer() != TipoBoolean.TIPO) &&
+		   (desig.getTipo_infer() != TipoDouble.TIPO)  &&
+		   (desig.getTipo_infer() != TipoInt.TIPO))
+			throw new CheckFailException("El tipo "+desig.getTipo_infer()+" no se puede leer");
 	}
 }

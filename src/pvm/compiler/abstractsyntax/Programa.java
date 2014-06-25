@@ -6,12 +6,8 @@ import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
-import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
-import pvm.compiler.abstractsyntax.subprog.param.Parametro;
-import pvm.compiler.abstractsyntax.tipo.DecTipo;
-import pvm.compiler.exceptions.CheckFailException;
 
-public class Programa implements Node {
+public class Programa extends Node {
 	private SeccionTipos sectipos;
 	private SeccionVariables secvars;
 	private SeccionSubprogramas secsubprogs;
@@ -23,6 +19,20 @@ public class Programa implements Node {
 		this.secvars = secvars;
 		this.secsubprogs = secsubprogs;
 		this.instrs = instrs;
+	}
+
+	@Override
+	public void chequea() {
+		sectipos.chequea();
+		secvars.chequea();
+		secsubprogs.chequea();
+		
+		sectipos.simplificaDefTipos();
+		secvars.simplificaDefTipos();
+		secsubprogs.simplificaDefTipos();
+		
+		for(Instruccion inst : this.instrs)
+			inst.chequea();
 	}
 
 	public List<Instruccion> getInstrs() {
@@ -42,6 +52,9 @@ public class Programa implements Node {
 	}
 
 	@Override
+	public void simplificaDefTipos() {}
+
+	@Override
 	public String toString() {
 		String ret = "PROGRAM\n";
 
@@ -58,43 +71,20 @@ public class Programa implements Node {
 		sym_t.abreBloque();
 		
 
-		for (DecTipo dectipo : this.getSectipos().getDectipos())
-			dectipo.vincula();
+		sectipos.vincula();
+		secvars.vincula();
+		secsubprogs.vincula();
 		
-		for (DecTipo decvar : this.getSecvars().getDectipos())
-			decvar.vincula();
-		
-		for (DecSubprograma decsubprog : this.getSecsubprogs().getDecsubprogramas())
-			decsubprog.vincula();
-		
-		
-		for (DecTipo dectipo : this.getSectipos().getDectipos())
-			dectipo.vinculaDefPunteros();
-		
-		for (DecTipo decvar : this.getSecvars().getDectipos())
-			decvar.vinculaDefPunteros();
-		
-		for (DecSubprograma decsubprog : this.getSecsubprogs().getDecsubprogramas())
-			decsubprog.vinculaDefPunteros();
+		sectipos.vinculaDefPunteros();
+		secvars.vinculaDefPunteros();
+		secsubprogs.vinculaDefPunteros();
 		
 		
-		for (Instruccion instr : this.getInstrs())
+		for (Instruccion instr : this.instrs)
 			instr.vincula();
 		
 	}
 
 	@Override
-	public void vinculaDefPunteros(){		
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		this.getSectipos().chequea();
-		this.getSecvars().chequea();
-		this.getSecsubprogs().chequea();
-		
-		for(Instruccion inst : this.getInstrs()){
-			inst.chequea();
-		}
-	}
+	public void vinculaDefPunteros() {}
 }

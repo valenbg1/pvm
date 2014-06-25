@@ -1,5 +1,6 @@
 package pvm.compiler.abstractsyntax.designador;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.exp.Exp;
 
 public class DesignaArray extends Designador {
@@ -12,8 +13,18 @@ public class DesignaArray extends Designador {
 	}
 
 	@Override
-	public String toString() {
-		return desig + "[" + exp + "]";
+	public void chequea() {
+		desig.chequea();
+		exp.chequea();
+		
+		if ((desig.getTipo_infer() != null) && (exp.getTipo_infer() != null)) {
+			if (!desig.getTipo_infer().esArray())
+				ErrorsHandler.chequeaDesignadorNoEsDeTipo("ARRAY", desig, row);
+			else if (!exp.getTipo_infer().esInt())
+				ErrorsHandler.chequeaExpresionNoEsDeTipo("int", exp, row);
+			else
+				tipo_infer = desig.getTipo_infer().getTipo_infer();
+		}
 	}
 
 	public Designador getDesig() {
@@ -25,12 +36,13 @@ public class DesignaArray extends Designador {
 	}
 
 	@Override
-	public void vincula() {
-		this.getDesig().vincula();
-		this.getExp().vincula();
+	public String toString() {
+		return desig + "[" + exp + "]";
 	}
 
 	@Override
-	public void vinculaDefPunteros() {
+	public void vincula() {
+		desig.vincula();
+		exp.vincula();
 	}
 }
