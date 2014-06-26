@@ -24,11 +24,12 @@ public class Programa extends Node {
 	@Override
 	public void chequea() {
 		sectipos.chequea();
-		secvars.chequea();
-		secsubprogs.chequea();
-		
 		sectipos.simplificaDefTipos();
+		
+		secvars.chequea();
 		secvars.simplificaDefTipos();
+		
+		secsubprogs.chequea();
 		secsubprogs.simplificaDefTipos();
 		
 		for(Instruccion inst : this.instrs)
@@ -70,7 +71,6 @@ public class Programa extends Node {
 	public void vincula(){
 		sym_t.abreBloque();
 		
-
 		sectipos.vincula();
 		secvars.vincula();
 		secsubprogs.vincula();
@@ -79,10 +79,8 @@ public class Programa extends Node {
 		secvars.vinculaDefPunteros();
 		secsubprogs.vinculaDefPunteros();
 		
-		
 		for (Instruccion instr : this.instrs)
 			instr.vincula();
-		
 	}
 
 	@Override

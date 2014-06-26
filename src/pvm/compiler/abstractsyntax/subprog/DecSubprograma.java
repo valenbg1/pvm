@@ -9,13 +9,9 @@ import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
 import pvm.compiler.abstractsyntax.subprog.param.Parametro;
-import pvm.compiler.abstractsyntax.tipo.DecTipo;
-import pvm.compiler.exceptions.CheckFailException;
 
 public class DecSubprograma extends Node {
 	private String id;
-	
-	private int row;
 	
 	private List<Parametro> params;
 	private SeccionTipos sectipos;
@@ -37,6 +33,54 @@ public class DecSubprograma extends Node {
 	}
 
 	@Override
+	public void chequea() {
+		for (Parametro param : params)
+			param.getTipo_infer().chequea();
+		
+		sectipos.chequea();
+		sectipos.simplificaDefTipos();
+		
+		secvars.chequea();
+		secvars.simplificaDefTipos();
+		
+		secsubprogs.chequea();
+		secsubprogs.simplificaDefTipos();
+		
+		for(Instruccion inst : this.instrs)
+			inst.chequea();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public List<Instruccion> getInstrs() {
+		return instrs;
+	}
+
+	public List<Parametro> getParams() {
+		return params;
+	}
+
+	public SeccionSubprogramas getSecsubprogs() {
+		return secsubprogs;
+	}
+
+	public SeccionTipos getSectipos() {
+		return sectipos;
+	}
+
+	public SeccionVariables getSecvars() {
+		return secvars;
+	}
+
+	@Override
+	public void simplificaDefTipos() {
+		for (Parametro param : params)
+			param.setTipo_infer(param.getTipo_infer().tipoSimplificado());
+	}
+
+	@Override
 	public String toString() {
 		String ret = "SUBPROGRAM " + id + "(";
 		
@@ -51,72 +95,28 @@ public class DecSubprograma extends Node {
 		return ret += "}";
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public List<Parametro> getParams() {
-		return params;
-	}
-
-	public SeccionTipos getSectipos() {
-		return sectipos;
-	}
-
-	public SeccionVariables getSecvars() {
-		return secvars;
-	}
-
-	public SeccionSubprogramas getSecsubprogs() {
-		return secsubprogs;
-	}
-
-	public List<Instruccion> getInstrs() {
-		return instrs;
-	}
-
-	public int getRow() {
-		return row;
-	}
-
 	@Override
 	public void vincula() {
-		if (!sym_t.insertaId(this.getId(), this))
-			ErrorsHandler.vinculaDuplicatedId(this.getId(), this.getRow());
+		if (!sym_t.insertaId(id, this))
+			ErrorsHandler.vinculaDuplicatedId(id, row);
 		
 		sym_t.abreBloque();
-		sym_t.insertaId(this.getId(), this);
+		sym_t.insertaId(id, this);
 		
-		for (Parametro param : this.getParams()){
+		for (Parametro param : params){
 			sym_t.insertaId(param.getId(), param);
 			param.vincula();
 		}
 		
+		sectipos.vincula();
+		secvars.vincula();
+		secsubprogs.vincula();
 		
-		for (DecTipo dectipo : this.getSectipos().getDectipos())
-			dectipo.vincula();
+		sectipos.vinculaDefPunteros();
+		secvars.vinculaDefPunteros();
+		secsubprogs.vinculaDefPunteros();
 		
-		for (DecTipo decvar : this.getSecvars().getDectipos())
-			decvar.vincula();
-		
-		for (DecSubprograma decsubprog : this.getSecsubprogs().getDecsubprogramas())
-			decsubprog.vincula();
-		
-		for (Parametro param : this.getParams()){
-			param.vinculaDefPunteros();
-		}
-		
-		for (DecTipo dectipo : this.getSectipos().getDectipos())
-			dectipo.vinculaDefPunteros();
-		
-		for (DecTipo decvar : this.getSecvars().getDectipos())
-			decvar.vinculaDefPunteros();
-		
-		for (DecSubprograma decsubprog : this.getSecsubprogs().getDecsubprogramas())
-			decsubprog.vinculaDefPunteros();
-		
-		
-		for (Instruccion instr : this.getInstrs())
+		for (Instruccion instr : this.instrs)
 			instr.vincula();
 		
 		sym_t.cierraBloque();
@@ -124,35 +124,7 @@ public class DecSubprograma extends Node {
 
 	@Override
 	public void vinculaDefPunteros() {
-		for (Parametro param : this.getParams())
-			param.getTipo().vinculaDefPunteros();
-	}
-
-	@Override
-	public void chequea() {
-		for(Parametro param : this.getParams()){
-			param.chequea();
-			param.getTipo().simplificaDefTipos();
-		}
-		
-		for(DecTipo dec : this.getSectipos().getDectipos()){
-			dec.chequea();
-			dec.getTipo().simplificaDefTipos();
-		}
-		
-		for(DecTipo dec : this.getSecvars().getDectipos()){
-			dec.chequea();
-			dec.getTipo().simplificaDefTipos();
-		}
-		
-		for(Instruccion inst : this.getInstrs()){
-			inst.chequea();
-		}
-	}
-
-	@Override
-	public void simplificaDefTipos() {
-		// TODO Auto-generated method stub
-		
+		for (Parametro param : params)
+			param.getTipo_infer().vinculaDefPunteros();
 	}
 }
