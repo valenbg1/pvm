@@ -18,6 +18,8 @@ public class Caso extends Node {
 
 	@Override
 	public void chequea() {
+		exp.chequea();
+		
 		if (!exp.getTipo_infer().esBooleano())
 			ErrorsHandler.chequeaExpresionNoEsDeTipo("boolean", exp, row);
 		
@@ -50,6 +52,8 @@ public class Caso extends Node {
 
 	@Override
 	public void vincula() {
+		exp.vincula();
+		
 		for (Instruccion instr : instrs)
 			instr.vincula();
 	}

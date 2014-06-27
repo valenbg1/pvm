@@ -28,7 +28,14 @@ public class TipoPointer extends Tipo {
 
 	@Override
 	public boolean equals(Tipo other) {
-		return (other instanceof TipoPointer) && (other.getTipo_infer().equals(tipo_infer));
+		if (other instanceof TipoPointer) {
+			if (((TipoPointer) other).isNull())
+				return true;
+
+			return other.getTipo_infer().equals(tipo_infer);	
+		}
+		
+		return false;
 	}
 
 	@Override

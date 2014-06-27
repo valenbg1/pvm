@@ -13,8 +13,17 @@ public class IDelete extends Instruccion {
 
 	@Override
 	public void chequea() {
-		if((desig != null) && (desig.getTipo_infer().esPointer()))
-			ErrorsHandler.chequeaDesignadorNoEsDeTipo("pointer", desig, row);
+		desig.chequea();
+		
+		if (desig != null) {
+			if (desig.getTipo_infer().esPointer())
+				return;
+			else if (desig.getTipo_infer().esId() && desig.getTipo_infer()
+							.getVinculo().getTipo_infer().esPointer())
+				return;
+				
+			ErrorsHandler.chequeaDesignadorNoEsDeTipo("pointer", desig, desig.getRow());
+		}
 	}
 
 	public Designador getDesig() {

@@ -41,4 +41,17 @@ public abstract class Tipo extends Node {
 	public void simplificaDefTipos() {}
 	
 	public abstract Tipo tipoSimplificado();
+	
+	public boolean ioValid() {
+		if (esBooleano())
+			return true;
+		
+		if (esDouble())
+			return true;
+		
+		if (esInt())
+			return true;
+
+		return false;
+	}
 }

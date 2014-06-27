@@ -22,6 +22,8 @@ public abstract class ExpBinComp extends ExpBin {
 			return new TipoBoolean();
 		if (exp0.getTipo_infer().esNumero() && exp1.getTipo_infer().esNumero())
 			return new TipoBoolean();
+		if (exp0.getTipo_infer().esPointer() && exp1.getTipo_infer().esPointer())
+			return new TipoBoolean();
 		
 		return null;
 	}

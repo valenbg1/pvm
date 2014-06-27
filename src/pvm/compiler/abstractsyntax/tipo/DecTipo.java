@@ -67,7 +67,7 @@ public class DecTipo extends Node {
 	public void vincula()  {
 		tipo_infer.vincula();
 		
-		if (!sym_t.insertaId(this.getId(), tipo_infer))
+		if (!sym_t.insertaId(id, this))
 			ErrorsHandler.vinculaDuplicatedId(id, row);
 	}
 

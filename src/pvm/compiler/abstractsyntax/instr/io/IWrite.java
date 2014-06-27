@@ -13,9 +13,9 @@ public class IWrite extends Instruccion {
 
 	@Override
 	public void chequea() {
-		if((!exp.getTipo_infer().esBooleano()) &&
-		   (!exp.getTipo_infer().esDouble())  &&
-		   (!exp.getTipo_infer().esInt()))
+		exp.chequea();
+		
+		if ((!exp.getTipo_infer().ioValid()))
 		   ErrorsHandler.error("El tipo " + exp.getTipo_infer() + " no se puede escribir");
 	}
 

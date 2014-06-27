@@ -19,7 +19,6 @@ public class Main {
 		System.out.println(programa);
 		
 		programa.vincula();
-		
-		programa.getInstrs();
+		programa.chequea();
 	}
 }

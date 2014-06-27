@@ -4,7 +4,7 @@ import pvm.compiler.SymbolsTable;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
 
 public abstract class Node {
-	public static final SymbolsTable sym_t = new SymbolsTable();
+	public static SymbolsTable sym_t = null;
 	
 	protected Tipo tipo_infer = null;
 	protected Node vinculo = null;
@@ -15,6 +15,7 @@ public abstract class Node {
 	public boolean esParametro() {
 		return false;
 	}
+	
 	public boolean esVariable() {
 		return false;
 	}

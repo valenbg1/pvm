@@ -13,7 +13,7 @@ public class DesignaId extends Designador {
 
 	@Override
 	public void chequea() {
-		if (!vinculo.esVariable() || !vinculo.esParametro())
+		if (!vinculo.esVariable() && !vinculo.esParametro())
 			ErrorsHandler.chequeaIdentificadorNoDeEsTipo("param o var", id, row);
 		
 		tipo_infer = vinculo.getTipo_infer();

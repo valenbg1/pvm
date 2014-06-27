@@ -2,6 +2,7 @@ package pvm.compiler.abstractsyntax;
 
 import java.util.List;
 
+import pvm.compiler.SymbolsTable;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
@@ -69,6 +70,7 @@ public class Programa extends Node {
 
 	@Override
 	public void vincula(){
+		sym_t = new SymbolsTable();
 		sym_t.abreBloque();
 		
 		sectipos.vincula();

@@ -13,9 +13,9 @@ public class IRead extends Instruccion {
 
 	@Override
 	public void chequea() {
-		if((!desig.getTipo_infer().esBooleano()) &&
-		   (!desig.getTipo_infer().esDouble())  &&
-		   (!desig.getTipo_infer().esInt()))
+		desig.chequea();
+		
+		if ((!desig.getTipo_infer().ioValid()))
 		   ErrorsHandler.error("El tipo " + desig.getTipo_infer() + " no se puede leer");
 	}
 	

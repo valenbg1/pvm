@@ -25,7 +25,7 @@ public abstract class Parametro extends Node {
 	public boolean esRefer() {
 		return false;
 	}
-
+	
 	public boolean esValor() {
 		return false;
 	}
@@ -33,7 +33,7 @@ public abstract class Parametro extends Node {
 	public String getId() {
 		return id;
 	}
-	
+
 	@Override
 	public void simplificaDefTipos() {}
 

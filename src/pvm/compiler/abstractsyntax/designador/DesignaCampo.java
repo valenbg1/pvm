@@ -28,7 +28,7 @@ public class DesignaCampo extends Designador {
 				else
 					tipo_infer = c.getTipo_infer();
 			} else
-				ErrorsHandler.chequeaDesignadorNoEsDeTipo("STRUCT", desig, row);
+				ErrorsHandler.chequeaDesignadorNoEsDeTipo("STRUCT", desig, desig.getRow());
 		}
 	}
 

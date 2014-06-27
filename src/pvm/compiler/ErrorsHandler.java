@@ -41,7 +41,7 @@ public class ErrorsHandler {
 
 	public static void chequeaIdentificadorNoEsTipo(String id, int row) {
 		System.err.println("ERROR identificador '" + id
-				+ "' no es un tipo definido " + row);
+				+ "' no es un tipo definido en la fila " + row);
 		System.exit(1);
 	}
 

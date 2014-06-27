@@ -35,7 +35,7 @@ public class DecSubprograma extends Node {
 	@Override
 	public void chequea() {
 		for (Parametro param : params)
-			param.getTipo_infer().chequea();
+			param.chequea();
 		
 		sectipos.chequea();
 		sectipos.simplificaDefTipos();
@@ -75,10 +75,7 @@ public class DecSubprograma extends Node {
 	}
 
 	@Override
-	public void simplificaDefTipos() {
-		for (Parametro param : params)
-			param.setTipo_infer(param.getTipo_infer().tipoSimplificado());
-	}
+	public void simplificaDefTipos() {}
 
 	@Override
 	public String toString() {

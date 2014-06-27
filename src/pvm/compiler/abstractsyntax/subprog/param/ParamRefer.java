@@ -11,7 +11,7 @@ public class ParamRefer extends Parametro {
 	public boolean esRefer() {
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "& " + super.toString();
