@@ -1,9 +1,8 @@
 package pvm.compiler.abstractsyntax.instr.dynmem;
 
-import pvm.compiler.abstractsyntax.designador.DesignaId;
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
-import pvm.compiler.exceptions.CheckFailException;
 
 public class IDelete extends Instruccion {
 	private Designador desig;
@@ -13,8 +12,9 @@ public class IDelete extends Instruccion {
 	}
 
 	@Override
-	public String toString() {
-		return "DELETE " + desig + ";";
+	public void chequea() {
+		if((desig != null) && (desig.getTipo_infer().esPointer()))
+			ErrorsHandler.chequeaDesignadorNoEsDeTipo("pointer", desig, row);
 	}
 
 	public Designador getDesig() {
@@ -22,17 +22,12 @@ public class IDelete extends Instruccion {
 	}
 
 	@Override
+	public String toString() {
+		return "DELETE " + desig + ";";
+	}
+
+	@Override
 	public void vincula() {
-		this.getDesig().vincula();
-	}
-
-	@Override
-	public void vinculaDefPunteros() {	
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		if(!(desig instanceof DesignaId))
-			throw new CheckFailException("Intentas hacer delete de "+desig+ " que no es un identificador.");
+		desig.vincula();
 	}
 }

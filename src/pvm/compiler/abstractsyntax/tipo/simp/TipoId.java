@@ -20,6 +20,11 @@ public class TipoId extends Tipo {
 	}
 
 	@Override
+	public boolean equals(Tipo other) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public boolean esId() {
 		return true;
 	}

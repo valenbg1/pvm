@@ -7,10 +7,15 @@ public class TipoBoolean extends Tipo {
 	public void chequea() {}
 
 	@Override
+	public boolean equals(Tipo other) {
+		return other instanceof TipoBoolean;
+	}
+	
+	@Override
 	public boolean esBooleano() {
 		return true;
 	}
-	
+
 	@Override
 	public Tipo tipoSimplificado() {
 		return this;
@@ -23,7 +28,7 @@ public class TipoBoolean extends Tipo {
 
 	@Override
 	public void vincula() {}
-
+	
 	@Override
 	public void vinculaDefPunteros() {}
 }

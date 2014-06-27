@@ -16,10 +16,18 @@ public abstract class Parametro extends Node {
 	public void chequea() {
 		tipo_infer.chequea();
 	}
-
+	
 	@Override
 	public boolean esParametro() {
 		return true;
+	}
+	
+	public boolean esRefer() {
+		return false;
+	}
+
+	public boolean esValor() {
+		return false;
 	}
 
 	public String getId() {

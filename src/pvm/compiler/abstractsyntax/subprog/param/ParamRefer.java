@@ -8,6 +8,11 @@ public class ParamRefer extends Parametro {
 	}
 	
 	@Override
+	public boolean esRefer() {
+		return true;
+	}
+	
+	@Override
 	public String toString() {
 		return "& " + super.toString();
 	}

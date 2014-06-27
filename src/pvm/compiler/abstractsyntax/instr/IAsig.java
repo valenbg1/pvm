@@ -1,8 +1,8 @@
 package pvm.compiler.abstractsyntax.instr;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.exp.Exp;
-import pvm.compiler.exceptions.CheckFailException;
 
 public class IAsig extends Instruccion {
 	private Designador desig;
@@ -14,8 +14,14 @@ public class IAsig extends Instruccion {
 	}
 
 	@Override
-	public String toString() {
-		return desig + " = " + exp + ";";
+	public void chequea() {
+		desig.chequea();
+		exp.chequea();
+
+		if (!desig.getTipo_infer().equals(exp.getTipo_infer()))
+			ErrorsHandler.chequeaTiposNoCompatibles(exp, desig.getTipo_infer(),
+					exp.getTipo_infer(), row);
+
 	}
 
 	public Designador getDesig() {
@@ -27,21 +33,13 @@ public class IAsig extends Instruccion {
 	}
 
 	@Override
+	public String toString() {
+		return desig + " = " + exp + ";";
+	}
+
+	@Override
 	public void vincula() {
-		this.getDesig().vincula();
-		this.getExp().vincula();
-	}
-
-	@Override
-	public void vinculaDefPunteros() {	
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		this.getDesig().chequea();
-		this.getExp().chequea();
-		
-		if(this.getDesig().getTipo_infer() != this.getExp().getTipo())
-			throw new CheckFailException("asignación, tipo no coincide, se esperaba "+this.getDesig().getTipo_infer());
+		desig.vincula();
+		exp.vincula();
 	}
 }

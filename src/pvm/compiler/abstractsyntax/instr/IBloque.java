@@ -2,13 +2,17 @@ package pvm.compiler.abstractsyntax.instr;
 
 import java.util.List;
 
-import pvm.compiler.exceptions.CheckFailException;
-
 public class IBloque extends Instruccion {
 	private List<Instruccion> instrs;
 
 	public IBloque(List<Instruccion> instrs) {
 		this.instrs = instrs;
+	}
+
+	@Override
+	public void chequea() {
+		for (Instruccion instr : instrs)
+			instr.chequea();
 	}
 
 	public List<Instruccion> getInstrs() {
@@ -27,17 +31,7 @@ public class IBloque extends Instruccion {
 
 	@Override
 	public void vincula() {
-		for (Instruccion instr : this.getInstrs())
+		for (Instruccion instr : instrs)
 			instr.vincula();
-	}
-
-	@Override
-	public void vinculaDefPunteros() {
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		for (Instruccion instr : this.getInstrs())
-			instr.chequea();
 	}
 }

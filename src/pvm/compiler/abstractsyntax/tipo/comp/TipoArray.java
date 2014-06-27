@@ -17,6 +17,13 @@ public class TipoArray extends Tipo {
 	}
 
 	@Override
+	public boolean equals(Tipo other) {
+		return (other instanceof TipoArray)
+				&& (other.getTipo_infer().equals(tipo_infer))
+				&& (((TipoArray) other).getNum() == num);
+	}
+
+	@Override
 	public boolean esArray() {
 		return true;
 	}
@@ -31,12 +38,12 @@ public class TipoArray extends Tipo {
 		
 		return this;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "ARRAY " + tipo_infer + "[" + num + "]";
 	}
-	
+
 	@Override
 	public void vincula() {
 		tipo_infer.vincula();

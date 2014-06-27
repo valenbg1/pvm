@@ -2,13 +2,12 @@ package pvm.compiler.abstractsyntax.instr.cond;
 
 import java.util.List;
 
+import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
-import pvm.compiler.abstractsyntax.tipo.simp.TipoBoolean;
-import pvm.compiler.exceptions.CheckFailException;
 
-public class Caso implements Node {
+public class Caso extends Node {
 	private Exp exp;
 	private List<Instruccion> instrs;
 	
@@ -16,6 +15,26 @@ public class Caso implements Node {
 		this.exp = exp;
 		this.instrs = instrs;
 	}
+
+	@Override
+	public void chequea() {
+		if (!exp.getTipo_infer().esBooleano())
+			ErrorsHandler.chequeaExpresionNoEsDeTipo("boolean", exp, row);
+		
+		for (Instruccion instr : instrs)
+			instr.chequea();
+	}
+
+	public Exp getExp() {
+		return exp;
+	}
+
+	public List<Instruccion> getInstrs() {
+		return instrs;
+	}
+
+	@Override
+	public void simplificaDefTipos() {}
 
 	@Override
 	public String toString() {
@@ -29,25 +48,12 @@ public class Caso implements Node {
 		return ret;
 	}
 
-	public Exp getExp() {
-		return exp;
-	}
-
-	public List<Instruccion> getInstrs() {
-		return instrs;
-	}
-
 	@Override
 	public void vincula() {
+		for (Instruccion instr : instrs)
+			instr.vincula();
 	}
 
 	@Override
-	public void vinculaDefPunteros() {
-	}
-
-	@Override
-	public void chequea() throws CheckFailException {
-		if(this.getExp().getTipo() != TipoBoolean.TIPO)
-			throw new CheckFailException("el caso "+this.getExp()+" no es de tipo booleano");
-	}
+	public void vinculaDefPunteros() {}
 }

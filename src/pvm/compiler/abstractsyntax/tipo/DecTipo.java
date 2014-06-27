@@ -32,6 +32,19 @@ public class DecTipo extends Node {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof DecTipo))
+			return false;
+		if (tipo_infer != ((DecTipo) obj).getTipo_infer())
+			return false;
+		return true;
+	}
+
+	@Override
 	public boolean esVariable() {
 		return esVariable;
 	}

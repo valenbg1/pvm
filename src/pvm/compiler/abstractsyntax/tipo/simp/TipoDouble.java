@@ -7,10 +7,15 @@ public class TipoDouble extends Tipo {
 	public void chequea() {}
 
 	@Override
+	public boolean equals(Tipo other) {
+		return other instanceof TipoDouble;
+	}
+	
+	@Override
 	public boolean esDouble() {
 		return true;
 	}
-	
+
 	@Override
 	public Tipo tipoSimplificado() {
 		return this;

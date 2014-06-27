@@ -6,4 +6,9 @@ public class ParamValor extends Parametro {
 	public ParamValor(String id, Tipo tipo) {
 		super(id, tipo);
 	}
+	
+	@Override
+	public boolean esValor() {
+		return true;
+	}
 }

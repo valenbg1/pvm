@@ -24,6 +24,18 @@ public class TipoStruct extends Tipo {
 	}
 
 	@Override
+	public boolean equals(Tipo other) {
+		if (other instanceof TipoStruct) {
+			for (DecTipo dectipo : campos.values()) {
+				if (!((TipoStruct) other).getCampos().containsValue(dectipo))
+					return false;
+			}
+		}
+		
+		return true;
+	}
+
+	@Override
 	public boolean esStruct() {
 		return true;
 	}

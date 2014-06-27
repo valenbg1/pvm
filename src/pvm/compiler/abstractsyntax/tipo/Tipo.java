@@ -3,6 +3,8 @@ package pvm.compiler.abstractsyntax.tipo;
 import pvm.compiler.abstractsyntax.Node;
 
 public abstract class Tipo extends Node {
+	public abstract boolean equals(Tipo other);
+	
 	public boolean esArray() {
 		return false;
 	}
