@@ -11,7 +11,11 @@ import pvm.compiler.abstractsyntax.exp.ExpDesignador;
 import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
 import pvm.compiler.abstractsyntax.subprog.param.Parametro;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.PointerInstruction;
 import pvm.vm.instructions.VoidArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
 public class ILlamada extends Instruccion {
@@ -108,13 +112,19 @@ public class ILlamada extends Instruccion {
 	}
 
 	private ArrayList<Instruction> codigoFinLlamada() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, 0));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, 1));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, this.fin));
+		ret.add(new PointerInstruction(PointerInstruction_t.DESAPILA_IND));
+		ret.add(new IntArgInstruction(IntInstruction_t.IR_A, vinculo.getInicio()));
+		
+		return ret;
 	}
 
-	private int numeroInstruccionesFinLlamada() {
-		// TODO Auto-generated method stub
-		return 0;
+	private int numeroInstruccionesFinLlamada() {	
+		return 6;
 	}
 
 	private int numeroInstruccionesPasoParam(Exp exp) {
@@ -123,12 +133,26 @@ public class ILlamada extends Instruccion {
 	}
 
 	private ArrayList<Instruction> codigoPasoParámetro(Exp exp) {
-		// TODO Auto-generated method stub
-		return null;
+		int index = args.indexOf(exp);
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, index));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		ret.addAll(exp.getCod());
+		
+		if(((DecSubprograma)vinculo).getParams().get(index).esValor() && (exp instanceof ExpDesignador))
+			ret.add(new IntArgInstruction(IntInstruction_t.CLONA, exp.getTipo_infer().getTam()));
+		else
+			ret.add(new PointerInstruction(PointerInstruction_t.DESAPILA_IND));
+				
+		return ret;
 	}
 
 	private ArrayList<Instruction> codigoCompienzoPasoParam() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, 0));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, 3));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		return ret;
 	}
 }
