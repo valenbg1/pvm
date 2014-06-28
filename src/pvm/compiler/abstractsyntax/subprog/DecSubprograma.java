@@ -211,13 +211,33 @@ public class DecSubprograma extends Node {
 	}
 
 	private ArrayList<Instruction> codigoEpilogo() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		
+		// Restaura cima Reg Act
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, 0));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, secDataSize+2));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.RESTA));
+		ret.add(new IntArgInstruction(IntInstruction_t.DESAPILA_DIR, 0));
+		
+		// Restaura display
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, 0));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, 2));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		ret.add(new PointerInstruction(PointerInstruction_t.APILA_IND));
+		ret.add(new IntArgInstruction(IntInstruction_t.DESAPILA_DIR, getN_nivel()));
+
+		// Retorna
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, 0));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, 1));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		ret.add(new PointerInstruction(PointerInstruction_t.APILA_IND));
+		ret.add(new PointerInstruction(PointerInstruction_t.IR_IND));
+		
+		return ret;
 	}
 
 	private int numInstruccionesEpilogo() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 14;
 	}
 
 	private ArrayList<Instruction> codigoPrologo() {
