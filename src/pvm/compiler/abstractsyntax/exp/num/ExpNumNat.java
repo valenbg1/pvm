@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoInt;
+import pvm.vm.instructions.BoolArgInstruction;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.BoolArgInstruction.BoolInstruction_t;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
 
 public class ExpNumNat extends Exp {
 	private int numnat;
@@ -37,7 +41,8 @@ public class ExpNumNat extends Exp {
 	}
 
 	private ArrayList<Instruction> codigoInt() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, numnat));
+		return ret;
 	}
 }
