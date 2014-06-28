@@ -43,11 +43,11 @@ public class ILlamada extends Instruccion {
 			
 			if (param.esRefer() && !(exp instanceof ExpDesignador))
 				ErrorsHandler.error("El parámetro " + i + " en '" + this
-						+ "' no es un designador " + getRow());
+						+ "' no es un designador " + row);
 			else if (!param.getTipo_infer().equals(exp.getTipo_infer()))
 				ErrorsHandler.error("El parámetro " + i + " en '" + this
 						+ "' no tiene tipo compatible con "
-						+ param.getTipo_infer() + " en la linea " + getRow());
+						+ param.getTipo_infer() + " en la linea " + row);
 
 			++i;
 		}

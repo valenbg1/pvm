@@ -35,7 +35,9 @@ public abstract class Parametro extends Node {
 	}
 
 	@Override
-	public void simplificaDefTipos() {}
+	public void simplificaDefTipos() {
+		tipo_infer = tipo_infer.tipoSimplificado();
+	}
 
 	@Override
 	public String toString() {

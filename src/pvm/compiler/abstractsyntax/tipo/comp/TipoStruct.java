@@ -64,8 +64,13 @@ public class TipoStruct extends Tipo {
 	public String toString() {
 		String ret = "struct {\n";
 		
-		for (DecTipo dectipo : dectipos)
-			ret += "\t\t" + dectipo + "\n";
+		for (DecTipo dectipo : dectipos) {
+			if (dectipo.getTipo_infer().esPointer()
+					&& (dectipo.getTipo_infer().getTipo_infer() == this))
+				ret += "\t\t" + dectipo.getId() + ": pointer this;" + "\n";
+			else
+				ret += "\t\t" + dectipo + "\n";
+		}
 		
 		ret += "\t}";
 		

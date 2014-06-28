@@ -2,6 +2,7 @@ package pvm.compiler;
 
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.instr.IAsig;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
 import pvm.compiler.lexanalyzer.LexicalUnit;
 
@@ -63,10 +64,10 @@ public class ErrorsHandler {
 		System.exit(1);
 	}
 
-	public static void chequeaTiposNoCompatibles(Exp exp, Tipo tipo1,
+	public static void chequeaTiposNoCompatibles(IAsig iasig, Tipo tipo1,
 			Tipo tipo2, int row) {
 		System.err.println("ERROR tipos " + tipo1 + ", " + tipo2
-				+ " no compatibles en '" + exp + "' en la fila " + row);
+				+ " no compatibles en '" + iasig + "' en la fila " + row);
 		System.exit(1);
 	}
 

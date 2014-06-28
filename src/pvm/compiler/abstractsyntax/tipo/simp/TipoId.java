@@ -21,7 +21,7 @@ public class TipoId extends Tipo {
 
 	@Override
 	public boolean equals(Tipo other) {
-		throw new UnsupportedOperationException();
+		return tipo_infer.equals(other.getTipo_infer());
 	}
 
 	@Override

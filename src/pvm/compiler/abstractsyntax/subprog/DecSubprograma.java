@@ -43,8 +43,11 @@ public class DecSubprograma extends Node {
 		secvars.chequea();
 		secvars.simplificaDefTipos();
 		
+		for (Parametro param : params)
+			param.simplificaDefTipos();
+		
 		secsubprogs.chequea();
-		secsubprogs.simplificaDefTipos();
+		secsubprogs.simplificaDefTipos();		
 		
 		for(Instruccion inst : this.instrs)
 			inst.chequea();

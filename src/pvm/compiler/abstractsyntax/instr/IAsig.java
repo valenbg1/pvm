@@ -19,7 +19,7 @@ public class IAsig extends Instruccion {
 		exp.chequea();
 
 		if (!desig.getTipo_infer().equals(exp.getTipo_infer()))
-			ErrorsHandler.chequeaTiposNoCompatibles(exp, desig.getTipo_infer(),
+			ErrorsHandler.chequeaTiposNoCompatibles(this, desig.getTipo_infer(),
 					exp.getTipo_infer(), row);
 
 	}
