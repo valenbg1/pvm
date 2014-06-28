@@ -1,7 +1,10 @@
 package pvm.compiler.abstractsyntax.exp.unar;
 
+import java.util.ArrayList;
+
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
+import pvm.vm.instructions.Instruction;
 
 public abstract class ExpUnaria extends Exp {
 	protected String op;
@@ -50,4 +53,20 @@ public abstract class ExpUnaria extends Exp {
 	public void vincula() {
 		exp.vincula();	
 	}
+	
+	@Override
+	public void codigo() {
+		exp.codigo();
+		cinst += exp.numInstruccionesAccesoValor();
+		cinst++;
+		
+		cod = new ArrayList<Instruction>();
+		
+		cod.addAll(exp.getCod());
+		cod.addAll(exp.codigoAccesoAlValor());
+		
+		cod.add(codigoDeOperacion());
+	}
+
+	protected abstract Instruction codigoDeOperacion();
 }

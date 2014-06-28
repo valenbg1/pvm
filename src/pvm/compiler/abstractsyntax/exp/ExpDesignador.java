@@ -29,4 +29,10 @@ public class ExpDesignador extends Exp {
 	public void vincula() {
 		desig.vincula();
 	}
+
+	@Override
+	public void codigo() {
+		desig.codigo();
+		cod = desig.getCod();
+	}
 }

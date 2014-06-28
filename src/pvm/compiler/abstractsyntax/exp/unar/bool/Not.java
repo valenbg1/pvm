@@ -5,6 +5,9 @@ import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.exp.unar.ExpUnaria;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoBoolean;
+import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.VoidArgInstruction;
+import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
 public class Not extends ExpUnaria {
 	public Not(Exp exp) {
@@ -22,5 +25,11 @@ public class Not extends ExpUnaria {
 			return new TipoBoolean();
 		
 		return null;
+	}
+	
+	@Override
+	protected Instruction codigoDeOperacion() {
+		
+		return new VoidArgInstruction(VoidInstruction_t.NOT);
 	}
 }

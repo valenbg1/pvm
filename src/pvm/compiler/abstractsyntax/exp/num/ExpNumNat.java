@@ -1,7 +1,10 @@
 package pvm.compiler.abstractsyntax.exp.num;
 
+import java.util.ArrayList;
+
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoInt;
+import pvm.vm.instructions.Instruction;
 
 public class ExpNumNat extends Exp {
 	private int numnat;
@@ -26,4 +29,15 @@ public class ExpNumNat extends Exp {
 
 	@Override
 	public void vincula() {}
+
+	@Override
+	public void codigo() {
+		cod = codigoInt();
+		cinst += cod.size();
+	}
+
+	private ArrayList<Instruction> codigoInt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

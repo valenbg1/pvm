@@ -5,6 +5,9 @@ import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.exp.unar.ExpUnaria;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoInt;
+import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.VoidArgInstruction;
+import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
 public class ToInt extends ExpUnaria {
 	public ToInt(Exp exp) {
@@ -22,5 +25,11 @@ public class ToInt extends ExpUnaria {
 			return new TipoInt();
 		
 		return null;
+	}
+	
+	@Override
+	protected Instruction codigoDeOperacion() {
+		
+		return new VoidArgInstruction(VoidInstruction_t.TOINT);
 	}
 }

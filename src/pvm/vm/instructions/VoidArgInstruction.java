@@ -7,6 +7,7 @@ import pvm.vm.PMachine;
 import pvm.vm.exceptions.InvalidValueTypeException;
 import pvm.vm.instructions.auxiliar.NumOps;
 import pvm.vm.values.BoolValue;
+import pvm.vm.values.DoubleValue;
 import pvm.vm.values.IntValue;
 import pvm.vm.values.Value;
 
@@ -116,6 +117,30 @@ public class VoidArgInstruction implements Instruction {
 				Value op = stack.pop();
 
 				stack.push(new BoolValue(!op.getBool()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		TODOUBLE {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.stack;
+				Value op = stack.pop();
+
+				stack.push(new DoubleValue(op.getDouble()));
+				pmachine.incP_prog();
+			}
+		},
+		
+		TOINT {
+			@Override
+			protected void execute(PMachine pmachine)
+					throws InvalidValueTypeException, EmptyStackException {
+				Stack<Value> stack = pmachine.stack;
+				Value op = stack.pop();
+
+				stack.push(new IntValue(op.getInt()));
 				pmachine.incP_prog();
 			}
 		},

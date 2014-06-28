@@ -1,7 +1,10 @@
 package pvm.compiler.abstractsyntax.exp.bin;
 
+import java.util.ArrayList;
+
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.tipo.Tipo;
+import pvm.vm.instructions.Instruction;
 
 public abstract class ExpBin extends Exp {
 	protected String op;
@@ -58,4 +61,23 @@ public abstract class ExpBin extends Exp {
 		exp0.vincula();
 		exp1.vincula();	
 	}
+	
+	@Override
+	public void codigo() {
+		exp0.codigo();
+		exp1.codigo();
+		cinst += exp0.numInstruccionesAccesoValor() + exp1.numInstruccionesAccesoValor();
+		cinst++;
+		
+		cod = new ArrayList<Instruction>();
+		
+		cod.addAll(exp0.getCod());
+		cod.addAll(exp0.codigoAccesoAlValor());
+		cod.addAll(exp1.getCod());
+		cod.addAll(exp0.codigoAccesoAlValor());
+		
+		cod.add(codigoDeOperacion());
+	}
+	
+	protected abstract Instruction codigoDeOperacion();
 }
