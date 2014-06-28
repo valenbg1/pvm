@@ -127,8 +127,7 @@ public class ILlamada extends Instruccion {
 	}
 
 	private int numeroInstruccionesPasoParam(Exp exp) {
-		// TODO Auto-generated method stub
-		return 0;
+		return 3 + exp.getCod().size();
 	}
 
 	private ArrayList<Instruction> codigoPasoParámetro(Exp exp) {
