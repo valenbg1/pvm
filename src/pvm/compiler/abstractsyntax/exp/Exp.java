@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.PointerInstruction;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 
 public abstract class Exp extends Node {
 	@Override
@@ -23,12 +25,18 @@ public abstract class Exp extends Node {
 	public void vinculaDefPunteros() {}
 
 	public int numInstruccionesAccesoValor() {
-		// TODO Auto-generated method stub
-		return 0;
+		if(this instanceof ExpDesignador)
+			return 1;
+		else
+			return 0;
 	}
 
 	public ArrayList<Instruction> codigoAccesoAlValor() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		
+		if(this instanceof ExpDesignador)
+			ret.add(new PointerInstruction(PointerInstruction_t.APILA_IND));
+
+		return ret;
 	}
 }
