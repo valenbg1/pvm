@@ -7,10 +7,11 @@ VARIABLES
   
 # Programa Principal 
 {
-  secuencia[2] = -1;
+  secuencia[2] = 2;
   new point;
   read point->;
   write secuencia[2];
+  write -3;
   write point->
   
 }

@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.exp.ExpDesignador;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.vm.instructions.IOInstruction;
 import pvm.vm.instructions.IOInstruction.IOInstruction_t;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.PointerInstruction;
 
 public class IWrite extends Instruccion {
 	private Exp exp;
@@ -52,11 +55,14 @@ public class IWrite extends Instruccion {
 
 	private ArrayList<Instruction> codigoFinWrite() {
 		ArrayList<Instruction> ret = new ArrayList<>();
+		if(exp instanceof ExpDesignador)
+			ret.add(new PointerInstruction(PointerInstruction_t.APILA_IND));
+		
 		ret.add(new IOInstruction(IOInstruction_t.ESCRIBE));
 		return ret;
 	}
 
 	private int numeroInstruccionesFinWrite() {
-		return 1;
+		return (exp instanceof ExpDesignador)? 2 : 1;
 	}
 }
