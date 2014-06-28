@@ -1,0 +1,16 @@
+PROGRAM
+TYPES   
+  TSecuencia: ARRAY int[10]
+VARIABLES
+  secuencia: TSecuencia;
+  point: pointer int
+  
+# Programa Principal 
+{
+  secuencia[2] = -1;
+  new point;
+  read point->;
+  write secuencia[2];
+  write point->
+  
+}

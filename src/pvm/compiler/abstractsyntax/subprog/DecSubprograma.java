@@ -195,7 +195,7 @@ public class DecSubprograma extends Node {
 		cod.addAll(secvars.getCod());
 		cod.addAll(secsubprogs.getCod());
 
-		dirComienzo = cinst;
+		inicio = cinst;
 		
 		cinst += numInstruccionesPrologo();
 		cod.addAll(codigoPrologo());

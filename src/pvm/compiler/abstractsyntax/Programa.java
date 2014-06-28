@@ -138,6 +138,7 @@ public class Programa extends Node {
 		secsubprogs.codigo();
 		
 		inicio = cinst;
+		
 		for (Instruccion instr : this.instrs)
 			instr.codigo();
 		
@@ -145,6 +146,8 @@ public class Programa extends Node {
 		cod.addAll(sectipos.getCod());
 		cod.addAll(secvars.getCod());
 		cod.addAll(secsubprogs.getCod());
+		
+		
 		
 		for (Instruccion instr : this.instrs)
 			cod.addAll(instr.getCod());

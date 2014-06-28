@@ -74,7 +74,7 @@ public class SeccionSubprogramas extends Node {
 	@Override
 	public void codigo() {
 		cod = new ArrayList<Instruction>();
-		
+		inicio = cinst;
 		for (DecSubprograma decsubprogram : decsubprogramas){
 			decsubprogram.codigo();
 			cod.addAll(decsubprogram.getCod());

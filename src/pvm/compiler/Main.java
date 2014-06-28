@@ -14,7 +14,7 @@ import pvm.vm.instructions.Instruction;
 public class Main {
 	public static void main(String[] args) throws Exception {
 		Reader input = new InputStreamReader(new FileInputStream(
-				"EjemploPractica4.txt"));
+				"ejemplo-supersencillo.txt"));
 		LexicalAnalyzer alex = new LexicalAnalyzer(input);
 		SyntacticAnalyzer asint = new SyntacticAnalyzer(alex);
 		Programa programa = (Programa) asint.parse().value;
@@ -27,6 +27,10 @@ public class Main {
 
 		programa.codigo();
 		ArrayList<Instruction> code = programa.getCod();
+		System.out.println("\n\nCODE:\n--------------------------------\n\n");
+		int i = 0;
+		for(Instruction ist : code)
+			System.out.println("["+(i++)+"]: "+ist);
 		
 		PMachine pvm = new PMachine(code);
 		pvm.run();
