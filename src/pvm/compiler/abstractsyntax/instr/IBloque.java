@@ -1,5 +1,6 @@
 package pvm.compiler.abstractsyntax.instr;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IBloque extends Instruccion {
@@ -33,5 +34,16 @@ public class IBloque extends Instruccion {
 	public void vincula() {
 		for (Instruccion instr : instrs)
 			instr.vincula();
+	}
+
+	@Override
+	public void codigo() {
+		inicio = cinst;
+		cod = new ArrayList<>();
+		for (Instruccion instr : instrs){
+			instr.codigo();
+			cod.addAll(instr.getCod());
+		}
+		fin = cinst;
 	}
 }

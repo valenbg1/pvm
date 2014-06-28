@@ -1,8 +1,12 @@
 package pvm.compiler.abstractsyntax.instr;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.vm.instructions.Instruction;
 
 public class IAsig extends Instruccion {
 	private Designador desig;
@@ -41,5 +45,29 @@ public class IAsig extends Instruccion {
 	public void vincula() {
 		desig.vincula();
 		exp.vincula();
+	}
+
+	@Override
+	public void codigo() {
+		inicio = cinst;
+		desig.codigo();
+		exp.codigo();
+		cinst += numeroInstruccionesFinAsig();
+		fin = cinst;
+		cod = new ArrayList<>();
+		cod.addAll(desig.getCod());
+		cod.addAll(exp.getCod());
+		cod.addAll(codigoFinAsig());
+		
+	}
+
+	private ArrayList<Instruction> codigoFinAsig() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private int numeroInstruccionesFinAsig() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

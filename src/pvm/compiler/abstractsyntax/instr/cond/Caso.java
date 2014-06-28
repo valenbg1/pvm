@@ -1,11 +1,13 @@
 package pvm.compiler.abstractsyntax.instr.cond;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
+import pvm.vm.instructions.Instruction;
 
 public class Caso extends Node {
 	private Exp exp;
@@ -70,4 +72,17 @@ public class Caso extends Node {
 	
 	@Override
 	public void vinculaDefPunteros() {}
+
+	@Override
+	public void codigo() {
+		exp.codigo();
+		for (Instruccion instr : instrs)
+			instr.codigo();
+	}
+	
+	@Override
+	public ArrayList<Instruction> getCod() {
+		throw new UnsupportedOperationException();
+	}
+
 }

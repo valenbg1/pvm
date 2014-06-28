@@ -11,4 +11,8 @@ public class ParamValor extends Parametro {
 	public boolean esValor() {
 		return true;
 	}
+
+	@Override
+	public void codigo() {
+	}
 }
