@@ -8,7 +8,10 @@ import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
+import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
 
 public class Programa extends Node {
 	private SeccionTipos sectipos;
@@ -134,6 +137,7 @@ public class Programa extends Node {
 		secvars.codigo();
 		secsubprogs.codigo();
 		
+		inicio = cinst;
 		for (Instruccion instr : this.instrs)
 			instr.codigo();
 		
@@ -148,13 +152,20 @@ public class Programa extends Node {
 	}
 	
 	private int numeroInstruccionesActivacionPrograma(){
-		//TODO
-		return 0;
+		return 2;
 	}
 	
 	private ArrayList<Instruction> codigoActivacionPrograma(){
-		//TODO
-		return null;
+		int secDatos = 0;
+		int numDispays = anidamientoDe();
+		for(DecTipo d : secvars.getDectipos())
+			secDatos += d.getTipo_infer().getTam();
+		
+		ArrayList<Instruction> ret = new ArrayList<>();
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, numDispays + secDatos));
+		ret.add(new IntArgInstruction(IntInstruction_t.DESAPILA_DIR, 0));
+		
+		return ret;
 	}
 
 }
