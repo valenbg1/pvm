@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import pvm.compiler.ErrorsHandler;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.PointerInstruction;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 
 
 public class DesignaPointer extends Designador {
@@ -50,12 +52,12 @@ public class DesignaPointer extends Designador {
 	}
 
 	private int numeroInstruccionesDereferencia() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	private ArrayList<Instruction> codigoDereferencia() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		ret.add(new PointerInstruction(PointerInstruction_t.APILA_IND));
+		return ret;
 	}
 }

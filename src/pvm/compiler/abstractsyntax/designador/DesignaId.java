@@ -1,9 +1,18 @@
 package pvm.compiler.abstractsyntax.designador;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 
 import pvm.compiler.ErrorsHandler;
+import pvm.vm.PMachine;
+import pvm.vm.exceptions.InvalidHeapStateException;
+import pvm.vm.exceptions.InvalidValueTypeException;
+import pvm.vm.exceptions.NoHeapSpaceException;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
+import pvm.vm.instructions.VoidArgInstruction;
 
 public class DesignaId extends Designador {
 	private String id;
@@ -46,7 +55,14 @@ public class DesignaId extends Designador {
 	}
 
 	private ArrayList<Instruction> codigoAccesoId() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<>();
+		if(vinculo.getN_nivel() == 0){
+			ret.add(new IntArgInstruction(IntInstruction_t.APILA, vinculo.getN_dir()));
+		}else{
+			ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, vinculo.getN_nivel()));
+			ret.add(new IntArgInstruction(IntInstruction_t.APILA, vinculo.getN_dir()));
+			ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		}
+		return ret;
 	}
 }

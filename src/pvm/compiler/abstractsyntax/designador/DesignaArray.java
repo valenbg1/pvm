@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.VoidArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
 public class DesignaArray extends Designador {
 	private Designador desig;
@@ -61,12 +65,14 @@ public class DesignaArray extends Designador {
 	}
 
 	private int numeroInstruccionesIndexacion() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 3;
 	}
 
 	private ArrayList<Instruction> codigoIndexacion() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<>();
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, this.tipo_infer.getTam()));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.MUL));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		return ret;
 	}
 }
