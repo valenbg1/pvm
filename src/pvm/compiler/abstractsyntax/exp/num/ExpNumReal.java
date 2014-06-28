@@ -7,8 +7,6 @@ import pvm.compiler.abstractsyntax.tipo.simp.TipoDouble;
 import pvm.vm.instructions.DoubleArgInstruction;
 import pvm.vm.instructions.DoubleArgInstruction.DoubleInstruction_t;
 import pvm.vm.instructions.Instruction;
-import pvm.vm.instructions.IntArgInstruction;
-import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
 
 public class ExpNumReal extends Exp {
 	private double numreal;

@@ -1,9 +1,6 @@
 package pvm.compiler.abstractsyntax.instr;
 
-import java.util.ArrayList;
-
 import pvm.compiler.abstractsyntax.Node;
-import pvm.vm.instructions.Instruction;
 
 public abstract class Instruccion extends Node {
 	@Override

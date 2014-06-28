@@ -6,10 +6,8 @@ import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.vm.instructions.IOInstruction;
-import pvm.vm.instructions.Instruction;
-import pvm.vm.instructions.PointerInstruction;
 import pvm.vm.instructions.IOInstruction.IOInstruction_t;
-import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
+import pvm.vm.instructions.Instruction;
 
 public class IWrite extends Instruccion {
 	private Exp exp;

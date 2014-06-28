@@ -1,7 +1,6 @@
 package pvm.compiler.abstractsyntax.instr;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.designador.Designador;

@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoInt;
-import pvm.vm.instructions.BoolArgInstruction;
 import pvm.vm.instructions.Instruction;
-import pvm.vm.instructions.BoolArgInstruction.BoolInstruction_t;
 import pvm.vm.instructions.IntArgInstruction;
 import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
 

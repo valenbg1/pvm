@@ -1,7 +1,5 @@
 package pvm.compiler.abstractsyntax.exp.bin.arithm;
 
-import java.util.ArrayList;
-
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.vm.instructions.Instruction;
 import pvm.vm.instructions.VoidArgInstruction;
