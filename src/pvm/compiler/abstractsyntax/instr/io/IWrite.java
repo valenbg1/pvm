@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
+import pvm.vm.instructions.IOInstruction;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.PointerInstruction;
+import pvm.vm.instructions.IOInstruction.IOInstruction_t;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 
 public class IWrite extends Instruccion {
 	private Exp exp;
@@ -49,12 +53,12 @@ public class IWrite extends Instruccion {
 	}
 
 	private ArrayList<Instruction> codigoFinWrite() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<>();
+		ret.add(new IOInstruction(IOInstruction_t.ESCRIBE));
+		return ret;
 	}
 
 	private int numeroInstruccionesFinWrite() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 }

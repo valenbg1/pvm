@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
+import pvm.vm.instructions.IOInstruction;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IOInstruction.IOInstruction_t;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
+import pvm.vm.instructions.PointerInstruction;
 
 public class IRead extends Instruccion {
 	private Designador desig;
@@ -49,12 +53,13 @@ public class IRead extends Instruccion {
 	}
 
 	private ArrayList<Instruction> codigoFinRead() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<>();
+		ret.add(new IOInstruction(IOInstruction_t.LEE));
+		ret.add(new PointerInstruction(PointerInstruction_t.DESAPILA_IND));
+		return ret;
 	}
 
 	private int numeroInstruccionesFinRead() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
 }
