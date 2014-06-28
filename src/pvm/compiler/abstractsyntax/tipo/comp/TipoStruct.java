@@ -12,9 +12,24 @@ public class TipoStruct extends Tipo {
 	private List<DecTipo> dectipos;
 	
 	private Map<String, DecTipo> campos;
+	private Map<String, Integer> desp_campos;
 	
 	public TipoStruct(List<DecTipo> dectipos) {
 		this.dectipos = dectipos;
+	}
+
+	@Override
+	public void asignaEspacio() {
+		if (tam == -1) {
+			tam = 0;
+			desp_campos = new HashMap<String, Integer>();
+			
+			for (DecTipo dectipo : dectipos) {
+				desp_campos.put(dectipo.getId(), tam);
+				dectipo.getTipo_infer().asignaEspacio();
+				tam += dectipo.getTipo_infer().getTam();
+			}
+		}
 	}
 
 	@Override
@@ -48,8 +63,16 @@ public class TipoStruct extends Tipo {
 		return dectipos;
 	}
 
+	public Map<String, Integer> getDesp_campos() {
+		return desp_campos;
+	}
+
 	public void setCampos(Map<String, DecTipo> campos) {
 		this.campos = campos;
+	}
+
+	public void setDesp_campos(Map<String, Integer> desp_campos) {
+		this.desp_campos = desp_campos;
 	}
 
 	@Override
@@ -79,7 +102,7 @@ public class TipoStruct extends Tipo {
 
 	@Override
 	public void vincula() {
-		this.setCampos(new HashMap<String, DecTipo>());
+		campos = new HashMap<String, DecTipo>();
 		
 		for (DecTipo campo : dectipos) {
 			if (campos.containsKey(campo.getId()))
@@ -90,7 +113,7 @@ public class TipoStruct extends Tipo {
 			campo.getTipo_infer().vincula();
 		}
 	}
-
+	
 	@Override
 	public void vinculaDefPunteros() {
 		for (DecTipo dectipo : dectipos)

@@ -17,6 +17,16 @@ public class Caso extends Node {
 	}
 
 	@Override
+	public int anidamientoDe() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void asignaEspacio() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public void chequea() {
 		exp.chequea();
 		
@@ -49,7 +59,7 @@ public class Caso extends Node {
 		
 		return ret;
 	}
-
+	
 	@Override
 	public void vincula() {
 		exp.vincula();
@@ -57,7 +67,7 @@ public class Caso extends Node {
 		for (Instruccion instr : instrs)
 			instr.vincula();
 	}
-
+	
 	@Override
 	public void vinculaDefPunteros() {}
 }

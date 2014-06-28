@@ -3,6 +3,13 @@ package pvm.compiler.abstractsyntax.tipo;
 import pvm.compiler.abstractsyntax.Node;
 
 public abstract class Tipo extends Node {
+	protected int tam = -1;
+	
+	@Override
+	public int anidamientoDe() {
+		throw new UnsupportedOperationException();
+	}
+	
 	public abstract boolean equals(Tipo other);
 	
 	public boolean esArray() {
@@ -37,10 +44,9 @@ public abstract class Tipo extends Node {
 		return false;
 	}
 	
-	@Override
-	public void simplificaDefTipos() {}
-	
-	public abstract Tipo tipoSimplificado();
+	public int getTam() {
+		return tam;
+	}
 	
 	public boolean ioValid() {
 		if (esBooleano())
@@ -54,4 +60,13 @@ public abstract class Tipo extends Node {
 
 		return false;
 	}
+
+	public void setTam(int tam) {
+		this.tam = tam;
+	}
+
+	@Override
+	public void simplificaDefTipos() {}
+	
+	public abstract Tipo tipoSimplificado();
 }

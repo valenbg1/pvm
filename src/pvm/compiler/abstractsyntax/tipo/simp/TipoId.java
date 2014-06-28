@@ -14,6 +14,11 @@ public class TipoId extends Tipo {
 	}
 
 	@Override
+	public void asignaEspacio() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public void chequea() {
 		if(!(vinculo instanceof DecTipo))
 			ErrorsHandler.chequeaIdentificadorNoEsTipo(id, row);
@@ -54,8 +59,7 @@ public class TipoId extends Tipo {
 			ErrorsHandler.vinculaUndeclaredId(id, row);
 		
 	}
-
+	
 	@Override
 	public void vinculaDefPunteros() {}
-
 }

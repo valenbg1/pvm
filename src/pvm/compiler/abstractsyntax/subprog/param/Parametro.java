@@ -13,6 +13,16 @@ public abstract class Parametro extends Node {
 	}
 	
 	@Override
+	public int anidamientoDe() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
+	public void asignaEspacio() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@Override
 	public void chequea() {
 		tipo_infer.chequea();
 	}
@@ -21,11 +31,11 @@ public abstract class Parametro extends Node {
 	public boolean esParametro() {
 		return true;
 	}
-	
+
 	public boolean esRefer() {
 		return false;
 	}
-	
+
 	public boolean esValor() {
 		return false;
 	}
@@ -33,12 +43,12 @@ public abstract class Parametro extends Node {
 	public String getId() {
 		return id;
 	}
-
+	
 	@Override
 	public void simplificaDefTipos() {
 		tipo_infer = tipo_infer.tipoSimplificado();
 	}
-
+	
 	@Override
 	public String toString() {
 		return id + ": " + tipo_infer;

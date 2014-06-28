@@ -20,5 +20,6 @@ public class Main {
 		
 		programa.vincula();
 		programa.chequea();
+		programa.asignaEspacio();
 	}
 }

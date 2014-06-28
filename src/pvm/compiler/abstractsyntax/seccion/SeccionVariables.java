@@ -13,11 +13,27 @@ public class SeccionVariables extends Node {
 	}
 
 	@Override
+	public int anidamientoDe() {
+		int anid = 0;
+		
+		for (DecTipo dectipo : dectipos)
+			anid = Math.max(anid, dectipo.anidamientoDe());
+		
+		return anid;
+	}
+	
+	@Override
+	public void asignaEspacio() {
+		for (DecTipo dectipo : dectipos)
+			dectipo.asignaEspacio();
+	}
+
+	@Override
 	public void chequea() {
 		for(DecTipo dectipo: dectipos)
 			dectipo.chequea();
 	}
-	
+
 	public List<DecTipo> getDectipos() {
 		return dectipos;
 	}

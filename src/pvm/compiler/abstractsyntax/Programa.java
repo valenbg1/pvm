@@ -13,6 +13,8 @@ public class Programa extends Node {
 	private SeccionVariables secvars;
 	private SeccionSubprogramas secsubprogs;
 	private List<Instruccion> instrs;
+	
+	private int finDatos;
 
 	public Programa(SeccionTipos sectipos, SeccionVariables secvars,
 			SeccionSubprogramas secsubprogs, List<Instruccion> instrs) {
@@ -20,6 +22,22 @@ public class Programa extends Node {
 		this.secvars = secvars;
 		this.secsubprogs = secsubprogs;
 		this.instrs = instrs;
+	}
+
+	@Override
+	public int anidamientoDe() {
+		return 0;
+	}
+
+	@Override
+	public void asignaEspacio() {
+		finDatos = max_anidamiento();
+		dir = finDatos;
+		nivel = 0;
+		
+		sectipos.asignaEspacio();
+		secvars.asignaEspacio();
+		secsubprogs.asignaEspacio();
 	}
 
 	@Override
@@ -37,6 +55,10 @@ public class Programa extends Node {
 			inst.chequea();
 	}
 
+	public int getFinDatos() {
+		return finDatos;
+	}
+
 	public List<Instruccion> getInstrs() {
 		return instrs;
 	}
@@ -51,6 +73,20 @@ public class Programa extends Node {
 
 	public SeccionVariables getSecvars() {
 		return secvars;
+	}
+
+	private int max_anidamiento() {
+		int anid = 0;
+		
+		anid = Math.max(anid, sectipos.anidamientoDe());
+		anid = Math.max(anid, secvars.anidamientoDe());
+		anid = Math.max(anid, secsubprogs.anidamientoDe());
+		
+		return anid;
+	}
+
+	public void setFinDatos(int finDatos) {
+		this.finDatos = finDatos;
 	}
 
 	@Override

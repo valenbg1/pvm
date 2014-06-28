@@ -12,6 +12,14 @@ public class TipoArray extends Tipo {
 	}
 
 	@Override
+	public void asignaEspacio() {
+		if (tam == -1) {
+			tipo_infer.asignaEspacio();
+			tam = tipo_infer.getTam()*num;
+		}
+	}
+
+	@Override
 	public void chequea() {
 		tipo_infer.chequea();
 	}
@@ -31,14 +39,14 @@ public class TipoArray extends Tipo {
 	public int getNum() {
 		return num;
 	}
-
+	
 	@Override
 	public Tipo tipoSimplificado() {
 		tipo_infer = tipo_infer.tipoSimplificado();
 		
 		return this;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ARRAY " + tipo_infer + "[" + num + "]";

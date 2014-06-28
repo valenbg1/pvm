@@ -4,13 +4,18 @@ import pvm.compiler.abstractsyntax.tipo.Tipo;
 
 public class TipoDouble extends Tipo {
 	@Override
-	public void chequea() {}
+	public void asignaEspacio() {
+		tam = 1;
+	}
 
+	@Override
+	public void chequea() {}
+	
 	@Override
 	public boolean equals(Tipo other) {
 		return other instanceof TipoDouble;
 	}
-	
+
 	@Override
 	public boolean esDouble() {
 		return true;
@@ -28,7 +33,7 @@ public class TipoDouble extends Tipo {
 
 	@Override
 	public void vincula() {}
-
+	
 	@Override
 	public void vinculaDefPunteros() {}
 }

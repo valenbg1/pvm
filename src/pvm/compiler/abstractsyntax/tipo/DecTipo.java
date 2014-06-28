@@ -27,6 +27,21 @@ public class DecTipo extends Node {
 	}
 	
 	@Override
+	public int anidamientoDe() {
+		return 0;
+	}
+
+	@Override
+	public void asignaEspacio() {
+		if (esVariable) {
+			n_nivel = nivel;
+			n_dir = dir;
+			tipo_infer.asignaEspacio();
+			dir = dir+tipo_infer.getTam();
+		}
+	}
+
+	@Override
 	public void chequea() {
 		tipo_infer.chequea();
 	}

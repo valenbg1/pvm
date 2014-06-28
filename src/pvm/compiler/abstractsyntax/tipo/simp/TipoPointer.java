@@ -22,6 +22,13 @@ public class TipoPointer extends Tipo {
 	}
 	
 	@Override
+	public void asignaEspacio() {
+		tipo_infer.asignaEspacio();
+		
+		tam = 1;
+	}
+
+	@Override
 	public void chequea() {
 		tipo_infer.chequea();
 	}

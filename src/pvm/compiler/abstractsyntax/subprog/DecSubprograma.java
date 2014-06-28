@@ -33,6 +33,39 @@ public class DecSubprograma extends Node {
 	}
 
 	@Override
+	public int anidamientoDe() {
+		return 1 + max_anidamiento();
+	}
+
+	@Override
+	public void asignaEspacio() {
+		int copiaDir = dir;
+		int copiaNivel = nivel;
+		
+		++nivel;
+		n_nivel = nivel;
+		dir = 0;
+		
+		for (Parametro param : params) {
+			param.setN_dir(dir);
+			param.setN_nivel(nivel);
+			param.getTipo_infer().asignaEspacio();
+			
+			if (param.esRefer())
+				++dir;
+			else
+				dir += param.getTipo_infer().getTam();
+		}
+		
+		sectipos.asignaEspacio();
+		secvars.asignaEspacio();
+		secsubprogs.asignaEspacio();
+		
+		nivel = copiaNivel;
+		dir = copiaDir;
+	}
+
+	@Override
 	public void chequea() {
 		for (Parametro param : params)
 			param.chequea();
@@ -77,6 +110,16 @@ public class DecSubprograma extends Node {
 		return secvars;
 	}
 
+	private int max_anidamiento() {
+		int anid = 0;
+		
+		anid = Math.max(anid, sectipos.anidamientoDe());
+		anid = Math.max(anid, secvars.anidamientoDe());
+		anid = Math.max(anid, secsubprogs.anidamientoDe());
+		
+		return anid;
+	}
+
 	@Override
 	public void simplificaDefTipos() {}
 
@@ -94,7 +137,7 @@ public class DecSubprograma extends Node {
 		
 		return ret += "}";
 	}
-
+	
 	@Override
 	public void vincula() {
 		if (!sym_t.insertaId(id, this))

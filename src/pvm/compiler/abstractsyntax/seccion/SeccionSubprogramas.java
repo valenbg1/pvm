@@ -13,6 +13,22 @@ public class SeccionSubprogramas extends Node {
 	}
 
 	@Override
+	public int anidamientoDe() {
+		int anid = 0;
+		
+		for (DecSubprograma decsubprogram : decsubprogramas)
+			anid = Math.max(anid, decsubprogram.anidamientoDe());
+		
+		return anid;
+	}
+
+	@Override
+	public void asignaEspacio() {
+		for (DecSubprograma decsubprogram : decsubprogramas)
+			decsubprogram.asignaEspacio();
+	}
+
+	@Override
 	public void chequea() {
 		for(DecSubprograma decsubprogram: decsubprogramas)
 			decsubprogram.chequea();

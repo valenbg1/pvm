@@ -6,13 +6,18 @@ public class TipoInt extends Tipo {
 	public static final Tipo TIPO = new TipoInt();
 	
 	@Override
-	public void chequea() {}
+	public void asignaEspacio() {
+		tam = 1;
+	}
 
+	@Override
+	public void chequea() {}
+	
 	@Override
 	public boolean equals(Tipo other) {
 		return other instanceof TipoInt;
 	}
-	
+
 	@Override
 	public boolean esInt() {
 		return true;
@@ -27,7 +32,7 @@ public class TipoInt extends Tipo {
 	public String toString() {
 		return "int";
 	}
-
+	
 	@Override
 	public void vincula() {}
 	
