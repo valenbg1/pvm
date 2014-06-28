@@ -10,7 +10,14 @@ import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
 import pvm.compiler.abstractsyntax.subprog.param.Parametro;
+import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.PointerInstruction;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
+import pvm.vm.instructions.VoidArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
 public class DecSubprograma extends Node {
 	private String id;
@@ -21,6 +28,7 @@ public class DecSubprograma extends Node {
 	private SeccionSubprogramas secsubprogs;
 	private List<Instruccion> instrs;
 	private int dirComienzo;
+	private int secDataSize;
 	
 	public DecSubprograma(List<Parametro> params, String id,
 			SeccionTipos sectipos, SeccionVariables secvars,
@@ -213,13 +221,31 @@ public class DecSubprograma extends Node {
 	}
 
 	private ArrayList<Instruction> codigoPrologo() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		secDataSize = 0;
+		for(Parametro p : params)
+			secDataSize += p.getTipo_infer().getTam();
+		for(DecTipo d : secvars.getDectipos())
+			secDataSize += d.getTipo_infer().getTam();
+		
+		ret.add(new VoidArgInstruction(VoidInstruction_t.DUP));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, 1));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.RESTA));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, getN_nivel()));
+		ret.add(new PointerInstruction(PointerInstruction_t.DESAPILA_IND));
+		ret.add(new IntArgInstruction(IntInstruction_t.DESAPILA_DIR, getN_nivel()));
+		
+		// Actualiza cima de registros de activación.
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, getN_nivel()));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, secDataSize-1));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		ret.add(new IntArgInstruction(IntInstruction_t.DESAPILA_DIR, 0));
+		
+		return ret;
 	}
 
 	private int numInstruccionesPrologo() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 10;
 	}
 
 	public int getDirComienzo() {
