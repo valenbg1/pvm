@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.exp.ExpDesignador;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.PointerInstruction;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 
 public class IAsig extends Instruccion {
 	private Designador desig;
@@ -61,12 +66,18 @@ public class IAsig extends Instruccion {
 	}
 
 	private ArrayList<Instruction> codigoFinAsig() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		
+		if(exp instanceof ExpDesignador){
+			ret.add(new IntArgInstruction(IntInstruction_t.CLONA, exp.getTipo_infer().getTam()));
+		}else{
+			ret.add(new PointerInstruction(PointerInstruction_t.DESAPILA_IND));
+		}
+		
+		return ret;
 	}
 
 	private int numeroInstruccionesFinAsig() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 }
