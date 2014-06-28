@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoBoolean;
+import pvm.vm.instructions.BoolArgInstruction;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.BoolArgInstruction.BoolInstruction_t;
 
 public class ExpTrue extends Exp {
 	@Override
@@ -27,7 +29,8 @@ public class ExpTrue extends Exp {
 	}
 
 	private ArrayList<Instruction> codigoTrue() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		ret.add(new BoolArgInstruction(BoolInstruction_t.APILA, true));
+		return ret;
 	}
 }
