@@ -1,5 +1,6 @@
 package pvm.compiler.abstractsyntax;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pvm.compiler.SymbolsTable;
@@ -7,6 +8,7 @@ import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
+import pvm.vm.instructions.Instruction;
 
 public class Programa extends Node {
 	private SeccionTipos sectipos;
@@ -123,4 +125,36 @@ public class Programa extends Node {
 
 	@Override
 	public void vinculaDefPunteros() {}
+
+	@Override
+	public void codigo() {
+		cinst = numeroInstruccionesActivacionPrograma();
+
+		sectipos.codigo();
+		secvars.codigo();
+		secsubprogs.codigo();
+		
+		for (Instruccion instr : this.instrs)
+			instr.codigo();
+		
+		cod = codigoActivacionPrograma();
+		cod.addAll(sectipos.getCod());
+		cod.addAll(secvars.getCod());
+		cod.addAll(secsubprogs.getCod());
+		
+		for (Instruccion instr : this.instrs)
+			cod.addAll(instr.getCod());
+		
+	}
+	
+	private int numeroInstruccionesActivacionPrograma(){
+		//TODO
+		return 0;
+	}
+	
+	private ArrayList<Instruction> codigoActivacionPrograma(){
+		//TODO
+		return null;
+	}
+
 }

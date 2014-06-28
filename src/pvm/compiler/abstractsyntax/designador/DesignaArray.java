@@ -1,7 +1,10 @@
 package pvm.compiler.abstractsyntax.designador;
 
+import java.util.ArrayList;
+
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.vm.instructions.Instruction;
 
 public class DesignaArray extends Designador {
 	private Designador desig;
@@ -44,5 +47,26 @@ public class DesignaArray extends Designador {
 	public void vincula() {
 		desig.vincula();
 		exp.vincula();
+	}
+	
+	@Override
+	public void codigo() {
+		desig.codigo();
+		exp.codigo();
+		
+		cod.addAll(desig.getCod());
+		cod.addAll(exp.getCod());
+		cod.addAll(codigoIndexacion());
+		cinst += numeroInstruccionesIndexacion();
+	}
+
+	private int numeroInstruccionesIndexacion() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private ArrayList<Instruction> codigoIndexacion() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

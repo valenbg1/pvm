@@ -10,6 +10,11 @@ public abstract class Tipo extends Node {
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
+	public void codigo() {
+		throw new UnsupportedOperationException();
+	}
+	
 	public abstract boolean equals(Tipo other);
 	
 	public boolean esArray() {

@@ -1,9 +1,11 @@
 package pvm.compiler.abstractsyntax.seccion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
+import pvm.vm.instructions.Instruction;
 
 public class SeccionVariables extends Node {
 	private List<DecTipo> dectipos;
@@ -67,5 +69,10 @@ public class SeccionVariables extends Node {
 	public void vinculaDefPunteros() {
 		for (DecTipo dectipo : dectipos)
 			dectipo.vinculaDefPunteros();
+	}
+	
+	@Override
+	public void codigo() {
+		cod = new ArrayList<Instruction>();
 	}
 }

@@ -3,10 +3,12 @@ package pvm.compiler;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 
 import pvm.compiler.abstractsyntax.Programa;
 import pvm.compiler.lexanalyzer.LexicalAnalyzer;
 import pvm.compiler.synanalyzer.SyntacticAnalyzer;
+import pvm.vm.instructions.Instruction;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
@@ -21,5 +23,8 @@ public class Main {
 		programa.vincula();
 		programa.chequea();
 		programa.asignaEspacio();
+
+		programa.codigo();
+		ArrayList<Instruction> code = programa.getCod();
 	}
 }

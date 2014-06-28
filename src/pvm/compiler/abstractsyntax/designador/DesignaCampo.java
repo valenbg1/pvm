@@ -1,8 +1,11 @@
 package pvm.compiler.abstractsyntax.designador;
 
+import java.util.ArrayList;
+
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.compiler.abstractsyntax.tipo.comp.TipoStruct;
+import pvm.vm.instructions.Instruction;
 
 
 
@@ -48,5 +51,24 @@ public class DesignaCampo extends Designador {
 	@Override
 	public void vincula() {
 		desig.vincula();
+	}
+
+	@Override
+	public void codigo() {
+		desig.codigo();
+		
+		cod.addAll(desig.getCod());
+		cod.addAll(codigoAccesoCampo());
+		cinst += numeroInstruccionesAccesoACampo();
+	}
+
+	private int numeroInstruccionesAccesoACampo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private ArrayList<Instruction> codigoAccesoCampo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

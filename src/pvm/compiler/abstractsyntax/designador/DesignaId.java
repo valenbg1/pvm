@@ -1,6 +1,9 @@
 package pvm.compiler.abstractsyntax.designador;
 
+import java.util.ArrayList;
+
 import pvm.compiler.ErrorsHandler;
+import pvm.vm.instructions.Instruction;
 
 public class DesignaId extends Designador {
 	private String id;
@@ -34,5 +37,16 @@ public class DesignaId extends Designador {
 		
 		if (vinculo == null)
 			ErrorsHandler.vinculaUndeclaredId(id, row);
+	}
+
+	@Override
+	public void codigo() {
+		cod = codigoAccesoId();
+		cinst += cod.size();
+	}
+
+	private ArrayList<Instruction> codigoAccesoId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

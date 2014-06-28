@@ -1,9 +1,11 @@
 package pvm.compiler.abstractsyntax.seccion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.subprog.DecSubprograma;
+import pvm.vm.instructions.Instruction;
 
 public class SeccionSubprogramas extends Node {
 	private List<DecSubprograma> decsubprogramas;
@@ -67,5 +69,15 @@ public class SeccionSubprogramas extends Node {
 	public void vinculaDefPunteros() {
 		for (DecSubprograma decsubprogram : decsubprogramas)
 			decsubprogram.vinculaDefPunteros();
+	}
+
+	@Override
+	public void codigo() {
+		cod = new ArrayList<Instruction>();
+		
+		for (DecSubprograma decsubprogram : decsubprogramas){
+			decsubprogram.codigo();
+			cod.addAll(decsubprogram.getCod());
+		}
 	}
 }

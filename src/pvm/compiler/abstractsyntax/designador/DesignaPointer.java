@@ -1,6 +1,9 @@
 package pvm.compiler.abstractsyntax.designador;
 
+import java.util.ArrayList;
+
 import pvm.compiler.ErrorsHandler;
+import pvm.vm.instructions.Instruction;
 
 
 public class DesignaPointer extends Designador {
@@ -35,5 +38,24 @@ public class DesignaPointer extends Designador {
 	@Override
 	public void vincula() {
 		desig.vincula();
+	}
+
+	@Override
+	public void codigo() {
+		desig.codigo();
+		
+		cod.addAll(desig.getCod());
+		cod.addAll(codigoDereferencia());
+		cinst += numeroInstruccionesDereferencia();
+	}
+
+	private int numeroInstruccionesDereferencia() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private ArrayList<Instruction> codigoDereferencia() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -90,4 +90,8 @@ public class DecTipo extends Node {
 	public void vinculaDefPunteros() {
 		tipo_infer.vinculaDefPunteros();		
 	}
+
+	@Override
+	public void codigo() {
+	}
 }

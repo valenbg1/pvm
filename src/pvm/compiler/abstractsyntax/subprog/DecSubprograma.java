@@ -1,5 +1,7 @@
 package pvm.compiler.abstractsyntax.subprog;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import pvm.compiler.ErrorsHandler;
@@ -9,6 +11,7 @@ import pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas;
 import pvm.compiler.abstractsyntax.seccion.SeccionTipos;
 import pvm.compiler.abstractsyntax.seccion.SeccionVariables;
 import pvm.compiler.abstractsyntax.subprog.param.Parametro;
+import pvm.vm.instructions.Instruction;
 
 public class DecSubprograma extends Node {
 	private String id;
@@ -18,6 +21,7 @@ public class DecSubprograma extends Node {
 	private SeccionVariables secvars;
 	private SeccionSubprogramas secsubprogs;
 	private List<Instruccion> instrs;
+	private int dirComienzo;
 	
 	public DecSubprograma(List<Parametro> params, String id,
 			SeccionTipos sectipos, SeccionVariables secvars,
@@ -169,5 +173,61 @@ public class DecSubprograma extends Node {
 	public void vinculaDefPunteros() {
 		for (Parametro param : params)
 			param.getTipo_infer().vinculaDefPunteros();
+	}
+
+
+	@Override
+	public void codigo() {
+		cod = new ArrayList<Instruction>();
+		
+		sectipos.codigo();
+		secvars.codigo();
+		secsubprogs.codigo();
+
+		cod.addAll(sectipos.getCod());
+		cod.addAll(secvars.getCod());
+		cod.addAll(secsubprogs.getCod());
+
+		dirComienzo = cinst;
+		
+		cinst += numInstruccionesPrologo();
+		cod.addAll(codigoPrologo());
+		
+		for (Instruccion instr : this.instrs){
+			instr.codigo();
+			cod.addAll(instr.getCod());
+		}
+		
+		cinst += numInstruccionesEpilogo();
+		cod.addAll(codigoEpilogo());
+		
+	}
+
+	private ArrayList<Instruction> codigoEpilogo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private int numInstruccionesEpilogo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	private ArrayList<Instruction> codigoPrologo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private int numInstruccionesPrologo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getDirComienzo() {
+		return dirComienzo;
+	}
+
+	public void setDirComienzo(int dirComienzo) {
+		this.dirComienzo = dirComienzo;
 	}
 }
