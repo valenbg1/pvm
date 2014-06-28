@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.tipo.simp.TipoDouble;
+import pvm.vm.instructions.DoubleArgInstruction;
+import pvm.vm.instructions.DoubleArgInstruction.DoubleInstruction_t;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
 
 public class ExpNumReal extends Exp {
 	private double numreal;
@@ -37,7 +41,8 @@ public class ExpNumReal extends Exp {
 	}
 
 	private ArrayList<Instruction> codigoDouble() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<Instruction>();
+		ret.add(new DoubleArgInstruction(DoubleInstruction_t.APILA, numreal));
+		return ret;
 	}
 }
