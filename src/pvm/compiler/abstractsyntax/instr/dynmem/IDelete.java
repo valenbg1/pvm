@@ -6,6 +6,10 @@ import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.PointerInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 
 public class IDelete extends Instruccion {
 	private Designador desig;
@@ -56,12 +60,12 @@ public class IDelete extends Instruccion {
 	}
 
 	private ArrayList<Instruction> codigoFinDelete() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<>();
+		ret.add(new IntArgInstruction(IntInstruction_t.LIBERA, vinculo.getTipo_infer().getTam()));
+		return ret;
 	}
 
 	private int numeroInstruccionesFinDelete() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 }

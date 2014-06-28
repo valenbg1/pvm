@@ -6,6 +6,10 @@ import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.designador.Designador;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.PointerInstruction;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 
 public class INew extends Instruccion {
 	private Designador desig;
@@ -56,12 +60,13 @@ public class INew extends Instruccion {
 	}
 
 	private ArrayList<Instruction> codigoFinNew() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Instruction> ret = new ArrayList<>();
+		ret.add(new IntArgInstruction(IntInstruction_t.RESERVA, vinculo.getTipo_infer().getTam()));
+		ret.add(new PointerInstruction(PointerInstruction_t.DESAPILA_IND));
+		return ret;
 	}
 
 	private int numeroInstruccionesFinNew() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2;
 	}
 }
