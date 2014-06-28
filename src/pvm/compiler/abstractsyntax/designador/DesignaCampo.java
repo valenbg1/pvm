@@ -6,6 +6,10 @@ import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.tipo.DecTipo;
 import pvm.compiler.abstractsyntax.tipo.comp.TipoStruct;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.VoidArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
 
 
@@ -63,12 +67,28 @@ public class DesignaCampo extends Designador {
 	}
 
 	private int numeroInstruccionesAccesoACampo() {
-		// TODO Auto-generated method stub
-		return 0;
+		if(desig.getN_nivel() == 0)
+			return 3;
+		else
+			return 5;
 	}
 
 	private ArrayList<Instruction> codigoAccesoCampo() {
-		// TODO Auto-generated method stub
-		return null;
+		int dir = desig.getN_dir();
+		int desp = ((TipoStruct) desig.getTipo_infer()).getDesp_campos().get(campo);
+		ArrayList<Instruction> ret = new ArrayList<>();
+		
+		if(desig.getN_nivel() == 0){
+			ret.add(new IntArgInstruction(IntInstruction_t.APILA, dir));
+			ret.add(new IntArgInstruction(IntInstruction_t.APILA, desp));
+			ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		}else{
+			ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, desig.getN_nivel()));
+			ret.add(new IntArgInstruction(IntInstruction_t.APILA, dir));
+			ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+			ret.add(new IntArgInstruction(IntInstruction_t.APILA, desp));
+			ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		}
+		return ret;
 	}
 }
