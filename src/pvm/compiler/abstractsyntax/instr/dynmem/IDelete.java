@@ -59,7 +59,7 @@ public class IDelete extends Instruccion {
 
 	private ArrayList<Instruction> codigoFinDelete() {
 		ArrayList<Instruction> ret = new ArrayList<>();
-		ret.add(new IntArgInstruction(IntInstruction_t.LIBERA, vinculo.getTipo_infer().getTam()));
+		ret.add(new IntArgInstruction(IntInstruction_t.LIBERA, desig.getTipo_infer().getTam()));
 		return ret;
 	}
 

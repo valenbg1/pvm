@@ -46,6 +46,8 @@ public class DesignaPointer extends Designador {
 	public void codigo() {
 		desig.codigo();
 		
+		cod = new ArrayList<Instruction>();
+		
 		cod.addAll(desig.getCod());
 		cod.addAll(codigoDereferencia());
 		cinst += numeroInstruccionesDereferencia();

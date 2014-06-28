@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import pvm.compiler.abstractsyntax.Programa;
 import pvm.compiler.lexanalyzer.LexicalAnalyzer;
 import pvm.compiler.synanalyzer.SyntacticAnalyzer;
+import pvm.vm.PMachine;
 import pvm.vm.instructions.Instruction;
 
 public class Main {
@@ -26,5 +27,8 @@ public class Main {
 
 		programa.codigo();
 		ArrayList<Instruction> code = programa.getCod();
+		
+		PMachine pvm = new PMachine(code);
+		pvm.run();
 	}
 }

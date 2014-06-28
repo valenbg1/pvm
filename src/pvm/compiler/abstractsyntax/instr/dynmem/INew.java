@@ -61,7 +61,7 @@ public class INew extends Instruccion {
 
 	private ArrayList<Instruction> codigoFinNew() {
 		ArrayList<Instruction> ret = new ArrayList<>();
-		ret.add(new IntArgInstruction(IntInstruction_t.RESERVA, vinculo.getTipo_infer().getTam()));
+		ret.add(new IntArgInstruction(IntInstruction_t.RESERVA, desig.getTipo_infer().getTam()));
 		ret.add(new PointerInstruction(PointerInstruction_t.DESAPILA_IND));
 		return ret;
 	}

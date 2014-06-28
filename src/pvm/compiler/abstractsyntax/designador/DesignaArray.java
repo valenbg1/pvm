@@ -58,6 +58,8 @@ public class DesignaArray extends Designador {
 		desig.codigo();
 		exp.codigo();
 		
+		cod = new ArrayList<Instruction>();
+		
 		cod.addAll(desig.getCod());
 		cod.addAll(exp.getCod());
 		cod.addAll(codigoIndexacion());

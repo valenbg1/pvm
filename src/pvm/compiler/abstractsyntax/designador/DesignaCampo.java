@@ -61,6 +61,8 @@ public class DesignaCampo extends Designador {
 	public void codigo() {
 		desig.codigo();
 		
+		cod = new ArrayList<Instruction>();
+		
 		cod.addAll(desig.getCod());
 		cod.addAll(codigoAccesoCampo());
 		cinst += numeroInstruccionesAccesoACampo();
