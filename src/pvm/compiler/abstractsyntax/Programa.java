@@ -152,7 +152,7 @@ public class Programa extends Node {
 	}
 	
 	private int numeroInstruccionesActivacionPrograma(){
-		return 2;
+		return 3;
 	}
 	
 	private ArrayList<Instruction> codigoActivacionPrograma(){
@@ -164,6 +164,7 @@ public class Programa extends Node {
 		ArrayList<Instruction> ret = new ArrayList<>();
 		ret.add(new IntArgInstruction(IntInstruction_t.APILA, numDispays + secDatos));
 		ret.add(new IntArgInstruction(IntInstruction_t.DESAPILA_DIR, 0));
+		ret.add(new IntArgInstruction(IntInstruction_t.IR_A, inicio));
 		
 		return ret;
 	}
