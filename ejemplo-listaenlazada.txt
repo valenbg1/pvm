@@ -1,0 +1,69 @@
+PROGRAM
+TYPES  
+  TLista: pointer TCelda; 
+
+  TCelda: struct {
+            valor: int; 
+            sig: TLista   
+          }
+VARIABLES
+  lista: TLista
+SUBPROGRAMS
+  SUBPROGRAM LeeValores(& lista: TLista)  
+  VARIABLES
+    fin: boolean;                              
+    valor: int
+  SUBPROGRAMS
+      SUBPROGRAM LeeValor(& valor: int) {
+          read valor;                        
+          fin = (valor == -1)     
+      };
+      
+      SUBPROGRAM GuardaValor(& lista: TLista) 
+      SUBPROGRAMS
+          SUBPROGRAM AlmacenaValor() {
+              new lista;                      
+              lista->.valor = valor;
+              lista->.sig = null
+          }
+      { # Cuerpo de GuardaValor
+        IF 
+          lista == null: {AlmacenaValor()} []
+          true: {GuardaValor(lista->.sig)}
+        ENDIF
+      } 
+   { # Cuerpo de LeeValores
+      fin = false;   
+      DO
+        NOT fin: {LeeValor(valor);
+                  IF 
+                    NOT fin: {GuardaValor(lista)}
+                  ENDIF}   
+      ENDDO
+   }; 
+  
+  SUBPROGRAM LiberaLista(& lista: TLista)
+  SUBPROGRAMS
+      SUBPROGRAM Libera(lista: TLista ) {
+          IF 
+            lista != null: {
+            Libera(lista->.sig);
+            delete lista
+          }
+         ENDIF 
+      }
+      
+   { # Cuerpo de LiberaArbol
+     Libera(lista);
+     lista = null
+   }
+
+
+# Programa Principal 
+
+{
+  lista = null;
+  LeeValores(lista);
+  read lista->.valor;
+  LiberaLista(lista)
+}
