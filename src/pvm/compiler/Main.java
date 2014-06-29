@@ -14,7 +14,7 @@ import pvm.vm.instructions.Instruction;
 public class Main {
 	public static void main(String[] args) throws Exception {
 		Reader input = new InputStreamReader(new FileInputStream(
-				"ejemplo-sencillo.txt"));
+				"ejemplo-factorial.txt"));
 		LexicalAnalyzer alex = new LexicalAnalyzer(input);
 		SyntacticAnalyzer asint = new SyntacticAnalyzer(alex);
 		Programa programa = (Programa) asint.parse().value;
