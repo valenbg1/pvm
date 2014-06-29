@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import pvm.compiler.ErrorsHandler;
 import pvm.compiler.abstractsyntax.exp.Exp;
+import pvm.compiler.abstractsyntax.exp.ExpDesignador;
 import pvm.vm.instructions.Instruction;
 import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.PointerInstruction;
 import pvm.vm.instructions.VoidArgInstruction;
 import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
 public class DesignaArray extends Designador {
@@ -63,6 +66,10 @@ public class DesignaArray extends Designador {
 		
 		cod.addAll(desig.getCod());
 		cod.addAll(exp.getCod());
+		if (exp instanceof ExpDesignador){
+			cod.add(new PointerInstruction(PointerInstruction_t.APILA_IND));
+			cinst++;
+		}
 		cod.addAll(codigoIndexacion());
 		cinst += numeroInstruccionesIndexacion();
 		
