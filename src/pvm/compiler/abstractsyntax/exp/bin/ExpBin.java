@@ -66,9 +66,10 @@ public abstract class ExpBin extends Exp {
 	public void codigo() {
 		inicio = cinst;
 		exp0.codigo();
+		cinst += exp0.numInstruccionesAccesoValor();
 		cinst++;
 		exp1.codigo();
-		cinst += exp0.numInstruccionesAccesoValor() + exp1.numInstruccionesAccesoValor();
+		cinst += exp1.numInstruccionesAccesoValor();
 		
 		cod = new ArrayList<Instruction>();
 		
