@@ -26,5 +26,6 @@ public class ExpNull extends Exp {
 	public void codigo() {
 		cod = new ArrayList<Instruction>();
 		cod.add(new IntArgInstruction(IntInstruction_t.APILA, 0));
+		cinst++;
 	}
 }
