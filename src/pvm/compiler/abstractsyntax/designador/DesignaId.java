@@ -3,9 +3,12 @@ package pvm.compiler.abstractsyntax.designador;
 import java.util.ArrayList;
 
 import pvm.compiler.ErrorsHandler;
+import pvm.compiler.abstractsyntax.subprog.param.ParamRefer;
 import pvm.vm.instructions.Instruction;
 import pvm.vm.instructions.IntArgInstruction;
 import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
+import pvm.vm.instructions.PointerInstruction;
+import pvm.vm.instructions.PointerInstruction.PointerInstruction_t;
 import pvm.vm.instructions.VoidArgInstruction;
 import pvm.vm.instructions.VoidArgInstruction.VoidInstruction_t;
 
@@ -59,7 +62,10 @@ public class DesignaId extends Designador {
 			ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, vinculo.getN_nivel()));
 			ret.add(new IntArgInstruction(IntInstruction_t.APILA, vinculo.getN_dir()));
 			ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+			if(vinculo instanceof ParamRefer)
+				ret.add(new PointerInstruction(PointerInstruction_t.APILA_IND));
 		}
+		
 		return ret;
 	}
 }

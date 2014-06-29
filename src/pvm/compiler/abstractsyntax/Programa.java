@@ -38,7 +38,7 @@ public class Programa extends Node {
 	@Override
 	public void asignaEspacio() {
 		finDatos = max_anidamiento();
-		dir = finDatos;
+		dir = finDatos+1;
 		nivel = 0;
 		
 		sectipos.asignaEspacio();
