@@ -246,9 +246,12 @@ public class DecSubprograma extends Node {
 	private ArrayList<Instruction> codigoPrologo() {
 		ArrayList<Instruction> ret = new ArrayList<Instruction>();
 		secDataSize = 0;
-		for(Parametro p : params)
-			secDataSize += p.getTipo_infer().getTam();
-		for(DecTipo d : secvars.getDectipos())
+		for(Parametro p : params){
+			if(p.esValor())
+				secDataSize += p.getTipo_infer().getTam();
+			else
+				secDataSize ++;
+		}for(DecTipo d : secvars.getDectipos())
 			secDataSize += d.getTipo_infer().getTam();
 		
 		ret.add(new VoidArgInstruction(VoidInstruction_t.DUP));

@@ -99,9 +99,7 @@ public class ILlamada extends Instruccion {
 		for (Exp exp : args){
 			cod.add(new VoidArgInstruction(VoidInstruction_t.DUP));
 			cinst++;
-			exp.codigo();
 			cod.addAll(codigoPasoParámetro(exp));
-			cinst += numeroInstruccionesPasoParam(exp);
 		}
 		
 		cinst += numeroInstruccionesFinLlamada();
@@ -126,23 +124,21 @@ public class ILlamada extends Instruccion {
 		return 6;
 	}
 
-	private int numeroInstruccionesPasoParam(Exp exp) {
-		return 3 + exp.getCod().size();
-	}
-
 	private ArrayList<Instruction> codigoPasoParámetro(Exp exp) {
 		int index = args.indexOf(exp);
 		ArrayList<Instruction> ret = new ArrayList<Instruction>();
 		
 		ret.add(new IntArgInstruction(IntInstruction_t.APILA, index));
 		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+		cinst += 2;
+		exp.codigo();
 		ret.addAll(exp.getCod());
 		
 		if(((DecSubprograma)vinculo).getParams().get(index).esValor() && (exp instanceof ExpDesignador))
 			ret.add(new IntArgInstruction(IntInstruction_t.CLONA, exp.getTipo_infer().getTam()));
 		else
 			ret.add(new PointerInstruction(PointerInstruction_t.DESAPILA_IND));
-				
+		cinst++;	
 		return ret;
 	}
 
