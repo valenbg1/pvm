@@ -34,8 +34,10 @@ public class ExpNumNat extends Exp {
 
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		cod = codigoInt();
 		cinst += cod.size();
+		fin = cinst;
 	}
 
 	private ArrayList<Instruction> codigoInt() {

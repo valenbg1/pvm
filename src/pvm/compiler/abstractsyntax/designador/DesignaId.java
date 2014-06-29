@@ -45,8 +45,10 @@ public class DesignaId extends Designador {
 
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		cod = codigoAccesoId();
 		cinst += cod.size();
+		fin = cinst;
 	}
 
 	private ArrayList<Instruction> codigoAccesoId() {

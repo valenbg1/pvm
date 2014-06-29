@@ -8,6 +8,8 @@ import pvm.compiler.abstractsyntax.Node;
 import pvm.compiler.abstractsyntax.exp.Exp;
 import pvm.compiler.abstractsyntax.instr.Instruccion;
 import pvm.vm.instructions.Instruction;
+import pvm.vm.instructions.IntArgInstruction;
+import pvm.vm.instructions.IntArgInstruction.IntInstruction_t;
 
 public class Caso extends Node {
 	private Exp exp;
@@ -75,14 +77,25 @@ public class Caso extends Node {
 
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		exp.codigo();
+		cinst += numeroInstruccionesDeControl();
 		for (Instruccion instr : instrs)
 			instr.codigo();
+		cinst += numeroInstruccionesDeControl();
+		
+		fin = cinst;
+		
+		cod = new ArrayList<Instruction>();
+		cod.addAll(exp.getCod());
+		cod.add(new IntArgInstruction(IntInstruction_t.IR_F, fin));
+		for (Instruccion instr : instrs)
+			cod.addAll(instr.getCod());
 	}
 	
-	@Override
-	public ArrayList<Instruction> getCod() {
-		throw new UnsupportedOperationException();
+	private int numeroInstruccionesDeControl() {
+		return 1;
 	}
+
 
 }

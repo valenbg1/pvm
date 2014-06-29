@@ -34,8 +34,10 @@ public class ExpNumReal extends Exp {
 	
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		cod = codigoDouble();
 		cinst += cod.size();
+		fin = cinst;
 	}
 
 	private ArrayList<Instruction> codigoDouble() {

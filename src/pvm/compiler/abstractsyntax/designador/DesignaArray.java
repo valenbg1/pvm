@@ -55,6 +55,7 @@ public class DesignaArray extends Designador {
 	
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		desig.codigo();
 		exp.codigo();
 		
@@ -64,6 +65,8 @@ public class DesignaArray extends Designador {
 		cod.addAll(exp.getCod());
 		cod.addAll(codigoIndexacion());
 		cinst += numeroInstruccionesIndexacion();
+		
+		fin = cinst;
 	}
 
 	private int numeroInstruccionesIndexacion() {

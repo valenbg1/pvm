@@ -74,5 +74,7 @@ public class SeccionVariables extends Node {
 	@Override
 	public void codigo() {
 		cod = new ArrayList<Instruction>();
+		inicio = cinst;
+		fin = cinst;
 	}
 }

@@ -79,5 +79,6 @@ public class SeccionSubprogramas extends Node {
 			decsubprogram.codigo();
 			cod.addAll(decsubprogram.getCod());
 		}
+		fin = cinst;
 	}
 }

@@ -186,6 +186,7 @@ public class DecSubprograma extends Node {
 	@Override
 	public void codigo() {
 		cod = new ArrayList<Instruction>();
+		inicio = cinst;
 		
 		sectipos.codigo();
 		secvars.codigo();
@@ -195,7 +196,7 @@ public class DecSubprograma extends Node {
 		cod.addAll(secvars.getCod());
 		cod.addAll(secsubprogs.getCod());
 
-		inicio = cinst;
+		dirComienzo = cinst;
 		
 		cinst += numInstruccionesPrologo();
 		cod.addAll(codigoPrologo());
@@ -207,6 +208,8 @@ public class DecSubprograma extends Node {
 		
 		cinst += numInstruccionesEpilogo();
 		cod.addAll(codigoEpilogo());
+		
+		fin = cinst;
 		
 	}
 

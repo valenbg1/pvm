@@ -20,6 +20,7 @@ public class Programa extends Node {
 	private List<Instruccion> instrs;
 	
 	private int finDatos;
+	private int direccionInicio;
 
 	public Programa(SeccionTipos sectipos, SeccionVariables secvars,
 			SeccionSubprogramas secsubprogs, List<Instruccion> instrs) {
@@ -131,13 +132,14 @@ public class Programa extends Node {
 
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		cinst = numeroInstruccionesActivacionPrograma();
 
 		sectipos.codigo();
 		secvars.codigo();
 		secsubprogs.codigo();
 		
-		inicio = cinst;
+		direccionInicio = cinst;
 		
 		for (Instruccion instr : this.instrs)
 			instr.codigo();
@@ -152,6 +154,7 @@ public class Programa extends Node {
 		for (Instruccion instr : this.instrs)
 			cod.addAll(instr.getCod());
 		
+		fin = cinst;		
 	}
 	
 	private int numeroInstruccionesActivacionPrograma(){
@@ -167,7 +170,7 @@ public class Programa extends Node {
 		ArrayList<Instruction> ret = new ArrayList<>();
 		ret.add(new IntArgInstruction(IntInstruction_t.APILA, numDispays + secDatos));
 		ret.add(new IntArgInstruction(IntInstruction_t.DESAPILA_DIR, 0));
-		ret.add(new IntArgInstruction(IntInstruction_t.IR_A, inicio));
+		ret.add(new IntArgInstruction(IntInstruction_t.IR_A, direccionInicio));
 		
 		return ret;
 	}

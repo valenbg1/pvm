@@ -64,6 +64,7 @@ public abstract class ExpBin extends Exp {
 	
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		exp0.codigo();
 		exp1.codigo();
 		cinst += exp0.numInstruccionesAccesoValor() + exp1.numInstruccionesAccesoValor();
@@ -77,6 +78,8 @@ public abstract class ExpBin extends Exp {
 		cod.addAll(exp0.codigoAccesoAlValor());
 		
 		cod.add(codigoDeOperacion());
+		
+		fin = cinst;
 	}
 	
 	protected abstract Instruction codigoDeOperacion();

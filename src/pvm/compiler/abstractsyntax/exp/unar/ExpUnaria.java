@@ -56,6 +56,7 @@ public abstract class ExpUnaria extends Exp {
 	
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		exp.codigo();
 		cinst += exp.numInstruccionesAccesoValor();
 		cinst++;
@@ -66,6 +67,7 @@ public abstract class ExpUnaria extends Exp {
 		cod.addAll(exp.codigoAccesoAlValor());
 		
 		cod.add(codigoDeOperacion());
+		fin = cinst;
 	}
 
 	protected abstract Instruction codigoDeOperacion();

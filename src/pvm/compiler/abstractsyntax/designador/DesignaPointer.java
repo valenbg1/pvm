@@ -44,6 +44,7 @@ public class DesignaPointer extends Designador {
 
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		desig.codigo();
 		
 		cod = new ArrayList<Instruction>();
@@ -51,6 +52,7 @@ public class DesignaPointer extends Designador {
 		cod.addAll(desig.getCod());
 		cod.addAll(codigoDereferencia());
 		cinst += numeroInstruccionesDereferencia();
+		fin = cinst;
 	}
 
 	private int numeroInstruccionesDereferencia() {

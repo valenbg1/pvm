@@ -32,7 +32,9 @@ public class ExpDesignador extends Exp {
 
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		desig.codigo();
 		cod = desig.getCod();
+		fin = cinst;
 	}
 }

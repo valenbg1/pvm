@@ -59,6 +59,7 @@ public class DesignaCampo extends Designador {
 
 	@Override
 	public void codigo() {
+		inicio = cinst;
 		desig.codigo();
 		
 		cod = new ArrayList<Instruction>();
@@ -66,6 +67,8 @@ public class DesignaCampo extends Designador {
 		cod.addAll(desig.getCod());
 		cod.addAll(codigoAccesoCampo());
 		cinst += numeroInstruccionesAccesoACampo();
+		
+		fin = cinst;
 	}
 
 	private int numeroInstruccionesAccesoACampo() {

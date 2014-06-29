@@ -117,7 +117,7 @@ public class ILlamada extends Instruccion {
 		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
 		ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, this.fin));
 		ret.add(new PointerInstruction(PointerInstruction_t.DESAPILA_IND));
-		ret.add(new IntArgInstruction(IntInstruction_t.IR_A, vinculo.getInicio()));
+		ret.add(new IntArgInstruction(IntInstruction_t.IR_A, ((DecSubprograma)vinculo).getDirComienzo()));
 		
 		return ret;
 	}

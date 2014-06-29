@@ -49,22 +49,15 @@ public class IBucle extends Instruccion {
 		
 		for (Caso caso : this.getCasos()){
 			caso.codigo();
-			cinst += numeroInstruccionesControlDeCaso();
-			caso.setFin(cinst);
 		}
 		
 		this.fin = cinst;
 		
 		for (Caso caso : this.getCasos()){
-			cod.addAll(caso.getExp().getCod());
-			cod.add(new IntArgInstruction(IntInstruction_t.IR_F, caso.getFin()));
-			for(Instruccion inst : caso.getInstrs())
-				cod.addAll(inst.getCod());
+			cod.addAll(caso.getCod());
+			// En caso.codigo() contamos con una instrucción de más que se pone aqui.
 			cod.add(new IntArgInstruction(IntInstruction_t.IR_A, inicio));
 		}
 	}
 
-	private int numeroInstruccionesControlDeCaso() {
-		return 2; // Ir_F despues de Expresión e Ir despues de cuerpo.
-	}
 }
