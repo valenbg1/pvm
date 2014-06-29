@@ -76,7 +76,7 @@ public abstract class ExpBin extends Exp {
 		cod.addAll(exp0.getCod());
 		cod.addAll(exp0.codigoAccesoAlValor());
 		cod.addAll(exp1.getCod());
-		cod.addAll(exp0.codigoAccesoAlValor());
+		cod.addAll(exp1.codigoAccesoAlValor());
 		
 		cod.add(codigoDeOperacion());
 		
