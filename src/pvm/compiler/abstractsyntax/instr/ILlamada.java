@@ -21,6 +21,7 @@ public class ILlamada extends Instruccion {
 	private String id;
 	
 	private List<Exp> args;
+	private int argSecSize;
 	
 	public ILlamada(String id, List<Exp> args, int row) {
 		this.id = id;
@@ -96,16 +97,26 @@ public class ILlamada extends Instruccion {
 		cod = codigoCompienzoPasoParam();
 		cinst +=  cod.size();
 		
+		argSecSize = 0;
 		for (Exp exp : args){
 			cod.add(new VoidArgInstruction(VoidInstruction_t.DUP));
 			cinst++;
 			cod.addAll(codigoPasoParámetro(exp));
+			
+			argSecSize += tamañoDeParámetro(exp);
 		}
 		
 		cinst += numeroInstruccionesFinLlamada();
 		fin = cinst;
 		
 		cod.addAll(codigoFinLlamada());
+	}
+
+	private int tamañoDeParámetro(Exp exp) {
+		int index = args.indexOf(exp);
+		if((exp instanceof ExpDesignador) && ((DecSubprograma)vinculo).getParams().get(index).esValor())
+				return exp.getTipo_infer().getTam();
+		return 1;
 	}
 
 	private ArrayList<Instruction> codigoFinLlamada() {
@@ -128,7 +139,7 @@ public class ILlamada extends Instruccion {
 		int index = args.indexOf(exp);
 		ArrayList<Instruction> ret = new ArrayList<Instruction>();
 		
-		ret.add(new IntArgInstruction(IntInstruction_t.APILA, index));
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, argSecSize));
 		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
 		cinst += 2;
 		exp.codigo();
