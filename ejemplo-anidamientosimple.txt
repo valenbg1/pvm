@@ -1,0 +1,36 @@
+PROGRAM
+TYPES  
+  TLista: pointer TCelda; 
+
+  TCelda: struct {
+            valor: int; 
+            sig: TLista   
+          }
+VARIABLES
+  lista: TLista
+  
+SUBPROGRAMS  
+	SUBPROGRAM leeValor(& lista: TLista ) 
+	VARIABLES
+	   val: int
+	SUBPROGRAMS
+	   SUBPROGRAM ponValor(& lista: TLista)
+	   {
+	      IF (lista == null): {new lista; lista->.valor = val; lista->.sig = null}[]
+	         (true):          {ponValor(lista->.sig)}
+	      ENDIF
+	   }
+	{
+	   read val;
+	   IF (val != -1): {ponValor(lista)}
+	   ENDIF
+	}
+ 
+# Programa Principal 
+{
+	lista = null;
+	leeValor(lista);
+	leeValor(lista);
+	write lista->.valor;
+	write lista->.sig->.valor
+}

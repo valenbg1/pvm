@@ -5,11 +5,9 @@ VARIABLES
 
 SUBPROGRAMS  
 	SUBPROGRAM factorial(n: int, & res: int ) 
-	VARIABLES
-	   res2: int
 	{
 	   IF (n == 0): {res = 1} []
-	      (true): {factorial(n-1,res2); res = n * res2}
+	      (true): {factorial(n-1,res); res = n * res}
 	   ENDIF
 	}
  
