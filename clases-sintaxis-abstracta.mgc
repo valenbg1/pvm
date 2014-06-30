@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="pvm.compiler.abstractsyntax.instr.ILlamada" x="759" y="167">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"
+            endpointName="args" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.subprog.param.Parametro"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.subprog.DecSubprograma"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.cond.ICond" x="647" y="-225">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.instr.cond.Caso"
+            endpointName="casos" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.instr.cond.Caso"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.unar.ExpUnaria" x="256" y="653">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.Exp">
+            <Point x="454" y="556"/>
+        </Extension>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"
+            endpointName="exp" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.bool.Or" x="1104" y="298">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.bool.ExpBinBool"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.arithm.Modulo"
+        x="1291" y="544">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.arithm.ExpBinArithm"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.num.ExpNumNat" x="605" y="651">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.num.ExpNumReal" x="487" y="650">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bool.ExpFalse" x="735" y="651">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bool.ExpTrue" x="782" y="540">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.unar.bool.Not" x="395" y="670">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.unar.ExpUnaria"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.subprog.param.Parametro"
+        x="-203" y="-71">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.subprog.param.ParamRefer"
+        x="-361" y="-53">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.subprog.param.Parametro"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.designador.DesignaId"
+        x="-29" y="233">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.tipo.Tipo" x="-256" y="-830">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.io.IWrite" x="873" y="238">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"
+            endpointName="exp" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.tipo.DecTipo" x="42" y="-854">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.subprog.DecSubprograma"
+        x="-195" y="-299">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas"
+            endpointName="secsubprogs" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionVariables"
+            endpointName="secvars" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"
+            endpointName="instrs" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.subprog.param.Parametro"
+            endpointName="params" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionTipos"
+            endpointName="sectipos" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionTipos"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.subprog.param.Parametro"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionVariables"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.IBloque" x="1055" y="-163">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"
+            endpointName="instrs" kind="Simple">
+            <Point x="1110" y="-20"/>
+        </Association>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.arithm.Suma"
+        x="1140" y="423">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.arithm.ExpBinArithm"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.seccion.SeccionTipos"
+        x="587" y="-833">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.tipo.DecTipo"
+            endpointName="dectipos" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.DecTipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.dynmem.INew" x="600" y="35">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"
+            endpointName="desig" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.tipo.simp.TipoDouble"
+        x="-292" y="-1078">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.ExpBin" x="972" y="436">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"
+            endpointName="exp0" kind="Simple">
+            <Point x="718" y="514"/>
+        </Association>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"
+            endpointName="exp1" kind="Simple">
+            <Point x="903" y="432"/>
+        </Association>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.cond.IBucle" x="769" y="-360">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.instr.cond.Caso"
+            endpointName="casos" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.instr.cond.Caso"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.Node" x="178" y="-350">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"
+            endpointName="tipo_infer" kind="Simple">
+            <Point x="98" y="-544"/>
+        </Association>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.Node"
+            endpointName="vinculo" kind="Simple">
+            <Point x="140" y="-188"/>
+            <Point x="142" y="-211"/>
+        </Association>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.bool.And" x="994" y="291">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.bool.ExpBinBool"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.comp.Igualdad"
+        x="1082" y="651">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.comp.ExpBinComp"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.dynmem.IDelete"
+        x="540" y="-64">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"
+            endpointName="desig" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.comp.Mayor" x="907" y="580">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.comp.ExpBinComp"/>
+    </Class>
+    <Class
+        name="pvm.compiler.abstractsyntax.exp.bin.arithm.ExpBinArithm"
+        x="1189" y="470">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.ExpBin"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.comp.MenorOigual"
+        x="862" y="658">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.comp.ExpBinComp"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.tipo.comp.TipoStruct"
+        x="112" y="-1076">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.tipo.DecTipo"
+            endpointName="dectipos" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.tipo.DecTipo"
+            endpointName="campos" kind="Simple">
+            <Point x="247" y="-884"/>
+        </Association>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.DecTipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.tipo.simp.TipoId" x="-504" y="-1088">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.unar.cast.ToDouble"
+        x="144" y="702">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.unar.ExpUnaria"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.comp.Menor"
+        x="1059" y="599">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.comp.ExpBinComp"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.designador.DesignaPointer"
+        x="-18" y="93">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"
+            endpointName="desig" kind="Simple">
+            <Point x="109" y="169"/>
+        </Association>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.arithm.Division"
+        x="1139" y="538">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.arithm.ExpBinArithm"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.arithm.Resta"
+        x="1220" y="558">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.arithm.ExpBinArithm"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.unar.arithm.Menos"
+        x="393" y="714">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.unar.ExpUnaria"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.designador.Designador"
+        x="161" y="79">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.tipo.simp.TipoBoolean"
+        x="-500" y="-882">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.Instruccion" x="755" y="-90">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.cond.Caso" x="415" y="-270">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"
+            endpointName="exp" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"
+            endpointName="instrs" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.tipo.simp.TipoPointer"
+        x="-500" y="-538">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class
+        name="pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas"
+        x="-249" y="-499">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.subprog.DecSubprograma"
+            endpointName="decsubprogramas" kind="Simple">
+            <Point x="-107" y="-321"/>
+        </Association>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.subprog.DecSubprograma"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.IAsig" x="626" y="159">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"
+            endpointName="exp" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"
+            endpointName="desig" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.ExpNull" x="282" y="390">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.simp.TipoPointer"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.bool.ExpBinBool"
+        x="1037" y="355">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.ExpBin"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.tipo.simp.TipoInt" x="-502" y="-710">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"
+            endpointName="TIPO" kind="Simple">
+            <Point x="-315" y="-709"/>
+        </Association>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.designador.DesignaArray"
+        x="316" y="259">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"
+            endpointName="exp" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"
+            endpointName="desig" kind="Simple">
+            <Point x="361" y="213"/>
+        </Association>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.ExpDesignador" x="197" y="523">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.Exp"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"
+            endpointName="desig" kind="Simple">
+            <Point x="268" y="222"/>
+        </Association>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.Exp" x="455" y="417">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class
+        name="pvm.compiler.abstractsyntax.exp.bin.arithm.Multiplicacion"
+        x="1193" y="407">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.arithm.ExpBinArithm"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.comp.MayorOigual"
+        x="1031" y="719">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.comp.ExpBinComp"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.comp.Desigualdad"
+        x="931" y="720">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.comp.ExpBinComp"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.tipo.comp.TipoArray"
+        x="-82" y="-1080">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.bin.comp.ExpBinComp"
+        x="973" y="640">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.bin.ExpBin"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.Programa" x="566" y="-549">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionVariables"
+            endpointName="secvars" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas"
+            endpointName="secsubprogs" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"
+            endpointName="instrs" kind="Simple"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionTipos"
+            endpointName="sectipos" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionTipos"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionSubprogramas"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.seccion.SeccionVariables"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.instr.io.IRead" x="948" y="103">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.instr.Instruccion"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"
+            endpointName="desig" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.designador.DesignaCampo"
+        x="106" y="266">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.designador.Designador"
+            endpointName="desig" kind="Simple">
+            <Point x="156" y="245"/>
+        </Association>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.subprog.param.ParamValor"
+        x="-344" y="78">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.subprog.param.Parametro"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.exp.unar.cast.ToInt"
+        x="166" y="650">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.exp.unar.ExpUnaria"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.Tipo"/>
+    </Class>
+    <Class name="pvm.compiler.abstractsyntax.seccion.SeccionVariables"
+        x="257" y="-739">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="pvm.compiler.abstractsyntax.Node"/>
+        <Association
+            destinationClassName="pvm.compiler.abstractsyntax.tipo.DecTipo"
+            endpointName="dectipos" kind="Simple"/>
+        <Communication destinationClassName="pvm.compiler.abstractsyntax.tipo.DecTipo"/>
+    </Class>
+</ClassDiagram>
