@@ -72,28 +72,16 @@ public class DesignaCampo extends Designador {
 	}
 
 	private int numeroInstruccionesAccesoACampo() {
-		if(desig.getN_nivel() == 0)
-			return 3;
-		else
-			return 5;
+		return 2;
 	}
 
 	private ArrayList<Instruction> codigoAccesoCampo() {
-		int dir = desig.getN_dir();
 		int desp = ((TipoStruct) desig.getTipo_infer()).getDesp_campos().get(campo);
 		ArrayList<Instruction> ret = new ArrayList<>();
 		
-		if(desig.getN_nivel() == 0){
-			ret.add(new IntArgInstruction(IntInstruction_t.APILA, dir));
-			ret.add(new IntArgInstruction(IntInstruction_t.APILA, desp));
-			ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
-		}else{
-			ret.add(new IntArgInstruction(IntInstruction_t.APILA_DIR, desig.getN_nivel()));
-			ret.add(new IntArgInstruction(IntInstruction_t.APILA, dir));
-			ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
-			ret.add(new IntArgInstruction(IntInstruction_t.APILA, desp));
-			ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
-		}
+		ret.add(new IntArgInstruction(IntInstruction_t.APILA, desp));
+		ret.add(new VoidArgInstruction(VoidInstruction_t.SUMA));
+	
 		return ret;
 	}
 }
